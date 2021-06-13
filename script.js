@@ -1,3 +1,4 @@
+const root = document.documentElement;
 const postForm = document.getElementById("post-form");
 const midSection = document.getElementById("section-middle");
 
@@ -6,19 +7,13 @@ const boxSection = document.querySelector(".status-box");
 const popUp = document.querySelector(".status-popup");
 const secs = document.querySelectorAll(".sec");
 
-const btnMore = `<div class="status-popup hidden">
-      <span class="share">
-        <a href="#">share</a>
-      </span>
-      <span class="edit">
-        <a href="#">edit</a>
-      </span>
-      <span class="delete">
-        <a href="#">delete</a>
-      </span>
-      <span class="privacy">
-        <a href="#">privacy</a>
-      </span>
+const btnMore = `
+    <div class="status-popup hidden">
+      <span class="share"><a href="#">share</a></span>
+      <span class="edit"><a href="#">edit</a></span>
+      <span class="delete"><a href="#">delete</a></span>
+      <span class="privacy"><a href="#">privacy</a></span>
+      <span class="report"><a href="#">report</a></span>
     </div>`;
 
 function cb(e) {
@@ -99,7 +94,7 @@ postForm?.addEventListener("submit", cb);
 const secObserver = new IntersectionObserver(secCb);
 secs.forEach((s) => secObserver.observe(s));
 
-midSection?.addEventListener("click", function (e) {
+root?.addEventListener("click", function (e) {
   // if (!e.target.closest(".status-more") && !e.target.closest(".delete")) return;
   if (
     !document.querySelector(".status-popup") &&
@@ -109,7 +104,7 @@ midSection?.addEventListener("click", function (e) {
 
   if (
     document.querySelector(".status-popup") &&
-    !["share", "edit", "delete", "privacy"].some((cl) =>
+    !["share", "edit", "delete", "privacy", "report"].some((cl) =>
       e.target.closest("." + cl)
     )
   )
@@ -126,7 +121,7 @@ midSection?.addEventListener("click", function (e) {
   }
 
   if (
-    ["share", "edit", "delete", "privacy"].some((cl) =>
+    ["share", "edit", "delete", "privacy", "report"].some((cl) =>
       e.target.closest("." + cl)
     )
   ) {
