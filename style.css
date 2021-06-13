@@ -1,0 +1,271 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  padding: 0 2rem 0.5rem 2rem;
+  min-height: 100vh;
+  background-color: rgba(17, 34, 34, 0.713);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+/*  */
+nav {
+  position: sticky;
+  top: 0;
+  background-color: rgb(17, 34, 34);
+  width: 100%;
+}
+
+nav::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+nav #logo {
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+  background-color: #070707;
+  clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%);
+}
+
+#logo h1 {
+  text-align: right;
+  color: #fff;
+}
+
+ul {
+  float: right;
+}
+
+li {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-radius: 0;
+  margin-right: 1rem;
+  text-transform: capitalize;
+
+  transition: all 0.5s ease;
+  backface-visibility: hidden;
+}
+
+li:hover {
+  background-color: rgba(17, 34, 34, 0.802);
+}
+
+#logo a,
+li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+#logo a h1 {
+  padding: 0.5rem 1rem;
+  transition: all 0.5s ease;
+  text-transform: uppercase;
+}
+
+#logo a h1:hover {
+  letter-spacing: 0.5rem;
+  font-weight: 900;
+}
+/*  */
+section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+section > *:not(:last-child) {
+  margin-right: 10px;
+}
+
+#section-left,
+#section- {
+  background-color: rgba(218, 221, 218, 0.172);
+  width: 25%;
+  max-height: 90vh;
+  border: 0.5px solid rgba(17, 34, 34, 0.604);
+}
+
+#section-middle {
+  background-color: rgba(218, 221, 218, 0.816);
+  width: 40%;
+  min-height: 95vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 0.5px solid rgba(17, 34, 34, 0.604);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: whitesmoke;
+  width: 100%;
+  height: max-content;
+  margin-bottom: 10px;
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(17, 34, 34, 0.474);
+
+  box-shadow: 0 1px 9px rgba(0, 0, 0, 0.303);
+}
+
+input {
+  background-color: rgba(218, 221, 218, 0.816);
+  padding: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  width: 95%;
+  max-height: 30rem;
+  border-radius: 0.5rem;
+  /* display: inline-block; */
+  border: none;
+  outline: none;
+}
+input:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+button,
+button:active {
+  width: 100%;
+  border: none;
+  border-radius: 0;
+}
+
+.status-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+
+  background-color: whitesmoke;
+  border-bottom: 1px solid rgba(17, 34, 34, 0.22);
+}
+
+.status-box:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.status-info {
+  display: flex;
+  align-self: center;
+  width: 95%;
+  padding: 0rem 1rem 0.2rem 1rem;
+  border-bottom: 1px solid rgba(17, 34, 34, 0.22);
+}
+
+.status-info .user-image {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.status-info p {
+  align-self: center;
+
+  width: 100%;
+  padding-left: 1rem;
+}
+
+.status-info p > * {
+  display: block;
+}
+
+.status-info p + span {
+  align-self: center;
+  font-size: 2rem;
+}
+
+.status-info p:not(:last-child) > *:not(:last-child) {
+  text-transform: capitalize;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.status-content {
+  width: 100%;
+  padding: 1.5rem 2rem;
+
+  font-size: 1.5rem;
+  word-spacing: 0.04rem;
+  word-wrap: break-word;
+}
+
+.status-content-dialog {
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+
+  width: 70%;
+  border-top: 1px solid rgba(17, 34, 34, 0.22);
+}
+
+.status-content-dialog > span > * {
+  display: inline-block;
+  padding: 1rem 1px;
+
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: normal;
+  color: rgba(17, 34, 34, 0.624);
+
+  transition: color 0.3s ease;
+}
+
+.status-content-dialog:hover > span > * {
+  color: rgb(17, 34, 34);
+}
+
+.status-popup {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.5rem;
+  position: absolute;
+  top: -8rem;
+  right: 0;
+
+  font-size: 1.2rem;
+  line-height: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: lowercase;
+
+  background-color: whitesmoke;
+  border: 1px solid rgba(17, 34, 34, 0.22);
+  box-shadow: 1px 1px 2rem rgba(17, 34, 34, 0.22);
+}
+
+.status-popup > * {
+  padding: 0.5rem 2rem;
+  width: 100%;
+}
+
+.status-popup > *:not(:last-child) {
+  border-bottom: 1px solid rgba(17, 34, 34, 0.22);
+}
+
+.status-popup a {
+  text-decoration: none;
+  color: #122;
+}
