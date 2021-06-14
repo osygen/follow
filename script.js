@@ -5,6 +5,7 @@ const midSection = document.getElementById("section-middle");
 const nav = document.querySelector(".nav");
 const boxSection = document.querySelector(".status-box");
 const popUp = document.querySelector(".status-popup");
+
 const secs = document.querySelectorAll(".sec");
 
 const btnMore = `
@@ -16,39 +17,44 @@ const btnMore = `
       <span class="report"><a href="#">report</a></span>
     </div>`;
 
+
+const deleteBox=`<div class="delete-box">
+<h3>DELETE</h3>
+<p class="delete-content">you are about to delete this post, do you want to continue?</p>
+<p class="delete-dialog">
+  <span><a href="#">delete</a></span>
+  <span><a href="#">cancel</a></span>
+</p>
+</div>`
+
 function cb(e) {
   e.preventDefault();
   const [[, post]] = Array.from(new FormData(this));
   // const { post } = Object.fromEntries(new FormData(this));
   if (!post) return;
 
-  const status = `<div class="status-box">
-                  <div class="status-info">
-                    <img src="/img/IMG_sam_3234353.jpg" alt="" class="user-image" />
-                    <p>
-                      <span class="username">oduwole samuel</span
-                      ><span class="date">22 min.</span>
-                    </p>
-                    <span>🤩</span>
-                  </div>
-                  <div class="status-box">
-                    <p class="status-content">
-                      ${post}
-                    </p>
-                    <p class="status-content-dialog">
-                      <span class="status-like">
-                        <a href="#">likes</a>
-                        <span> 99+</span>
-                      </span>
-                      <span class="status-comment">
-                        <a href="#">comments</a>
-                        <span> 9</span>
-                      </span>
-                      <span class="status-more">
-                        <a href="#">more</a>
-                      </span>
-                    </p>
-                  </div>`;
+  const status = `        <div class="status-box">
+  <div class="status-info">
+    <img src="./img/IMG_sam_3234353.jpg" alt="" class="user-image" />
+    <p>
+      <span class="username">oduwole samuel</span
+      ><span class="date">22 min.</span>
+    </p>
+    <span>⭐</span>
+  </div>
+  <p class="status-content">
+   ${post}
+  </p>
+  <p class="status-content-dialog">
+    <span class="status-like"
+      ><a href="#">likes</a><span> 99+</span></span
+    >
+    <span class="status-comment"
+      ><a href="#">comments</a><span> 9</span></span
+    >
+    <span class="status-more"><a href="#">more</a></span>
+  </p>
+</div>`;
 
   // const p = document.createElement("p");
   // p.textContent = post;
@@ -86,16 +92,15 @@ function secCb(entries, observer) {
   });
 }
 
-postForm?.addEventListener("submit", cb);
-
 // const navObserver = new IntersectionObserver(navCb);
 // navObserver.observe(nav);
 
 const secObserver = new IntersectionObserver(secCb);
 secs.forEach((s) => secObserver.observe(s));
 
+postForm?.addEventListener("submit", cb);
+
 root?.addEventListener("click", function (e) {
-  // if (!e.target.closest(".status-more") && !e.target.closest(".delete")) return;
   if (
     !document.querySelector(".status-popup") &&
     !e.target.closest(".status-more")
@@ -112,20 +117,25 @@ root?.addEventListener("click", function (e) {
 
   e.preventDefault();
 
-  if (e.target.closest(".status-more")) {
-    document.querySelector(".status-popup")
-      ? document.querySelector(".status-popup").remove()
-      : null;
-
-    e.target.closest(".status-more").insertAdjacentHTML("beforebegin", btnMore);
-  }
+  if (e.target.closest(".status-more"))
+    e.target.closest(".status-more").insertAdjacentHTML("beforebegin", btnMore);  
+  
 
   if (
-    ["share", "edit", "delete", "privacy", "report"].some((cl) =>
+    ["share", "edit", "privacy", "report"].some((cl) =>
       e.target.closest("." + cl)
     )
   ) {
     console.log(e.target.closest("span"));
     document.querySelector(".status-popup").remove();
+
   }
+
+  if(e.target.closest(".delete")){
+    e.target.closest(".status-box").style.display="none" 
+    e.target.closest(".status-box")?.insertAdjacentHTML("afterend",deleteBox)
+    document.querySelector(".status-popup").remove();
+  }
+
+
 });

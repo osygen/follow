@@ -1,7 +1,14 @@
-* {
+*,
+*:after,
+*:before {
   padding: 0;
   margin: 0;
   box-sizing: inherit;
+  cursor: default;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 html {
@@ -10,20 +17,21 @@ html {
 
 body {
   box-sizing: border-box;
-  padding: 0 2rem 0.5rem 2rem;
+  padding: 0 0rem 0.5rem 0rem;
   min-height: 100vh;
-  background-color: rgba(17, 34, 34, 0.713);
+  /* background-color: rgba(17, 34, 34, 0.713); */
+  font-family: 'Lato', sans-serif;
+  background-color: #fff;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
+
 /*  */
 nav {
   position: sticky;
   top: 0;
   background-color: rgb(17, 34, 34);
   width: 100%;
+  z-index: 1000;
 }
 
 nav::after {
@@ -81,14 +89,14 @@ li a {
 
 #logo a h1:hover {
   letter-spacing: 0.5rem;
-  font-weight: 900;
+  
 }
 /*  */
 section {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 section > *:not(:last-child) {
@@ -96,21 +104,25 @@ section > *:not(:last-child) {
 }
 
 #section-left,
-#section- {
+#section-right {
   background-color: rgba(218, 221, 218, 0.172);
   width: 25%;
   max-height: 90vh;
-  border: 0.5px solid rgba(17, 34, 34, 0.604);
+  
+  border: none;
+  box-shadow: 0 1px 5px rgba(17, 34, 34, 0.11);
 }
 
 #section-middle {
-  background-color: rgba(218, 221, 218, 0.816);
+  background-color: whitesmoke;/*rgba(218, 221, 218, 0.816)*/
   width: 40%;
   min-height: 95vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 0.5px solid rgba(17, 34, 34, 0.604);
+  box-shadow: 0 .5px 5px rgba(17, 34, 34, 0.11);
+  /* border-left: 0.5px solid rgba(17, 34, 34, 0.604);
+  border-right: 0.5px solid rgba(17, 34, 34, 0.604); */
 }
 
 form {
@@ -119,14 +131,14 @@ form {
   align-items: center;
   justify-content: center;
 
-  background-color: whitesmoke;
+  background-color: #fff;
   width: 100%;
   height: max-content;
   margin-bottom: 10px;
   padding: 2rem 0;
   border-bottom: 1px solid rgba(17, 34, 34, 0.474);
 
-  box-shadow: 0 1px 9px rgba(0, 0, 0, 0.303);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.303);
 }
 
 input {
@@ -145,26 +157,36 @@ input:not(:last-child) {
   margin-bottom: 1rem;
 }
 
-button,
-button:active {
-  width: 100%;
-  border: none;
-  border-radius: 0;
-}
-
-.status-box {
+.status-box,.delete-box{
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  width: 100%;
+  background-color: #fff;
+}
 
-  background-color: whitesmoke;
+.status-box {
+  width: 100%;
   border-bottom: 1px solid rgba(17, 34, 34, 0.22);
 }
 
-.status-box:not(:last-child) {
+.delete-box{
+  justify-content: space-around;
+  width:97%;
+  height: 15rem;
+  padding-top: .9rem;
+  margin-top: 4px;
   margin-bottom: 8px;
+  border-radius: 5px;
+
+  background-color:rgba(255, 99, 71, 0.116);
+  color:#122;
+  box-shadow: 1px 1px 5px rgba(17, 34, 34, 0.481);
+
+}
+
+.status-box:not(:last-child) {
+  margin-bottom: 4px;
 }
 
 .status-info {
@@ -203,16 +225,28 @@ button:active {
   font-weight: 700;
 }
 
-.status-content {
+.status-content ,.delete-content{
   width: 100%;
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
 
-  font-size: 1.5rem;
   word-spacing: 0.04rem;
   word-wrap: break-word;
 }
 
-.status-content-dialog {
+.status-content{
+  font-size: 1.3rem;
+  word-spacing: 0.04rem;
+  word-wrap: break-word;
+}
+
+.delete-content{
+  font-size: 1.3rem;
+  text-align: center;
+  word-spacing: 0.04rem;
+  word-wrap: break-word;
+}
+
+.status-content-dialog,.delete-dialog {
   display: flex;
   justify-content: space-around;
   position: relative;
@@ -221,20 +255,26 @@ button:active {
   border-top: 1px solid rgba(17, 34, 34, 0.22);
 }
 
-.status-content-dialog > span > * {
+.delete-dialog {
+  border-top: 1px solid rgba(17, 34, 34, 0.295);
+}
+
+.status-content-dialog > span > *,.delete-dialog  > span > * {
   display: inline-block;
-  padding: 1rem 1px;
+  padding: .9rem 1px;
 
   text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: normal;
-  color: rgba(17, 34, 34, 0.624);
+  font-size: 1.2rem;
+  font-weight: 900;
+}
 
+.status-content-dialog > span > * {
+  color: rgba(17, 34, 34, 0.624);
   transition: color 0.3s ease;
 }
 
-.status-content-dialog:hover > span > * {
-  color: rgb(17, 34, 34);
+.status-content-dialog:hover > span > * ,.delete-dialog  > span > * {
+  color:#122;
 }
 
 .status-popup {
@@ -242,8 +282,8 @@ button:active {
   flex-direction: column;
   padding: 0 0.5rem;
   position: absolute;
-  top: -8rem;
-  right: 0;
+  top: -10.5rem;
+  right: -1rem;
 
   font-size: 1.2rem;
   line-height: 1.3rem;
@@ -252,8 +292,8 @@ button:active {
   text-transform: lowercase;
 
   background-color: whitesmoke;
-  border: 1px solid rgb(17, 34, 34);
-  box-shadow: 1px 1px 2rem rgba(17, 34, 34, 0.22);
+  border-radius: 2.5px;
+  box-shadow: 1px 1px 5px rgba(17, 34, 34, 0.481);
 }
 
 .status-popup > * {
