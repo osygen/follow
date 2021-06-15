@@ -17,13 +17,12 @@ html {
 
 body {
   box-sizing: border-box;
-  padding: 0 0rem 0.5rem 0rem;
+  padding: 0 0rem 1rem 0rem;
   min-height: 100vh;
   /* background-color: rgba(17, 34, 34, 0.713); */
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   background-color: #fff;
 }
-
 
 /*  */
 nav {
@@ -89,7 +88,6 @@ li a {
 
 #logo a h1:hover {
   letter-spacing: 0.5rem;
-  
 }
 /*  */
 section {
@@ -108,21 +106,24 @@ section > *:not(:last-child) {
   background-color: rgba(218, 221, 218, 0.172);
   width: 25%;
   max-height: 90vh;
-  
+  overflow: scroll;
+
   border: none;
   box-shadow: 0 1px 5px rgba(17, 34, 34, 0.11);
 }
 
 #section-middle {
-  background-color: whitesmoke;/*rgba(218, 221, 218, 0.816)*/
-  width: 40%;
+  overflow: scroll;
+
+  background-color: whitesmoke; /*rgba(218, 221, 218, 0.816)*/
+  width: 30%;
   min-height: 95vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 .5px 5px rgba(17, 34, 34, 0.11);
-  /* border-left: 0.5px solid rgba(17, 34, 34, 0.604);
-  border-right: 0.5px solid rgba(17, 34, 34, 0.604); */
+  box-shadow: 0 0.5px 5px rgba(17, 34, 34, 0.11);
+
+  /* border-left: 0.5px solid rgba(17, 34, 34, 0.604);*/
 }
 
 form {
@@ -139,6 +140,8 @@ form {
   border-bottom: 1px solid rgba(17, 34, 34, 0.474);
 
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.303);
+
+  z-index: 10;
 }
 
 input {
@@ -157,7 +160,8 @@ input:not(:last-child) {
   margin-bottom: 1rem;
 }
 
-.status-box,.delete-box{
+.status-box,
+.delete-box {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -170,19 +174,20 @@ input:not(:last-child) {
   border-bottom: 1px solid rgba(17, 34, 34, 0.22);
 }
 
-.delete-box{
+.delete-box {
   justify-content: space-around;
-  width:97%;
+  width: 97%;
   height: 15rem;
-  padding-top: .9rem;
+  padding-top: 0.9rem;
   margin-top: 4px;
   margin-bottom: 8px;
   border-radius: 5px;
 
-  background-color:rgba(255, 99, 71, 0.116);
-  color:#122;
+  background-color: rgba(255, 99, 71, 0.116);
+  color: #122;
   box-shadow: 1px 1px 5px rgba(17, 34, 34, 0.481);
 
+  transform: scale(0.7);
 }
 
 .status-box:not(:last-child) {
@@ -197,10 +202,16 @@ input:not(:last-child) {
   border-bottom: 1px solid rgba(17, 34, 34, 0.22);
 }
 
+.status-info .user-image-box {
+  height: 5rem;
+  width: 5rem;
+  clip-path: circle(50% at 50% 50%);
+}
+
 .status-info .user-image {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
+  height: 5rem;
+  width: 5rem;
+  /* border-radius: 50%; */
 }
 
 .status-info p {
@@ -225,28 +236,26 @@ input:not(:last-child) {
   font-weight: 700;
 }
 
-.status-content ,.delete-content{
+.status-content,
+.delete-content {
   width: 100%;
   padding: 1rem 2rem;
 
-  word-spacing: 0.04rem;
-  word-wrap: break-word;
-}
-
-.status-content{
   font-size: 1.3rem;
   word-spacing: 0.04rem;
   word-wrap: break-word;
 }
 
-.delete-content{
-  font-size: 1.3rem;
+.status-content {
+  line-height: 1.7rem;
+}
+
+.delete-content {
   text-align: center;
-  word-spacing: 0.04rem;
-  word-wrap: break-word;
 }
 
-.status-content-dialog,.delete-dialog {
+.status-content-dialog,
+.delete-dialog {
   display: flex;
   justify-content: space-around;
   position: relative;
@@ -255,13 +264,10 @@ input:not(:last-child) {
   border-top: 1px solid rgba(17, 34, 34, 0.22);
 }
 
-.delete-dialog {
-  border-top: 1px solid rgba(17, 34, 34, 0.295);
-}
-
-.status-content-dialog > span > *,.delete-dialog  > span > * {
+.status-content-dialog > span > *,
+.delete-dialog > span > * {
   display: inline-block;
-  padding: .9rem 1px;
+  padding: 0.9rem 1px;
 
   text-decoration: none;
   font-size: 1.2rem;
@@ -273,32 +279,33 @@ input:not(:last-child) {
   transition: color 0.3s ease;
 }
 
-.status-content-dialog:hover > span > * ,.delete-dialog  > span > * {
-  color:#122;
+.status-content-dialog:hover > span > *,
+.delete-dialog > span > * {
+  color: #122;
 }
 
 .status-popup {
   display: flex;
   flex-direction: column;
-  padding: 0 0.5rem;
+
   position: absolute;
-  top: -10.5rem;
-  right: -1rem;
+  top: -14.01rem;
+  right: -1.5rem;
+  padding: 0.5rem 0.5rem;
 
   font-size: 1.2rem;
-  line-height: 1.3rem;
+  line-height: 1.7rem;
   font-weight: 700;
   text-align: center;
   text-transform: lowercase;
 
   background-color: whitesmoke;
-  border-radius: 2.5px;
+  border-radius: 4px;
   box-shadow: 1px 1px 5px rgba(17, 34, 34, 0.481);
 }
 
 .status-popup > * {
   padding: 0.5rem 2rem;
-  width: 100%;
 }
 
 .status-popup > *:not(:last-child) {
