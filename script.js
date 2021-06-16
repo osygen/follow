@@ -1,6 +1,5 @@
 const root = document.documentElement,
-  postForm = document.getElementById("post-form"),
-  midSection = document.getElementById("section-middle"),
+  section = document.querySelector("form"),
   nav = document.querySelector(".nav"),
   secs = document.querySelectorAll(".sec");
 
@@ -68,19 +67,19 @@ function submitForm(e) {
 }
 
 let temp;
+
 function clickHandler(e) {
-  const popUp = document.querySelector(".status-popup");
-  const deleteBox = document.querySelector(".delete-box");
-
-  const popUpEvent = e.target.closest(".status-popup");
-  const more = e.target.closest(".status-more");
-
-  const statusBox = e.target.closest(".status-box");
-  let share, edit, deleteOption, privacy, report;
-
-  if (!popUp && !more) return;
+  if (e.target.closest("#post-form")) return;
 
   e.preventDefault();
+
+  const popUp = document.querySelector(".status-popup"),
+    deleteBox = document.querySelector(".delete-box");
+  const popUpEvent = e.target.closest(".status-popup"),
+    more = e.target.closest(".status-more"),
+    statusBox = e.target.closest(".status-box");
+  let share, edit, deleteOption, privacy, report;
+
   popUp && setTimeout(() => popUp?.remove(), 50);
 
   if (more) {
@@ -109,15 +108,23 @@ function clickHandler(e) {
   }
 }
 
-// function navCb(entries, observer) {
-//   entries.forEach((entry) => {
-//     if (!entry.isIntersecting) return;
-//     entry.target.style.position = "sticky";
-//     entry.target.style.top = 0;
-//   });
-// }
+function navCb(entries, observer) {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting)
+      entry.target.closest(
+        "section"
+      ).previousElementSibling.style.backgroundColor = "rgb(17, 34, 34)";
+    if (entry.isIntersecting)
+      entry.target.closest(
+        "section"
+      ).previousElementSibling.style.backgroundColor = "rgb(17, 34, 34,.0)";
 
-function secCb(entries, observer) {
+    //entry.target.closest("section").previousElementSibling.style.position = "sticky";
+    //entry.target.closest("section").previousElementSibling.style.top = 0;
+  });
+}
+
+function secCb(entries) {
   entries.forEach((entry) => {
     if (!entry.isIntersecting) return;
 
@@ -134,8 +141,12 @@ function secCb(entries, observer) {
   });
 }
 
-// const navObserver = new IntersectionObserver(navCb);
-// navObserver.observe(nav);
+const navObserver = new IntersectionObserver(navCb, {
+  root: null,
+  rootMargin: "-40px",
+  threshold: 1.0
+});
+navObserver.observe(section);
 
 const secObserver = new IntersectionObserver(secCb);
 secs.forEach((s) => secObserver.observe(s));

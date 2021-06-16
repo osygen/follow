@@ -19,16 +19,17 @@ body {
   box-sizing: border-box;
   padding: 0 0rem 1rem 0rem;
   min-height: 100vh;
-  /* background-color: rgba(17, 34, 34, 0.713); */
+
   font-family: "Lato", sans-serif;
-  background-color: #fff;
+  background-color: rgba(17, 34, 34, 0.713);
+  /* background-color: #fff; */
 }
 
 /*  */
 nav {
   position: sticky;
   top: 0;
-  background-color: rgb(17, 34, 34);
+  background-color: rgb(17, 34, 34, 0.2);
   width: 100%;
   z-index: 1000;
 }
@@ -103,14 +104,61 @@ section > *:not(:last-child) {
 
 #section-left,
 #section-right {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+
+  padding: 5px;
   background-color: rgba(218, 221, 218, 0.172);
   width: 25%;
   max-height: 90vh;
-  overflow: scroll;
+  border-radius: 5px;
 
   border: none;
   box-shadow: 0 1px 5px rgba(17, 34, 34, 0.11);
+  font-weight: 300;
 }
+
+#section-left .sub_header-box,
+#section-right .sub_header-box {
+  padding: 0.3rem 0.5rem;
+  letter-spacing: 0.1rem;
+  line-height: 2rem;
+  text-transform: capitalize;
+  border-bottom: 1px solid rgba(17, 34, 34, 0.226);
+  /* text-align: end; */
+}
+
+#section-left > *,
+#section-right > * {
+  padding: 0.3rem 0.5rem;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  background-color: whitesmoke;
+  border-radius: 3px;
+}
+
+#section-left > * {
+  height: calc(90vh / 3);
+}
+
+#section-left > *:not(:last-child),
+#section-right > *:not(:last-child) {
+  margin-bottom: 5px;
+}
+#section-right .notifications_box {
+  height: 40vh;
+}
+
+#section-right .chats_messages_box {
+  height: 50vh;
+}
+
+/* .pYMK_box,.friend_box,.groups_box,.notifications_box,.chats_messages_box{
+  
+  
+   flex:1,0,0 
+} */
 
 #section-middle {
   overflow: scroll;
@@ -140,8 +188,6 @@ form {
   border-bottom: 1px solid rgba(17, 34, 34, 0.474);
 
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.303);
-
-  z-index: 10;
 }
 
 input {
@@ -316,3 +362,5 @@ input:not(:last-child) {
   text-decoration: none;
   color: #122;
 }
+
+/*  */
