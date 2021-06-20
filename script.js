@@ -1,5 +1,5 @@
 const root = document.documentElement,
-  section = document.querySelector("form"),
+  form = document.querySelector("form"),
   nav = document.querySelector(".nav"),
   secs = document.querySelectorAll(".sec");
 
@@ -16,8 +16,8 @@ const btnMore = `
       <h3>DELETE</h3>
       <p class="delete-content">you are about to delete this post, do you want to continue?</p>
       <p class="delete-dialog">
-        <span><a href="#">delete</a></span>
-        <span><a href="#">cancel</a></span>
+        <span class="delete-status"><a href="#">delete</a></span>
+        <span class="cancel"><a href="#">cancel</a></span>
       </p>
     </div>`,
   statusTemplate = `
@@ -28,7 +28,7 @@ const btnMore = `
         </div>
         <p>
           <span class="username">oduwole samuel</span>
-          <span class="date">22 min.</span>
+          <span class="date">⏲ 22 min.</span>&nbsp;<span>📌</span>
         </p>
         <span>⭐</span>
       </div>
@@ -49,6 +49,7 @@ const btnMore = `
     </div>`;
 
 function submitForm(e) {
+  if (!e.target.closest("#post-form")) return;
   e.preventDefault();
 
   // const [[, post]] = Array.from(new FormData(e.target));
@@ -69,16 +70,19 @@ function submitForm(e) {
 let temp;
 
 function clickHandler(e) {
-  if (e.target.closest("#post-form")) return;
-
-  e.preventDefault();
-
   const popUp = document.querySelector(".status-popup"),
     deleteBox = document.querySelector(".delete-box");
   const popUpEvent = e.target.closest(".status-popup"),
     more = e.target.closest(".status-more"),
     statusBox = e.target.closest(".status-box");
+
+  const cancel = e.target.closest(".cancel");
+  const deleteStatus = e.target.closest(".delete-status");
+
   let share, edit, deleteOption, privacy, report;
+
+  if (!(popUp || more || cancel || deleteStatus || deleteBox)) return;
+  e.preventDefault();
 
   popUp && setTimeout(() => popUp?.remove(), 50);
 
@@ -87,8 +91,19 @@ function clickHandler(e) {
     deleteBox?.remove();
     temp = undefined;
 
-    setTimeout(() => more?.insertAdjacentHTML("beforebegin", btnMore), 50);
+    setTimeout(() => statusBox?.insertAdjacentHTML("afterend", btnMore), 50);
     // more?.insertAdjacentHTML("beforebegin", btnMore);
+  }
+
+  if (cancel || (deleteBox && !e.target.closest(".delete-box"))) {
+    deleteBox?.insertAdjacentElement("beforebegin", temp);
+    deleteBox?.remove();
+    temp = undefined;
+  }
+
+  if (deleteStatus) {
+    deleteBox?.remove();
+    temp = undefined;
   }
 
   if (popUp)
@@ -97,14 +112,15 @@ function clickHandler(e) {
     ).map((obj) => obj.classList.value);
 
   if (e.target.closest("." + deleteOption)) {
-    statusBox.insertAdjacentHTML("afterend", deleteBoxTemplate);
-    statusBox.remove();
+    popUp.insertAdjacentHTML("afterend", deleteBoxTemplate);
+    const t = popUp.previousElementSibling;
+    temp = t;
+    t.remove();
+    popUp.remove();
 
     setTimeout(() => {
       document.querySelector(".delete-box").style.transform = "scale(1)";
     }, 80);
-
-    temp = statusBox;
   }
 }
 
@@ -124,6 +140,13 @@ function navCb(entries, observer) {
   });
 }
 
+const navObserver = new IntersectionObserver(navCb, {
+  root: null,
+  rootMargin: "-40px",
+  threshold: 1.0
+});
+form ? navObserver.observe(form) : null;
+
 function secCb(entries) {
   entries.forEach((entry) => {
     if (!entry.isIntersecting) return;
@@ -141,19 +164,12 @@ function secCb(entries) {
   });
 }
 
-const navObserver = new IntersectionObserver(navCb, {
-  root: null,
-  rootMargin: "-40px",
-  threshold: 1.0
-});
-navObserver.observe(section);
-
 const secObserver = new IntersectionObserver(secCb);
-secs.forEach((s) => secObserver.observe(s));
+secs?.forEach((s) => secObserver.observe(s));
 
 ["submit", "click"].forEach((type, i, arr) =>
   root.addEventListener(type, function (e) {
-    e.type === arr[0] && submitForm(e);
-    e.type === arr[1] && clickHandler(e);
+    (e.type === arr[0] && submitForm(e)) ||
+      (e.type === arr[1] && clickHandler(e));
   })
 );

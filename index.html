@@ -10,13 +10,14 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="style.css" />
-    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <!-- <script type="module" defer src="script.js"></script> -->
+    <script type="module" defer src="script2.js"></script>
     <title>Follow!</title>
   </head>
   <body>
     <!-- navbar -->
-    <nav class="nav">
+    <!-- <nav class="nav">
       <div id="logo">
         <a href=""><h1>follow</h1></a>
       </div>
@@ -24,22 +25,27 @@
         <li><a href="./about.html">about</a></li>
         <li><a href="./contact.html">contact</a></li>
       </ul>
-    </nav>
+    </nav> -->
 
     <!-- section -->
     <section>
-      <!-- section-left -->
-      <div id="section-left" class="sec">
-        <div class="pYMK_box"><h2 class="sub_header-box">people you may know</h2></div>
-        
-        <div class="groups_box"><h2 class="sub_header-box">groups</h2>
-    </div>
+      <!-- section-1 -->
+      <div id="section-1" class="sec">
+        <div class="pYMK_box">
+          <h2 class="sub_header-box">people you may know</h2>
+        </div>
+
+        <div class="groups_box"><h2 class="sub_header-box">groups</h2></div>
         <div class="friend_box"><h2 class="sub_header-box">friend</h2></div>
-        
       </div>
 
-      <!-- section-middle -->
-      <div id="section-middle">
+      <!-- section-2 -->
+      <div id="section-2">
+        <div class="friend_box"><h2 class="sub_header-box">friend</h2></div>
+      </div>
+
+      <!-- section-3 -->
+      <div id="section-3">
         <!-- post-form -->
         <form id="post-form">
           <input
@@ -48,7 +54,7 @@
             type="text"
             placeholder="say something..."
           />
-          <input type="submit" value="post" />
+          <input type="submit" value="post" hidden />
         </form>
 
         <!-- status-box 1-->
@@ -60,7 +66,7 @@
 
             <p>
               <span class="username">oduwole samuel</span
-              ><span class="date">22 min.</span>
+              ><span class="date">⏲ 22 min.</span>&nbsp;<span>📌</span>
             </p>
             <span>🤩</span>
           </div>
@@ -84,9 +90,11 @@
 
         <!-- delete-box -->
 
-        <!-- <div class="delete-box ">
+        <!-- <div class="delete-box">
           <h3>DELETE</h3>
-          <p class="delete-content">you are about to delete this post, do you want to continue?</p>
+          <p class="delete-content">
+            you are about to delete this post, do you want to continue?
+          </p>
           <p class="delete-dialog">
             <span><a href="#">delete</a></span>
             <span><a href="#">cancel</a></span>
@@ -102,7 +110,7 @@
 
             <p>
               <span class="username">oduwole samuel</span
-              ><span class="date">22 min.</span>
+              ><span class="date">⏲ 22 min.</span>&nbsp;<span>📌</span>
             </p>
             <span>⭐</span>
           </div>
@@ -129,8 +137,8 @@
           <h3>DELETE</h3>
           <p class="delete-content">you are about to delete this post, do you want to continue?</p>
           <p class="delete-dialog">
-            <span><a href="#">delete</a></span>
-            <span><a href="#">cancel</a></span>
+            <span class="delete"><a href="#">delete</a></span>
+            <span class="cancel"><a href="#">cancel</a></span>
           </p>
         </div> -->
 
@@ -146,10 +154,19 @@
 
         <!--  -->
       </div>
-      <!-- section-right -->
-      <div id="section-right" class="sec">
-        <div class="notifications_box"><h2 class="sub_header-box">notifications</h2></div>
-        <div class="chats_messages_box"><h2 class="sub_header-box">chats &amp; messages</h2></div>
+
+      <!-- section-4 -->
+      <div id="section-4"></div>
+
+      <!-- section-5 -->
+      <div id="section-5" class="sec">
+        <div class="notifications_box">
+          <h2 class="sub_header-box">notifications</h2>
+          lorem*50
+        </div>
+        <div class="chats_messages_box">
+          <h2 class="sub_header-box">chats &amp; messages</h2>
+        </div>
       </div>
     </section>
   </body>
