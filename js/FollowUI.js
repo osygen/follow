@@ -5,7 +5,7 @@ class FollowUI extends Factory {
   #popUpEvent;
   #more;
   #statusBox;
-  #temp;
+  #temp = [];
   #cancel;
   #deleteStatus;
   #deleteBoxE;
@@ -14,15 +14,15 @@ class FollowUI extends Factory {
   #nav = document.querySelector(".nav");
   #secs = document.querySelectorAll(".sec");
   #btnMore = `
-        <div class="status-popup hidden">
+        <div class="status-popup hidden scaleAnimation">
           <span class="share"><a href="#">share</a></span>
           <span class="edit"><a href="#">edit</a></span>
-          <span class="delete"><a href="#">delete</a></span>
+          <span class="deleteOpt"><a href="#">delete</a></span>
           <span class="privacy"><a href="#">privacy</a></span>
           <span class="report"><a href="#">report</a></span>
         </div>`;
   #deleteBoxTemplate = `
-        <div class="delete-box">
+        <div class="delete-box scaleAnimation">
           <h3>DELETE</h3>
           <p class="delete-content">you are about to delete this post, do you want to continue?</p>
           <p class="delete-dialog">
@@ -30,6 +30,13 @@ class FollowUI extends Factory {
             <span class="cancel"><a href="#">cancel</a></span>
           </p>
         </div>`;
+
+  #statusContent;
+  #panelE;
+  #panel;
+  #panelString = `<div id="panel">
+            <!--<h2>post</h2>-->
+          </div> `;
 
   constructor() {
     super();
@@ -43,7 +50,11 @@ class FollowUI extends Factory {
   }
 
   rootHandler(arr, e) {
-    e.type === arr[0] ? this.clickHandler(e) : this.submitForm(e);
+    e.type === arr[0]
+      ? this.clickHandler(e)
+      : e.type === arr[1]
+      ? this.submitForm(e)
+      : alert("event not handled!");
   }
 
   submitForm(e) {
@@ -62,12 +73,18 @@ class FollowUI extends Factory {
       ["post"].includes(domEl.name) ? (domEl.value = "") : undefined
     );
 
+    setTimeout(() => {
+      this.#form.nextElementSibling.classList.remove("topMarginAnimation");
+    }, 500);
+
     // status?.removeEventListener("submit", cb);
   }
 
   clickHandler(e) {
     this._popUp = document.querySelector(".status-popup");
     this.#deleteBox = document.querySelector(".delete-box");
+    this.#panel = document.querySelector("#panel");
+
     this.#deleteBoxE = e.target.closest(".delete-box");
     this.#popUpEvent = e.target.closest(".status-popup");
     this.#more = e.target.closest(".status-more");
@@ -75,19 +92,51 @@ class FollowUI extends Factory {
     this.#cancel = e.target.closest(".cancel");
     this.#deleteStatus = e.target.closest(".delete");
 
+    this.#statusContent = e.target.closest(".status-content");
+    this.#panelE = e.target.closest("#panelE");
+
     if (
       !(
-        this.#more ||
-        this._popUp ||
-        this.#cancel ||
-        this.#deleteStatus ||
-        this.#deleteBox
+        (
+          this.#more ||
+          this._popUp ||
+          this.#cancel ||
+          this.#deleteStatus ||
+          this.#deleteBox ||
+          this.#statusContent
+        )
+        // ||
+        // this.#panelE ||
+        // (!e.target.closest("#post-form") && e.target.closest("#section-3"))
       )
     )
       return;
     // if (e.target.closest("#post-form")) return;
 
     e.preventDefault();
+
+    if (this.#statusContent && e.target.closest("#section-3")) {
+      if (this.#temp[2]) this.#temp[2].style.display = "";
+
+      if (!this.#panel)
+        document
+          .querySelector("#section-3")
+          .insertAdjacentHTML("afterend", this.#panelString);
+
+      this.#temp[2] = this.#statusBox;
+      let panelTemp = this.#temp[2].cloneNode(true);
+      panelTemp.classList.add("scaleAnimation");
+
+      document.getElementById("panel").innerHTML = "";
+      document
+        .getElementById("panel")
+        .insertAdjacentElement("afterbegin", panelTemp);
+      this.#temp[2].style.display = "none";
+
+      setTimeout(() => panelTemp?.classList.remove("scaleAnimation"), 500);
+
+      panelTemp = undefined;
+    }
 
     this.moreOption();
 
@@ -122,26 +171,65 @@ class FollowUI extends Factory {
   deleteOpt(e, deleteOption) {
     if (!e.target.closest("." + deleteOption)) return;
 
+    if (this.#panelE) {
+      this._popUp.insertAdjacentHTML("afterend", this.#deleteBoxTemplate);
+
+      this.#temp[1] = this._popUp.previousElementSibling;
+
+      this.#temp[1].remove();
+      this._popUp.remove();
+      return;
+    }
+
     this._popUp.insertAdjacentHTML("afterend", this.#deleteBoxTemplate);
 
-    this.#temp = this._popUp.previousElementSibling;
-    this.#temp.remove();
+    this.#temp[0] = this._popUp.previousElementSibling;
+
+    this.#temp[0].remove();
     this._popUp.remove();
   }
 
   deleteBoxCancel() {
     if (!(this.#cancel || (this.#deleteBox && !this.#deleteBoxE))) return;
+    // if (this.#deleteStatus) return;
 
-    this.#deleteBox?.insertAdjacentElement("beforebegin", this.#temp);
+    if (this.#temp[1]) {
+      this.#temp[1].classList.add("scaleAnimation");
+
+      this.#deleteBox?.insertAdjacentElement("beforebegin", this.#temp[1]);
+      this.#deleteBox?.remove();
+
+      setTimeout(() => {
+        this.#temp[1]?.classList.remove("scaleAnimation");
+        this.#temp[1] = undefined;
+      }, 210);
+      return;
+    }
+
+    this.#temp[0]?.classList.add("scaleAnimation");
+
+    this.#deleteBox?.insertAdjacentElement("beforebegin", this.#temp[0]);
     this.#deleteBox?.remove();
-    this.#temp = undefined;
+
+    setTimeout(() => {
+      this.#temp[0]?.classList.remove("scaleAnimation");
+      this.#temp[0] = undefined;
+    }, 210);
   }
 
   deleteBoxDelete() {
     if (!this.#deleteStatus) return;
-
     this.#deleteBox?.remove();
-    this.#temp = undefined;
+
+    if (!this.#panelE) {
+      this.#temp[0] = undefined;
+    }
+
+    if (this.#panelE) {
+      this.#temp[2].remove();
+      this.#temp[1] = undefined;
+      this.#temp[2] = undefined;
+    }
   }
 
   secObserver() {

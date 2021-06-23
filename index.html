@@ -54,12 +54,42 @@
             type="text"
             placeholder="say something..."
           />
-          <input type="submit" value="post" hidden />
+          <input type="submit" value="post" />
         </form>
 
         <!-- status-box 1-->
-        <div class="status-box">
-          <div class="status-info">
+        <div class="status-box <!--topMarginAnimation scaleAnimation-->">
+          <div class="status-info" data-user-idstatus-id="userid-statusid1">
+            <div class="user-image-box">
+              <img src="./img/IMG_sam_3234353.jpg" alt="" class="user-image" />
+            </div>
+
+            <p>
+              <span class="username">oduwole samuel</span
+              ><span class="date">⏲ 22 min.</span>&nbsp;<span>📌</span>
+            </p>
+            <span>🤩</span>
+          </div>
+
+          <p class="status-content">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora,
+            nam aliquid ullam fuga possimus sint inventore, laborum harum sunt
+            quia nesciunt. Dicta cumque quos magnam modi exercitationem itaque
+            velit totam. rgergreg
+          </p>
+          <p class="status-content-dialog">
+            <span class="status-like"
+              ><a href="#">likes</a><span> 99+</span></span
+            >
+            <span class="status-comment"
+              ><a href="#">comments</a><span> 9</span></span
+            >
+            <span class="status-more"><a href="#">more</a></span>
+          </p>
+        </div>
+
+        <div class="status-box <!--topMarginAnimation scaleAnimation-->">
+          <div class="status-info" data-user-idstatus-id="userid-statusid2">
             <div class="user-image-box">
               <img src="./img/IMG_sam_3234353.jpg" alt="" class="user-image" />
             </div>
@@ -102,8 +132,8 @@
         </div> -->
 
         <!-- status-box 2-->
-        <div class="status-box">
-          <div class="status-info">
+        <div class="status-box <!--topMarginAnimation scaleAnimation-->">
+          <div class="status-info" data-user-idstatus-id="userid-statusid3">
             <div class="user-image-box">
               <img src="./img/IMG_sam_3234353.jpg" alt="" class="user-image" />
             </div>
@@ -112,8 +142,9 @@
               <span class="username">oduwole samuel</span
               ><span class="date">⏲ 22 min.</span>&nbsp;<span>📌</span>
             </p>
-            <span>⭐</span>
+            <span>🤩</span>
           </div>
+
           <p class="status-content">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora,
             nam aliquid ullam fuga possimus sint inventore, laborum harum sunt
@@ -133,7 +164,7 @@
 
         <!-- delete-box -->
 
-        <!-- <div class="delete-box">
+        <!-- <div class="delete-box <!- -scaleAnimation- ->">
           <h3>DELETE</h3>
           <p class="delete-content">you are about to delete this post, do you want to continue?</p>
           <p class="delete-dialog">
@@ -144,10 +175,10 @@
 
         <!-- popup -->
 
-        <!-- <div class="status-popup hidden">
+        <!-- <div class="status-popup hidden <!- -scaleAnimation- ->">
           <span class="share"><a href="#">share</a></span>
           <span class="edit"><a href="#">edit</a></span>
-          <span class="delete"><a href="#">delete</a></span>
+          <span class="deleteOpt"><a href="#">delete</a></span>
           <span class="privacy"><a href="#">privacy</a></span>
           <span class="report"><a href="#">report</a></span>
         </div> -->
@@ -169,5 +200,9 @@
         </div>
       </div>
     </section>
+
+    <!-- <div id="panel">
+      <h2>post</h2>
+    </div> -->
   </body>
 </html>
