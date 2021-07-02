@@ -23,11 +23,10 @@ body {
   box-sizing: border-box;
 
   min-height: 100vh;
+  width: 100vw;
 
   font-family: "Lato", sans-serif;
   background-color: #122;
-
-  position: relative;
 }
 
 /*  */
@@ -101,42 +100,22 @@ section {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   overflow-x: scroll;
+  position: relative;
+
+  /* overflow: visible; */
 }
 
 section > * {
   display: flex;
   flex-direction: column;
-  flex: 1 0 20vw;
-  position: relative;
-
-  border-right: 5px solid rgba(238, 238, 238, 0);
-  border-left: 5px solid rgba(238, 238, 238, 0);
-  /* background-color: rgba(238, 238, 238, 0.268); */
+  flex: 1 1 calc(100vw / 4);
 
   height: 95vh;
   font-weight: 300;
   backface-visibility: hidden;
 }
-
-section > #panel {
-  flex: 1 0 40vw;
-}
-
-/* section > *::after {
-  display: block;
-  content: "";
-  width: 100%;
-  height: 100%;
-  position: absolute;
-
-  z-index: -1;
-
-  border-right: 2.5px solid rgba(238, 238, 238, 0);
-  border-left: 2.5px solid rgba(238, 238, 238, 0);
-  background-color: rgba(238, 238, 238, 0.268);
-} */
 
 section > *:hover {
   border-right: 5px solid transparent;
@@ -147,21 +126,15 @@ section > *:hover {
 section > :not(*:hover) {
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  background-color: rgba(238, 238, 238, 0.07);
+  background-color: rgba(238, 238, 238, 0.323);
 }
-
-/* section > *:hover::after {
-  border-right: 2.5px solid transparent;
-  border-left: 2.5px solid transparent;
-  background-color: transparent;
-} */
 
 section > * .sub_header-box {
   padding: 0.3rem 0.5rem;
   letter-spacing: 0.1rem;
   line-height: 2rem;
   text-transform: capitalize;
-  border-bottom: 1px solid rgba(17, 34, 34, 0.226);
+  border-bottom: 1px solid rgba(17, 34, 34, 0.042);
 }
 
 #section-1 > * {
@@ -180,15 +153,10 @@ section > * .sub_header-box {
   height: 60vh;
 }
 
-/* .pYMK_box,.friend_box,.groups_box,.notifications_box,.chats_messages_box{
-  
-  
-   flex:1,0,0 
-} */
-
 section #section-3 {
   overflow: scroll;
   max-height: 95vh;
+
   align-items: center;
   padding: 0;
 }
@@ -210,15 +178,9 @@ form {
   z-index: 10;
 }
 
-/* form + .status-box { */
 .topMarginAnimation {
   animation: topMargin 200ms ease-in-out 50ms forwards;
 }
-
-/* form + .status-box ~ .status-box {
-  animation: scale;
-  backface-visibility: hidden;
-} */
 
 @keyframes topMargin {
   from {
@@ -284,7 +246,6 @@ input:not(:last-child):focus + * {
   border-bottom: 1px solid rgba(17, 34, 34, 0.22);
   background-color: #fff;
 
-  /* animation: scale 200ms linear 50ms forwards; */
   transform-origin: center top;
   backface-visibility: hidden;
 }
@@ -427,79 +388,204 @@ form + .delete-box {
 }
 
 #panel {
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-start;
 
-  height: 95vh;
-  width: 40vw;
-  background-color: rgba(17, 34, 34, 0.123);
+  width: 50vw;
+  background-color: #eee;
 
-  position: absolute;
-  top: 2.5vh;
-  left: 0%;
-
-  padding: 2.5rem;
+  padding: 2.5rem 5rem;
   overflow: scroll;
-  z-index: 50;
-  backdrop-filter: blur(5px);
 }
 
 #panel > .status-box {
-  /* background-color: rgba(255, 255, 255, 0.227); */
-  height: calc(80vh - 5rem);
+  position: relative;
+
   justify-content: space-between;
   margin-top: 5rem;
-  border: none;
+  border: 0.5px solid rgba(17, 34, 34, 0.076);
+  box-shadow: 0.5px 0.5px 20px rgba(17, 34, 34, 0.083);
+  border-radius: 3rem 3rem 0 0;
+  background-color: transparent;
+
+  overflow: scoll;
 }
 
-#panel .status-info {
+.status-box #com-ply {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+
+  width: 80%;
+
+  display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-  /* position: sticky; */
-  /* top: -2.5rem; */
   background-color: #fff;
-  padding: 0 0 1rem 0;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 0px;
+
+  transform-origin: center center;
+  transform-box: fill-box;
+}
+
+.translateandscaley {
+  animation: translateandscaley 200ms ease-in-out forwards;
+}
+
+@keyframes translateandscaley {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  99% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+#com-ply #comment {
+  outline: none;
   border: none;
-  width: 100%;
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-family: "Lato", sans-serif;
+  line-height: 1.3;
+
+  resize: none;
+  background-color: transparent;
+  border: 0.5px solid rgba(17, 34, 34, 0.234);
+  box-shadow: 0.5px 0.5px 20px rgba(17, 34, 34, 0.152);
+
+  padding: 0.5rem;
+
+  width: 95%;
+  height: 10rem;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 2px rgba(68, 68, 68, 0.097);
+  margin-bottom: 5px;
 }
 
-#panel .status-info + * {
-  padding: 1rem 2.5rem;
-  overflow: scroll;
+#com-ply #comment + * {
+  padding: 0.5rem 2rem;
+  margin: unset;
+  border-radius: 20px;
+  background-color: #444;
+  font-weight: normal;
 }
 
-#panel .user-image-box {
+#panel > .status-box .status-info {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  padding: 0 0 1rem 0;
+  /* margin-bottom: 5rem; */
+  width: 50%;
+  border: none;
+}
+
+#panel > .status-box .status-info .username {
+  font-size: 1.8rem;
+  font-weight: 300;
+  letter-spacing: 3px;
+  padding: 0.5rem 0;
+}
+#panel > .status-box .status-info + * {
+  padding: 1rem 4rem;
+  line-height: 1.4;
+  word-spacing: 1;
+  /* font-size: 1.5rem; */
+}
+
+#panel > .status-box .user-image-box {
   clip-path: circle(50% at 50%, 50%);
-  width: 13rem;
-  height: 13rem;
+  width: 10rem;
+  height: 10rem;
   margin-top: -4rem;
 }
 
-#panel .user-image-box .user-image {
-  height: 13rem;
-  width: 13rem;
-  /* border-radius: 50%; */
+#panel > .status-box .user-image-box .user-image {
+  height: 10rem;
+  width: 10rem;
 }
 
-#panel .status-content-dialog {
-  position: sticky;
-  bottom: -2.5rem;
-
-  background-color: #fff;
-  width: 100%;
+#panel > .status-box .status-content-dialog {
+  width: 50%;
   align-items: center;
+  margin-top: 1rem;
+  border: none;
 }
 
 #panel .delete-box {
+  padding: 1rem 6rem 0 6rem;
+  width: 80%;
+  align-self: center;
+}
+
+#panel .delete-box ~ * {
+  display: none;
+}
+
+#panel .status-popup {
+  margin-top: -23rem;
+  flex-direction: column;
   align-items: center;
+  width: 50%;
+  border-radius: 2rem;
+  transform-origin: center bottom;
+  transform-box: fill-box;
+  transform: scaleY(0);
+  box-shadow: 2px 2px 0.5px rgba(17, 34, 34, 0.152);
+  border: 2px;
+
+  padding: 0.8rem 1rem;
+
+  z-index: 0;
+
+  bottom: 4.3rem;
+}
+
+.scaleyAnimation {
+  animation: scaley 150ms ease-in forwards;
+}
+
+@keyframes scaley {
+  98% {
+    transform: scaleY(1.2);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+#panel .status-popup > * {
+  padding: 0.8rem 5rem;
+}
+
+#panel .status-popup > *:not(:last-child) {
+  border-right: none;
+  border-bottom: 1px solid rgba(17, 34, 34, 0.063);
+}
+
+.status-popup + .comment-box {
+  margin-top: 4.5rem;
+  z-index: 100000000;
 }
 
 .status-popup {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
 
   padding: 1rem 0.5rem;
   width: 98%;
@@ -510,7 +596,7 @@ form + .delete-box {
   text-align: center;
   text-transform: lowercase;
 
-  background-color: #eee;
+  background-color: #fff;
   border-radius: 4px;
 
   margin: -4px 0 1px 0;
@@ -529,4 +615,170 @@ form + .delete-box {
 .status-popup a {
   text-decoration: none;
   color: #122;
+}
+
+.comment-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  border: 0.5px solid rgba(17, 34, 34, 0.076);
+  box-shadow: 0.5px 0.5px 20px rgba(17, 34, 34, 0.083);
+}
+
+.comment:not(:first-child) {
+  /* margin-top: 5px; */
+  border-top: 0.5px solid rgba(17, 34, 34, 0.179);
+}
+
+.comment-box .comment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+
+  position: relative;
+  padding: 2rem 3.5rem 0.8rem 3.5rem;
+  z-index: 1;
+}
+
+.comment-box .comment::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  z-index: -1;
+
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  transform-origin: center;
+}
+
+.comment-box .comment:hover::before {
+  background-color: rgba(50, 205, 50, 0.042);
+  transform: scale(1);
+  transition: all 200ms ease-in-out 100ms;
+}
+.comment-box .comment:not(:hover)::before {
+  background-color: transparent;
+  transform: scale(0.5);
+  transition: all 200ms ease-in-out 200ms;
+}
+.comment .status-info {
+  background-color: rgba(17, 34, 34, 0.019);
+  padding: 5px 2px;
+  margin: 0;
+  border: none;
+}
+
+/* .comment .status */
+
+.comment .status-info p {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 0rem;
+}
+
+.comment .status-info .date {
+  /* background-color: rgba(71, 255, 126, 0.083); */
+  background-color: transparent;
+  color: rgba(17, 34, 34, 0.809);
+
+  font-weight: 700;
+  /* border: 1px solid rgba(71, 255, 126, 0.419); */
+  border: transparent;
+  border-radius: 10px;
+}
+
+.comment .status-info .username {
+  font-size: 1.3rem;
+  font-weight: normal;
+  margin: 0;
+}
+
+.comment .status-imgInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 1.5rem 1.5rem 0.3rem 1rem;
+}
+
+.status-imgInfo .user-image-box {
+  clip-path: circle(50% at 50% 50%);
+  width: 5rem;
+  height: 5rem;
+}
+
+.status-imgInfo .user-image-box img {
+  width: 5rem;
+  height: 5rem;
+}
+
+.status-imgInfo a {
+  text-decoration: none;
+  color: unset;
+  font-size: 1.3rem;
+  line-height: 1.7rem;
+}
+.status-imgInfo .com-ply-content {
+  align-self: center;
+  padding: 0 0 0 2rem;
+}
+
+.comment .comment-dialog {
+  width: 35%;
+
+  border-radius: 5rem;
+  border: none;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-self: flex-end;
+
+  overflow: hidden;
+  background-color: rgba(71, 255, 126, 0.419);
+  background-color: rgba(17, 34, 34, 0.026);
+}
+
+.comment .comment-dialog > * {
+  width: 100%;
+  padding: 0.8rem 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: rgba(17, 34, 34, 0.768);
+  text-transform: lowercase;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.comment .comment-dialog > :hover {
+  background-color: rgba(71, 255, 126, 0.2);
+  color: green;
+}
+
+.comment .comment-dialog > .delete:hover {
+  background-color: rgba(255, 99, 71, 0.309);
+  color: red;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+.read-more {
+  color: rgb(68, 68, 68);
+  border-radius: 0.8rem;
+  display: inline-block;
+  padding: 1px 8px;
+}
+
+.read-more::before {
+  content: "...more";
 }

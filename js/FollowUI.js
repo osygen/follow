@@ -58,26 +58,37 @@ class FollowUI extends Factory {
   }
 
   submitForm(e) {
-    if (!e.target.closest("#post-form")) return;
+    if (!e.target.closest("#post-form") && !e.target.closest("#com-ply"))
+      return;
     e.preventDefault();
 
     // const [[, post]] = Array.from(new FormData(e.target));
     const post = Object.fromEntries(this._formData(e.target));
-    if (!post.post) return;
+
+    if (!["post", "comment", "reply"].some((key) => post[key]?.trim())) return;
 
     const status = this._statusHandler(post);
 
-    e.target.insertAdjacentHTML("afterend", status);
+    post.post && e.target.insertAdjacentElement("afterend", status);
+    post.post &&
+      Array.from(e.target.children).forEach((domEl) =>
+        ["post", "comment"].includes(domEl.name)
+          ? (domEl.value = "")
+          : undefined
+      );
+    post.post &&
+      setTimeout(() => {
+        document
+          .querySelector(".topMarginAnimation")
+          .classList.remove("topMarginAnimation");
+      }, 500);
 
-    Array.from(e.target.children).forEach((domEl) =>
-      ["post"].includes(domEl.name) ? (domEl.value = "") : undefined
-    );
-
-    setTimeout(() => {
-      this.#form.nextElementSibling.classList.remove("topMarginAnimation");
-    }, 500);
-
-    // status?.removeEventListener("submit", cb);
+    post.comment &&
+      e.target.parentNode.nextElementSibling.insertAdjacentElement(
+        "afterbegin",
+        status
+      ) &&
+      e.target.closest("#com-ply").remove();
   }
 
   clickHandler(e) {
@@ -93,21 +104,17 @@ class FollowUI extends Factory {
     this.#deleteStatus = e.target.closest(".delete");
 
     this.#statusContent = e.target.closest(".status-content");
-    this.#panelE = e.target.closest("#panelE");
+    this.#panelE = e.target.closest("#panel");
 
     if (
       !(
-        (
-          this.#more ||
-          this._popUp ||
-          this.#cancel ||
-          this.#deleteStatus ||
-          this.#deleteBox ||
-          this.#statusContent
-        )
-        // ||
-        // this.#panelE ||
-        // (!e.target.closest("#post-form") && e.target.closest("#section-3"))
+        this.#more ||
+        this._popUp ||
+        this.#cancel ||
+        this.#deleteStatus ||
+        this.#deleteBox ||
+        e.target.closest(".status-comment") ||
+        (document.querySelector("#com-ply") && !e.target.closest("#com-ply"))
       )
     )
       return;
@@ -115,28 +122,12 @@ class FollowUI extends Factory {
 
     e.preventDefault();
 
-    if (this.#statusContent && e.target.closest("#section-3")) {
-      if (this.#temp[2]) this.#temp[2].style.display = "";
+    if (document.querySelector("#com-ply") && !e.target.closest("#com-ply"))
+      document.querySelector("#com-ply").remove();
 
-      if (!this.#panel)
-        document
-          .querySelector("#section-3")
-          .insertAdjacentHTML("afterend", this.#panelString);
+    // document.querySelector("#com-ply").remove();
 
-      this.#temp[2] = this.#statusBox;
-      let panelTemp = this.#temp[2].cloneNode(true);
-      panelTemp.classList.add("scaleAnimation");
-
-      document.getElementById("panel").innerHTML = "";
-      document
-        .getElementById("panel")
-        .insertAdjacentElement("afterbegin", panelTemp);
-      this.#temp[2].style.display = "none";
-
-      setTimeout(() => panelTemp?.classList.remove("scaleAnimation"), 500);
-
-      panelTemp = undefined;
-    }
+    this.comPly(e);
 
     this.moreOption();
 
@@ -145,17 +136,31 @@ class FollowUI extends Factory {
 
     this.deleteBoxCancel();
 
-    this.deleteBoxDelete();
+    this.deleteBoxDelete(e);
 
     this.deleteOpt(e, deleteOption);
 
     e.target.closest("." + share) && this._popUp.remove();
   }
 
+  comPly(e) {
+    if (!e.target.closest(".status-comment")) return;
+
+    if (e.target.closest(".status-comment") && e.target.closest("#section-3"))
+      return setTimeout(() => location.assign("/panel.html"), 200);
+
+    this.#statusBox.insertAdjacentHTML("afterbegin", this._comPlyForm());
+  }
+
   moreOption() {
     if (!this.#more) return;
 
-    this.#statusBox?.insertAdjacentHTML("afterend", this.#btnMore);
+    this.#statusBox?.insertAdjacentHTML(
+      "afterend",
+      this.#panelE
+        ? this.#btnMore.replace("scaleAnimation", "scaleyAnimation")
+        : this.#btnMore
+    );
   }
 
   popUpOptions() {
@@ -171,16 +176,6 @@ class FollowUI extends Factory {
   deleteOpt(e, deleteOption) {
     if (!e.target.closest("." + deleteOption)) return;
 
-    if (this.#panelE) {
-      this._popUp.insertAdjacentHTML("afterend", this.#deleteBoxTemplate);
-
-      this.#temp[1] = this._popUp.previousElementSibling;
-
-      this.#temp[1].remove();
-      this._popUp.remove();
-      return;
-    }
-
     this._popUp.insertAdjacentHTML("afterend", this.#deleteBoxTemplate);
 
     this.#temp[0] = this._popUp.previousElementSibling;
@@ -191,20 +186,6 @@ class FollowUI extends Factory {
 
   deleteBoxCancel() {
     if (!(this.#cancel || (this.#deleteBox && !this.#deleteBoxE))) return;
-    // if (this.#deleteStatus) return;
-
-    if (this.#temp[1]) {
-      this.#temp[1].classList.add("scaleAnimation");
-
-      this.#deleteBox?.insertAdjacentElement("beforebegin", this.#temp[1]);
-      this.#deleteBox?.remove();
-
-      setTimeout(() => {
-        this.#temp[1]?.classList.remove("scaleAnimation");
-        this.#temp[1] = undefined;
-      }, 210);
-      return;
-    }
 
     this.#temp[0]?.classList.add("scaleAnimation");
 
@@ -217,18 +198,21 @@ class FollowUI extends Factory {
     }, 210);
   }
 
-  deleteBoxDelete() {
+  deleteBoxDelete(e) {
     if (!this.#deleteStatus) return;
+
+    this.#temp[0] = undefined;
     this.#deleteBox?.remove();
 
-    if (!this.#panelE) {
-      this.#temp[0] = undefined;
+    if (e.target.closest(".comment")) {
+      e.target.closest(".comment").remove();
+      return;
     }
 
     if (this.#panelE) {
-      this.#temp[2].remove();
-      this.#temp[1] = undefined;
-      this.#temp[2] = undefined;
+      this.#panelE.remove();
+
+      setTimeout(() => location.assign("/index.html"), 500);
     }
   }
 
