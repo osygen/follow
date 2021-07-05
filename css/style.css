@@ -20,6 +20,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  position: relative;
   box-sizing: border-box;
 
   min-height: 100vh;
@@ -412,25 +414,46 @@ form + .delete-box {
 }
 
 .status-box #com-ply {
+  margin: unset;
+  border: unset;
+
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
 
   width: 80%;
 
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
   background-color: #fff;
-  border-radius: 1rem;
-  padding: 1rem;
-  margin-bottom: 0px;
+  border-radius: 5px;
+  border: 0.5px solid rgba(17, 34, 34, 0.076);
+  box-shadow: 0.5px 0.5px 20px rgba(17, 34, 34, 0.083),
+    0.5px 0.5px 20px rgba(17, 34, 34, 0.083),
+    0.5px 0.5px 20px rgba(17, 34, 34, 0.083);
 
   transform-origin: center center;
   transform-box: fill-box;
+  z-index: 0;
+}
+
+.comment #com-ply {
+  flex-direction: column;
+  background-color: transparent;
+
+  margin: unset;
+  padding: unset;
+  border: unset;
+  box-shadow: unset;
+  z-index: 0;
+
+  transform-origin: right center;
+  transform-box: fill-box;
+}
+
+.comment #com-ply + .comment-dialog {
+  display: none;
 }
 
 .translateandscaley {
@@ -443,8 +466,7 @@ form + .delete-box {
     opacity: 0;
   }
   99% {
-    transform: translate(-50%, -50%) scale(1.05);
-    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1.2);
   }
   100% {
     transform: translate(-50%, -50%) scale(1);
@@ -455,31 +477,99 @@ form + .delete-box {
 #com-ply #comment {
   outline: none;
   border: none;
-  font-size: 1.4rem;
-  font-weight: 700;
+  font-size: 1.2rem;
+  font-weight: 400;
   font-family: "Lato", sans-serif;
   line-height: 1.3;
 
   resize: none;
-  background-color: transparent;
-  border: 0.5px solid rgba(17, 34, 34, 0.234);
-  box-shadow: 0.5px 0.5px 20px rgba(17, 34, 34, 0.152);
+  background-color: rgba(68, 68, 68, 0.056);
+  border: 0.5px solid rgba(17, 34, 34, 0.104);
+  box-shadow: 0.5px 0.5px 20px rgba(17, 34, 34, 0.075);
 
   padding: 0.5rem;
 
-  width: 95%;
+  width: 100%;
   height: 10rem;
   border-radius: 0.5rem;
-  box-shadow: 1px 1px 2px rgba(68, 68, 68, 0.097);
-  margin-bottom: 5px;
+}
+
+#com-ply #reply {
+  outline: none;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 400;
+  font-family: "Lato", sans-serif;
+  line-height: 1.3;
+
+  resize: none;
+  background-color: rgba(68, 68, 68, 0.056);
+  border: 0.5px solid rgba(17, 34, 34, 0.104);
+  box-shadow: 0.5px 0.5px 20px rgba(17, 34, 34, 0.075);
+
+  padding: 0.5rem;
+
+  width: 100%;
+  border-radius: 0.5rem;
 }
 
 #com-ply #comment + * {
-  padding: 0.5rem 2rem;
+  padding: 0.8rem 0;
   margin: unset;
-  border-radius: 20px;
-  background-color: #444;
+  outline: none;
+  border: none;
+  margin-top: 0.3rem;
+
   font-weight: normal;
+  align-self: flex-end;
+
+  border: 0.5px solid rgba(17, 34, 34, 0.076);
+  box-shadow: 0.5px 0.5px 20px rgba(17, 34, 34, 0.083);
+
+  width: 35%;
+  border-radius: 5rem;
+  background-color: rgba(17, 34, 34, 0.026);
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  color: rgba(17, 34, 34, 0.768);
+  text-transform: lowercase;
+  text-align: center;
+}
+
+#com-ply #reply + * {
+  padding: 0.8rem 0;
+  margin: unset;
+  outline: none;
+  border: none;
+  margin-top: 0.3rem;
+
+  font-weight: normal;
+  align-self: flex-end;
+
+  width: 35%;
+  border-radius: 5rem;
+  background-color: rgba(17, 34, 34, 0.026);
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  color: rgba(17, 34, 34, 0.768);
+  text-transform: lowercase;
+  text-align: center;
+}
+
+#com-ply #comment + *:hover {
+  background-color: rgba(71, 255, 126, 0.2);
+  color: green;
+  text-transform: uppercase;
+}
+
+#com-ply #reply + *:hover {
+  background-color: rgba(71, 255, 126, 0.2);
+  color: green;
+  text-transform: uppercase;
 }
 
 #panel > .status-box .status-info {
@@ -573,13 +663,12 @@ form + .delete-box {
 }
 
 #panel .status-popup > *:not(:last-child) {
-  border-right: none;
+  border: unset;
   border-bottom: 1px solid rgba(17, 34, 34, 0.063);
 }
 
 .status-popup + .comment-box {
   margin-top: 4.5rem;
-  z-index: 100000000;
 }
 
 .status-popup {
@@ -685,27 +774,30 @@ form + .delete-box {
   padding-left: 0rem;
 }
 
-.comment .status-info .date {
-  /* background-color: rgba(71, 255, 126, 0.083); */
+.comment .status-info .date,
+.comment .status-info .edited,
+.comment .status-info .replies {
   background-color: transparent;
   color: rgba(17, 34, 34, 0.809);
-
   font-weight: 700;
-  /* border: 1px solid rgba(71, 255, 126, 0.419); */
-  border: transparent;
-  border-radius: 10px;
+
+  border: unset;
+  padding: unset;
+  border-radius: unset;
 }
 
 .comment .status-info .username {
   font-size: 1.3rem;
   font-weight: normal;
   margin: 0;
+  flex: 1 0 0;
 }
 
 .comment .status-imgInfo {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
   padding: 1.5rem 1.5rem 0.3rem 1rem;
 }
@@ -714,6 +806,7 @@ form + .delete-box {
   clip-path: circle(50% at 50% 50%);
   width: 5rem;
   height: 5rem;
+  align-self: flex-end;
 }
 
 .status-imgInfo .user-image-box img {
@@ -722,13 +815,14 @@ form + .delete-box {
 }
 
 .status-imgInfo a {
+  align-self: center;
+
   text-decoration: none;
   color: unset;
   font-size: 1.3rem;
   line-height: 1.7rem;
 }
 .status-imgInfo .com-ply-content {
-  align-self: center;
   padding: 0 0 0 2rem;
 }
 
@@ -760,7 +854,7 @@ form + .delete-box {
   font-weight: 700;
 }
 
-.comment .comment-dialog > :hover {
+.comment .comment-dialog > *:hover {
   background-color: rgba(71, 255, 126, 0.2);
   color: green;
 }
@@ -768,17 +862,68 @@ form + .delete-box {
 .comment .comment-dialog > .delete:hover {
   background-color: rgba(255, 99, 71, 0.309);
   color: red;
+
   font-weight: normal;
   text-transform: uppercase;
+  line-height: 0;
 }
 
 .read-more {
-  color: rgb(68, 68, 68);
-  border-radius: 0.8rem;
   display: inline-block;
-  padding: 1px 8px;
+
+  padding: 0 3px;
+  border-radius: 2px;
+  margin-left: 5px;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: center;
+
+  color: rgba(255, 255, 255, 0.666);
+  background-color: rgba(17, 34, 34, 0.63);
 }
 
 .read-more::before {
-  content: "...more";
+  content: "read more";
+}
+
+.alert {
+  position: absolute;
+  left: 50%;
+
+  transform: translateX(-50%);
+  z-index: 1100000000000000000000000000000;
+
+  background-color: #eee;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: "Lato", sans-serif;
+}
+
+.success,
+.error {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  padding: 1rem 2.5rem;
+  gap: 0.5rem;
+  color: rgba(17, 34, 34, 0.741);
+}
+
+.success {
+  background-color: rgba(71, 255, 126, 0.138);
+  color: green;
+}
+
+.error {
+  background-color: rgba(255, 99, 71, 0.159);
+  color: red;
+}
+
+.success :last-child,
+.error :last-child {
+  font-weight: normal;
+  color: #122;
 }

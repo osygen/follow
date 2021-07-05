@@ -41,7 +41,7 @@ class FollowUI extends Factory {
   constructor() {
     super();
 
-    ["click", "submit"].some((type, i, arr) => {
+    ["click", "submit", "toggle"].some((type, i, arr) => {
       this.#root.addEventListener(type, this.rootHandler.bind(this, arr));
     });
 
@@ -65,30 +65,34 @@ class FollowUI extends Factory {
     // const [[, post]] = Array.from(new FormData(e.target));
     const post = Object.fromEntries(this._formData(e.target));
 
-    if (!["post", "comment", "reply"].some((key) => post[key]?.trim())) return;
+    if (!["post", "comment", "reply"].some((key) => post[key]?.trim()))
+      return this.alert(...Object.keys(post), "error");
 
     const status = this._statusHandler(post);
 
-    post.post && e.target.insertAdjacentElement("afterend", status);
-    post.post &&
-      Array.from(e.target.children).forEach((domEl) =>
-        ["post", "comment"].includes(domEl.name)
-          ? (domEl.value = "")
-          : undefined
-      );
-    post.post &&
-      setTimeout(() => {
-        document
-          .querySelector(".topMarginAnimation")
-          .classList.remove("topMarginAnimation");
-      }, 500);
+    if (post.post) {
+      e.target.insertAdjacentElement("afterend", status);
 
-    post.comment &&
+      Array.from(e.target.children).forEach((domEl) => {
+        if (["post", "comment"].includes(domEl.name)) domEl.value = "";
+      });
+    }
+
+    if (post.comment) {
       e.target.parentNode.nextElementSibling.insertAdjacentElement(
         "afterbegin",
         status
-      ) &&
+      );
       e.target.closest("#com-ply").remove();
+    }
+
+    if (post.reply) {
+      e.target.closest("#com-ply").remove();
+      this.logger(status.reply);
+      return;
+    }
+
+    this._removeAnimation(".topMarginAnimation", 500);
   }
 
   clickHandler(e) {
@@ -114,18 +118,13 @@ class FollowUI extends Factory {
         this.#deleteStatus ||
         this.#deleteBox ||
         e.target.closest(".status-comment") ||
+        e.target.closest(".reply") ||
         (document.querySelector("#com-ply") && !e.target.closest("#com-ply"))
       )
     )
       return;
-    // if (e.target.closest("#post-form")) return;
 
     e.preventDefault();
-
-    if (document.querySelector("#com-ply") && !e.target.closest("#com-ply"))
-      document.querySelector("#com-ply").remove();
-
-    // document.querySelector("#com-ply").remove();
 
     this.comPly(e);
 
@@ -143,13 +142,54 @@ class FollowUI extends Factory {
     e.target.closest("." + share) && this._popUp.remove();
   }
 
+  clearEmptyTextArea(e) {
+    ["#reply", "#comment"].some((id, i, arr) =>
+      document.querySelectorAll(id)?.forEach((el) => {
+        if (el.value.trim() === "" && arr[i] === "#reply")
+          el.parentNode.remove();
+        if (el.value.trim() === "" && arr[i] === "#comment" && !this.#statusBox)
+          el.parentNode.remove();
+      })
+    );
+    this.logger("clearEmptyTextArea ran");
+  }
+
+  focusTextArea(e) {
+    document.querySelector("#comment")?.focus();
+
+    document
+      .querySelectorAll("#reply")
+      ?.forEach(
+        (el) =>
+          el.closest(".comment") ===
+            e.target.closest(".reply").parentNode.parentNode && el?.focus()
+      );
+  }
+
   comPly(e) {
-    if (!e.target.closest(".status-comment")) return;
+    if (
+      !(
+        e.target.closest(".status-comment") ||
+        e.target.closest(".reply") ||
+        document.querySelectorAll("#reply").length ||
+        document.querySelectorAll("#comment").length
+      )
+    )
+      return;
+
+    this.clearEmptyTextArea(e);
 
     if (e.target.closest(".status-comment") && e.target.closest("#section-3"))
       return setTimeout(() => location.assign("/panel.html"), 200);
 
-    this.#statusBox.insertAdjacentHTML("afterbegin", this._comPlyForm());
+    !document.querySelector("#comment") &&
+      this.#statusBox?.insertAdjacentHTML("afterbegin", this._comPlyForm());
+
+    e.target
+      .closest(".reply")
+      ?.parentNode.insertAdjacentHTML("beforebegin", this._comPlyForm("reply"));
+
+    this.focusTextArea(e);
   }
 
   moreOption() {
@@ -192,17 +232,12 @@ class FollowUI extends Factory {
     this.#deleteBox?.insertAdjacentElement("beforebegin", this.#temp[0]);
     this.#deleteBox?.remove();
 
-    setTimeout(() => {
-      this.#temp[0]?.classList.remove("scaleAnimation");
-      this.#temp[0] = undefined;
-    }, 210);
+    this._removeAnimation(".scaleAnimation", 210);
+    this.#temp[0] = undefined;
   }
 
   deleteBoxDelete(e) {
     if (!this.#deleteStatus) return;
-
-    this.#temp[0] = undefined;
-    this.#deleteBox?.remove();
 
     if (e.target.closest(".comment")) {
       e.target.closest(".comment").remove();
@@ -211,9 +246,28 @@ class FollowUI extends Factory {
 
     if (this.#panelE) {
       this.#panelE.remove();
-
       setTimeout(() => location.assign("/index.html"), 500);
+      return;
     }
+
+    this.#temp[0] = undefined;
+    this.#deleteBox?.remove();
+  }
+
+  alert(key, c) {
+    this.#root.insertAdjacentHTML(
+      "afterbegin",
+      `<div class="alert"><p class="${c}"><span>Failed:</span><span>${key} cannot be empty, please try again.</span></p></div>`
+    );
+    setTimeout(() => document.querySelector(".alert")?.remove(), 800);
+  }
+
+  logger(key = "running") {
+    this.#root.insertAdjacentHTML(
+      "afterbegin",
+      `<div class="alert"><p class="success"><span style="text-decoration:underline wavy">Success:</span><span>${key}</span></p></div>`
+    );
+    setTimeout(() => document.querySelector(".alert")?.remove(), 1000);
   }
 
   secObserver() {
