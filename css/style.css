@@ -19,9 +19,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
-  position: relative;
   box-sizing: border-box;
 
   min-height: 100vh;
@@ -33,64 +32,67 @@ body {
 
 /*  */
 nav {
+  display: flex;
+  justify-content: space-between;
+
   position: sticky;
   top: 0;
   background-color: rgb(17, 34, 34, 0.2);
-  /* width: 100%; */
-  z-index: 1000;
-}
-
-nav::after {
-  content: "";
-  display: table;
-  clear: both;
+  background-color: #122;
+  width: 100%;
+  z-index: 50;
 }
 
 nav #logo {
-  font-size: 2rem;
-  font-weight: 700;
   text-transform: uppercase;
-  display: inline-block;
-  background-color: #070707;
+  background-color: #0707073d;
   clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%);
 }
 
-#logo h1 {
-  text-align: right;
-  color: #fff;
-}
-
 ul {
-  float: right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10rem;
 }
 
 li {
-  display: inline-block;
-  padding: 1rem 2rem;
-  border-radius: 0;
-  margin-right: 1rem;
-  text-transform: capitalize;
+  list-style: none;
+  padding: 1rem 3rem;
+  border-radius: 6px;
 
-  transition: all 0.5s ease;
+  text-transform: capitalize;
+  text-align: center;
+
+  transition: all 0.5s ease-in-out 100ms;
   backface-visibility: hidden;
 }
 
 li:hover {
-  background-color: rgba(17, 34, 34, 0.802);
+  background-color: rgba(238, 238, 238, 0.124);
 }
 
 #logo a,
 li a {
   text-decoration: none;
-  color: #fff;
-  font-size: 2rem;
-  font-weight: 700;
+  color: #eee;
+  font-size: 1.4rem;
+  font-weight: normal;
+  transition: all 0.5s ease-in-out 100ms;
+}
+
+li:hover a {
+  color: rgba(238, 238, 238, 0.309);
 }
 
 #logo a h1 {
-  padding: 0.5rem 1rem;
+  padding: 1rem 2rem;
   transition: all 0.5s ease;
   text-transform: uppercase;
+
+  font-size: 2rem;
+  font-weight: normal;
+  color: rgb(238, 238, 238);
 }
 
 #logo a h1:hover {
@@ -101,22 +103,26 @@ li a {
 section {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  overflow-x: scroll;
-  position: relative;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.5rem;
 
-  /* overflow: visible; */
+  position: relative;
+  /* background-color: rgba(238, 238, 238, 0.261); */
 }
 
 section > * {
   display: flex;
   flex-direction: column;
-  flex: 1 1 calc(100vw / 4);
 
-  height: 95vh;
+  min-height: 95vh;
   font-weight: 300;
   backface-visibility: hidden;
+  background-color: #eee;
+}
+
+section > :not(#panel, #section-3) {
+  flex: 0 1 25vw;
 }
 
 section > *:hover {
@@ -157,7 +163,9 @@ section > * .sub_header-box {
 
 section #section-3 {
   overflow: scroll;
-  max-height: 95vh;
+  min-height: 95vh;
+  width: 40vw;
+  background-color: #eee;
 
   align-items: center;
   padding: 0;
@@ -165,18 +173,19 @@ section #section-3 {
 
 form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  background-color: #eee;
 
-  background-color: #fff;
   width: 100%;
   height: max-content;
-  margin-bottom: 10px;
-  padding: 0.5rem 0.5rem;
-  border-bottom: 1px solid rgba(17, 34, 34, 0.474);
+  margin: 5px 0px 10px 0;
+  padding: 0.5rem 1rem;
+  /* border: 0.5px solid rgba(17, 34, 34, 0.104); */
+  border-radius: 0.5rem;
 
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.303);
+  /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.303); */
   z-index: 10;
 }
 
@@ -202,30 +211,55 @@ form {
   }
 }
 
-input {
-  background-color: #eee;
-  padding: 1rem;
-  font-size: 1.5rem;
+#post {
+  align-self: stretch;
+  height: 8rem;
+  outline: none;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 400;
+  font-family: "Lato", sans-serif;
+  line-height: 1.3;
+
+  resize: none;
+  background-color: rgba(68, 68, 68, 0.056);
+  border: 0.5px solid rgba(17, 34, 34, 0.104);
+  box-shadow: 0.5px 0.5px 20px rgba(17, 34, 34, 0.075);
+
+  padding: 0.5rem;
+
+  border-radius: 0.5rem;
+}
+
+#post ~ [type="submit"] {
+  padding: 0.8rem 0;
+  margin: unset;
+  outline: none;
+  border: none;
+  margin-top: 0.3rem;
+
+  font-weight: normal;
+  align-self: flex-end;
+
+  border: 0.5px solid rgba(17, 34, 34, 0.076);
+  box-shadow: 0.5px 0.5px 20px rgba(17, 34, 34, 0.083);
+
+  width: 35%;
+  border-radius: 5rem;
+  background-color: rgba(17, 34, 34, 0.026);
+
+  font-size: 0.9rem;
   font-weight: 700;
 
-  max-height: 30rem;
-  border-radius: 0.5rem;
-  display: inline-block;
-  border: none;
-  outline: none;
-  border: 1px solid #eee;
-}
-input:not(:last-child) {
-  width: 75%;
-  background-color: rgba(238, 238, 238, 0.337);
-  border: 1px solid transparent;
-}
-input:not(:last-child):focus {
-  animation: focusWidth 420ms ease-in-out both;
+  color: rgba(17, 34, 34, 0.768);
+  text-transform: lowercase;
+  text-align: center;
 }
 
-input:not(:last-child):focus + * {
-  display: none;
+#post ~ [type="submit"]:hover {
+  background-color: rgba(71, 255, 126, 0.2);
+  color: green;
+  text-transform: uppercase;
 }
 
 @keyframes focusWidth {
@@ -245,37 +279,38 @@ input:not(:last-child):focus + * {
 
 .status-box {
   width: 100%;
-  border-bottom: 1px solid rgba(17, 34, 34, 0.22);
-  background-color: #fff;
+
+  background-color: rgba(255, 255, 255, 0.281);
 
   transform-origin: center top;
   backface-visibility: hidden;
-}
-
-.status-box:not(:last-child) {
+  border: 1px solid rgba(17, 34, 34, 0.172);
+  padding: 2rem 2rem 0.5rem 2rem;
   margin-bottom: 5px;
 }
 
 .delete-box {
   justify-content: space-around;
-  width: 98%;
+  width: 60%;
   padding-top: 0.9rem;
+  padding-bottom: 0.5rem;
   border-radius: 5px;
 
-  background-color: rgba(238, 238, 238, 0.59);
+  /* background-color: rgba(238, 238, 238, 0.59); */
   color: #122;
-  box-shadow: 1px 1px 5px rgba(17, 34, 34, 0.481);
+  /* box-shadow: 1px 1px 5px rgba(17, 34, 34, 0.481); */
+  border: 1px solid rgba(17, 34, 34, 0.172);
 
   backface-visibility: hidden;
   transform-origin: center center;
 }
 
 .status-box + .delete-box {
-  margin: -4px 0 1px 0;
+  margin: 0px 0 5px 0;
 }
 
 form + .delete-box {
-  margin: -9px 0 1px 0;
+  margin: -5px 0 5px 0;
 }
 
 .scaleAnimation {
@@ -300,21 +335,21 @@ form + .delete-box {
 .status-info {
   display: flex;
   align-items: center;
-  width: 97%;
-  padding: 0rem 0.1rem 0.2rem 0.1rem;
-  border-bottom: 1px solid rgba(17, 34, 34, 0.4);
+  width: 100%;
+  padding: 0rem 1rem 0.5rem 1rem;
+  /* border-bottom: 1px solid rgba(17, 34, 34, 0.138); */
 }
 
 .status-info .user-image-box {
-  height: 4rem;
-  width: 4rem;
+  height: 5rem;
+  width: 5rem;
   clip-path: circle(50% at 50% 50%);
   align-self: center;
 }
 
 .status-info .user-image {
-  height: 4rem;
-  width: 4rem;
+  height: 5rem;
+  width: 5rem;
 }
 
 .status-info p {
@@ -347,7 +382,7 @@ form + .delete-box {
 .status-content,
 .delete-content {
   width: 100%;
-  padding: 1rem 0.5rem;
+  padding: 1rem 4rem;
 
   font-size: 1.3rem;
   line-height: 1.7rem;
@@ -362,31 +397,74 @@ form + .delete-box {
 .status-content-dialog,
 .delete-dialog {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   position: relative;
 
-  width: 80%;
-  border-top: 1px solid rgba(17, 34, 34, 0.22);
+  width: 60%;
+
+  border: 0.5px solid rgba(17, 34, 34, 0.076);
+  box-shadow: 0.5px 0.5px 10px rgba(17, 34, 34, 0.083);
+  border-radius: 5rem;
+  overflow: hidden;
 }
 
-.status-content-dialog > span > *,
-.delete-dialog > span > * {
-  display: inline-block;
-  padding: 0.9rem 1px;
+.status-content-dialog {
+  align-self: flex-end;
+}
 
+.status-content-dialog > span,
+.delete-dialog > span {
+  padding: 0.8rem 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: rgba(17, 34, 34, 0.768);
+  text-transform: lowercase;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  transition: all 1000ms ease 100ms;
+}
+
+.status-content-dialog > span {
+  flex: 1 1 calc(100% / 3);
+}
+.delete-dialog > span {
+  flex: 1 1 calc(100% / 2);
+}
+
+.status-content-dialog > span > a,
+.delete-dialog > span > a {
   text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: 900;
 }
 
-.status-content-dialog > span > * {
+.status-content-dialog > span > a,
+.delete-dialog > span > a {
   color: rgba(17, 34, 34, 0.624);
-  transition: color 0.3s ease;
 }
 
-.status-content-dialog:hover > span > *,
-.delete-dialog > span > * {
-  color: #122;
+.status-content-dialog > span:hover,
+.delete-dialog > span:hover {
+  background-color: rgba(71, 255, 126, 0.2);
+}
+
+.status-content-dialog > span:hover > * {
+  color: green;
+  text-transform: uppercase;
+}
+
+.delete-dialog > .delete:hover {
+  background-color: rgba(255, 99, 71, 0.563);
+}
+
+.delete-dialog > .cancel:hover > * {
+  color: green;
+}
+
+.delete-dialog > .delete:hover > * {
+  color: red;
+  text-transform: uppercase;
 }
 
 #panel {
@@ -630,6 +708,7 @@ form + .delete-box {
   margin-top: -23rem;
   flex-direction: column;
   align-items: center;
+
   width: 50%;
   border-radius: 2rem;
   transform-origin: center bottom;
@@ -638,11 +717,12 @@ form + .delete-box {
   box-shadow: 2px 2px 0.5px rgba(17, 34, 34, 0.152);
   border: 2px;
 
-  padding: 0.8rem 1rem;
+  /* padding: 0.8rem 0rem; */
 
   z-index: 0;
 
   bottom: 4.3rem;
+  background-color: #fff;
 }
 
 .scaleyAnimation {
@@ -660,11 +740,12 @@ form + .delete-box {
 
 #panel .status-popup > * {
   padding: 0.8rem 5rem;
+  width: 100%;
 }
 
 #panel .status-popup > *:not(:last-child) {
   border: unset;
-  border-bottom: 1px solid rgba(17, 34, 34, 0.063);
+  /* border-bottom: 1px solid rgba(17, 34, 34, 0.063); */
 }
 
 .status-popup + .comment-box {
@@ -674,10 +755,9 @@ form + .delete-box {
 .status-popup {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 
-  padding: 1rem 0.5rem;
-  width: 98%;
+  width: 70%;
 
   font-size: 1.2rem;
   line-height: 1.7rem;
@@ -685,24 +765,34 @@ form + .delete-box {
   text-align: center;
   text-transform: lowercase;
 
-  background-color: #fff;
+  border: 0.5px solid rgba(17, 34, 34, 0.104);
+  box-shadow: 0.5px 0.5px 20px rgba(17, 34, 34, 0.075);
+
   border-radius: 4px;
 
-  margin: -4px 0 1px 0;
+  margin: 0px 0 5px 0;
 
   transform-origin: center center;
 }
 
-.status-popup > * {
-  padding: 0rem 0.5rem;
-}
-
-.status-popup > *:not(:last-child) {
-  border-right: 1px solid rgba(17, 34, 34, 0.919);
+.status-popup > span {
+  padding: 0.5rem 1rem;
+  flex: 1 1 0;
 }
 
 .status-popup a {
   text-decoration: none;
+  font-size: 0.9rem;
+
+  color: rgba(17, 34, 34, 0.624);
+}
+
+.status-popup > span:hover {
+  background-color: rgba(17, 34, 34, 0.029);
+  text-transform: uppercase;
+}
+
+.status-popup > span:hover a {
   color: #122;
 }
 

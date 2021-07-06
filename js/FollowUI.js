@@ -45,8 +45,10 @@ class FollowUI extends Factory {
       this.#root.addEventListener(type, this.rootHandler.bind(this, arr));
     });
 
-    this.#secs?.forEach((s) => this.secObserver().observe(s));
-    this.#form ? this.navObserver().observe(this.#form) : undefined;
+    this.focusTextArea();
+
+    // this.#secs?.forEach((s) => this.secObserver().observe(s));
+    // this.#form ? this.navObserver().observe(this.#form) : undefined;
   }
 
   rootHandler(arr, e) {
@@ -123,6 +125,8 @@ class FollowUI extends Factory {
       )
     )
       return;
+
+    if (e.target.closest(".nav")) return;
 
     e.preventDefault();
 

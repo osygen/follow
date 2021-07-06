@@ -16,10 +16,34 @@
     <title>Follow!</title>
   </head>
   <body>
+    <nav class="nav">
+      <div id="logo">
+        <a href="#"><h1>follow</h1></a>
+      </div>
+      <ul>
+        <li><a href="./index.html">home</a></li>
+        <li><a href="./about.html">about</a></li>
+        <li><a href="./contact.html">contact</a></li>
+      </ul>
+    </nav>
+
     <section>
       <div id="panel">
         <!-- <h2>post</h2> -->
         <div class="status-box scaleAnimation">
+          <form
+            id="com-ply"
+            class="<!--translateandscaley-->"
+            style="transform: scale(1) translate(-50%, -50%)"
+          >
+            <textarea
+              id="comment"
+              name="comment"
+              type="text"
+              placeholder="write a comment"
+            ></textarea>
+            <input type="submit" value="comment" />
+          </form>
           <div class="status-info" data-user-idstatus-id="{{statusId}}">
             <div class="user-image-box">
               <img src="./img/IMG_sam_3234353.jpg" alt="" class="user-image" />
