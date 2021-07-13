@@ -18,14 +18,61 @@
   <body>
     <!-- navbar -->
     <nav class="nav">
-      <div id="logo">
-        <a href="#"><h1>follow</h1></a>
+      <h1 id="logo">follow</h1>
+      <form class="search-form" action="">
+        <input
+          class="search-input"
+          type="search"
+          name="search"
+          placeholder="search..."
+          id=""
+        />
+      </form>
+
+      <div class="profile-container">
+        <a class="home" href="./index.html">home</a>
+        <a class="logout" href="./logout.html">logout</a>
+        <div class="user-profile">
+          <label for="dropdown"
+            ><img class="user-image" src="./img/IMG_sam_3234353.jpg" alt=""
+          /></label>
+          <input style="display: none" type="checkbox" name="" id="dropdown" />
+
+          <!-- list -->
+
+          <ul class="dropdown">
+            <ul class="list1">
+              <li>
+                <a href="./myprofile.html">profile</a>
+              </li>
+              <li>
+                <a href="./friends.html">friends &amp; groups</a>
+              </li>
+              <li>
+                <a href="./mymessage.html">messages</a>
+              </li>
+              <li>
+                <a class="logout" href="./logout.html">logout</a>
+              </li>
+            </ul>
+            <ul class="list2" style="background-color: #191919">
+              <li>
+                <a href="./administration.html">Admin</a>
+              </li>
+              <li>
+                <a href="./api.html">API Documentation</a>
+              </li>
+              <li>
+                <a href="./feedback.html">feedback &amp; support</a>
+              </li>
+            </ul>
+          </ul>
+
+          <h2 class="username">
+            <a href="./userId">samuel oduwole</a>
+          </h2>
+        </div>
       </div>
-      <ul>
-        <li><a href="#">home</a></li>
-        <li><a href="./about.html">about</a></li>
-        <li><a href="./contact.html">contact</a></li>
-      </ul>
     </nav>
 
     <!-- section -->
@@ -34,17 +81,105 @@
       <div id="section-1" class="sec">
         <div class="pYMK_box">
           <h2 class="sub_header-box">people you may know</h2>
+
+          <div class="user-info" id="userid">
+            <div class="user-image-box">
+              <img src="./img/user-7.jpg" alt="" class="user-image" />
+            </div>
+
+            <h2 class="username">
+              <a href="./userid">jane ororo</a><span>5 friends</span>
+            </h2>
+            <button>follow</button>
+          </div>
+
+          <div class="user-info" id="userid">
+            <div class="user-image-box">
+              <img src="./img/user-13.jpg" alt="" class="user-image" />
+            </div>
+
+            <h2 class="username">
+              <a href="./userid">ahmed geijah </a><span>5 friends</span>
+            </h2>
+            <button>follow</button>
+          </div>
+
+          <div class="user-info" id="userid">
+            <div class="user-image-box">
+              <img src="./img/user-10.jpg" alt="" class="user-image" />
+            </div>
+
+            <h2 class="username">
+              <a href="./userid">roger chuks</a><span>5 friends</span>
+            </h2>
+            <button>follow</button>
+          </div>
+
+          <div class="user-info" id="userid">
+            <div class="user-image-box">
+              <img src="./img/user-4.jpg" alt="" class="user-image" />
+            </div>
+
+            <h2 class="username">
+              <a href="./userid">daniella ang lee</a><span>59 friends</span>
+            </h2>
+            <button>follow</button>
+          </div>
         </div>
 
-        <div class="groups_box"><h2 class="sub_header-box">groups</h2></div>
+        <div class="groups_box">
+          <h2 class="sub_header-box">groups</h2>
+        </div>
+
         <div class="friend_box">
-          <h2 class="sub_header-box">friend</h2>
-          <p class="status-content">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora,
-            nam aliquid ullam fuga possimus sint inventore, laborum harum sunt
-            quia nesciunt. Dicta cumque quos magnam modi exercitationem itaque
-            velit totam. rgergreg
-          </p>
+          <h2 class="sub_header-box">friends</h2>
+
+          <div class="user-info" id="userid">
+            <div class="user-image-box">
+              <img src="./img/user-19.jpg" alt="" class="user-image" />
+            </div>
+
+            <h2 class="username">
+              <a href="./userid">
+                Dr Raymond Justin 4444444444444444444444444
+              </a>
+              <span>59 friends</span>
+            </h2>
+            <button>unfollow</button>
+          </div>
+
+          <div class="user-info" id="userid">
+            <div class="user-image-box">
+              <img src="./img/user-20.jpg" alt="" class="user-image" />
+            </div>
+
+            <h2 class="username">
+              <a href="./userid">Mary Smith</a><span>59 friends</span>
+            </h2>
+            <button>unfollow</button>
+          </div>
+
+          <div class="user-info" id="userid">
+            <div class="user-image-box">
+              <img src="./img/user-15.jpg" alt="" class="user-image" />
+            </div>
+
+            <h2 class="username">
+              <a href="./userid">Ran Doe</a><span>59 friends</span>
+            </h2>
+            <button>unfollow</button>
+          </div>
+
+          <div class="user-info" id="userid">
+            <div class="user-image-box">
+              <img src="./img/user-2.jpg" alt="" class="user-image" />
+            </div>
+
+            <h2 class="username">
+              <a href="./userid">Xu Jong Lee</a><span>59 friends</span>
+            </h2>
+            <button>unfollow</button>
+          </div>
         </div>
       </div>
 
@@ -77,11 +212,11 @@
         <div class="status-box <!--topMarginAnimation scaleAnimation-->">
           <div class="status-info" data-user-idstatus-id="userid-statusid1">
             <div class="user-image-box">
-              <img src="./img/IMG_sam_3234353.jpg" alt="" class="user-image" />
+              <img src="./img/user-19.jpg" alt="" class="user-image" />
             </div>
 
             <p>
-              <span class="username">oduwole samuel</span
+              <span class="username">dr. raymond justin</span
               ><span class="date">⏲ 22 min.</span>&nbsp;<span>📌</span>
             </p>
             <span>🤩</span>
@@ -162,11 +297,11 @@
         <div class="status-box <!--topMarginAnimation scaleAnimation-->">
           <div class="status-info" data-user-idstatus-id="userid-statusid3">
             <div class="user-image-box">
-              <img src="./img/IMG_sam_3234353.jpg" alt="" class="user-image" />
+              <img src="./img/user-15.jpg" alt="" class="user-image" />
             </div>
 
             <p>
-              <span class="username">oduwole samuel</span
+              <span class="username">Ran Doe </span
               ><span class="date">⏲ 22 min.</span>&nbsp;<span>📌</span>
             </p>
             <span>🤩</span>
@@ -211,6 +346,9 @@
         </div> -->
 
         <!--  -->
+        <footer>
+          <h2>&copy; samuel oduwole</h2>
+        </footer>
       </div>
 
       <!-- section-4 -->
@@ -241,15 +379,11 @@
       <div id="section-5" class="sec">
         <div class="notifications_box">
           <h2 class="sub_header-box">notifications</h2>
+          <p class="status-content"></p>
         </div>
         <div class="chats_messages_box">
           <h2 class="sub_header-box">chats &amp; messages</h2>
-          <p class="status-content">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora,
-            nam aliquid ullam fuga possimus sint inventore, laborum harum sunt
-            quia nesciunt. Dicta cumque quos magnam modi exercitationem itaque
-            velit totam. rgergreg
-          </p>
+          <p class="status-content"></p>
         </div>
       </div>
     </section>

@@ -41,14 +41,18 @@ class FollowUI extends Factory {
   constructor() {
     super();
 
-    ["click", "submit", "toggle"].some((type, i, arr) => {
+    ["click", "submit" /*, "mousemove", "mousedown"*/].some((type, i, arr) => {
       this.#root.addEventListener(type, this.rootHandler.bind(this, arr));
     });
 
     this.focusTextArea();
 
-    // this.#secs?.forEach((s) => this.secObserver().observe(s));
-    // this.#form ? this.navObserver().observe(this.#form) : undefined;
+    this.#secs?.forEach((s) => this.secObserver().observe(s));
+
+    document.querySelector("#post-form") &&
+      this.navObserver().observe(document.querySelector("#post-form"));
+    document.querySelector("#panel") &&
+      this.navObserver().observe(document.querySelector(".status-box"));
   }
 
   rootHandler(arr, e) {
@@ -56,7 +60,43 @@ class FollowUI extends Factory {
       ? this.clickHandler(e)
       : e.type === arr[1]
       ? this.submitForm(e)
+      : e.type === arr[2]
+      ? this.shift(e)
+      : e.type === arr[3]
+      ? this.down(e)
       : alert("event not handled!");
+  }
+  x;
+
+  down(e) {
+    document.querySelector(".unshift") &&
+      setTimeout(
+        () => document.querySelector(".unshift")?.classList.remove("unshift"),
+        401
+      );
+
+    if (!e.target.closest(".status-box ")) return;
+
+    if (document.querySelector(".shift")) {
+      document.querySelector(".shift").classList.add("unshift");
+      document.querySelector(".shift").classList.remove("shift");
+    }
+
+    this.x = e.clientX;
+  }
+
+  shift(e) {
+    if (
+      !e.target.closest(".status-box ") ||
+      !e.target.closest("#section-3") ||
+      this.x === undefined
+    )
+      return;
+
+    if (e.clientX - this.x < -200) {
+      e.target.closest(".status-box ").classList.add("shift");
+      this.x = undefined;
+    }
   }
 
   submitForm(e) {
@@ -275,14 +315,11 @@ class FollowUI extends Factory {
   }
 
   secObserver() {
-    return new IntersectionObserver(this.secCb);
-  }
-
-  navObserver() {
-    return new IntersectionObserver(this.navCb, {
+    return new IntersectionObserver(this.secCb, {
       root: null,
-      rootMargin: "-40px",
-      threshold: 1.0
+      rootMargin: -this.#nav.getBoundingClientRect().height + "px",
+      //
+      threshold: 0
     });
   }
 
@@ -303,19 +340,20 @@ class FollowUI extends Factory {
     });
   }
 
+  navObserver() {
+    return new IntersectionObserver(this.navCb.bind(this), {
+      root: null,
+      rootMargin: -this.#nav.getBoundingClientRect().height + "px",
+      //
+      threshold: 1
+    });
+  }
+
   navCb(entries, observer) {
     entries.forEach((entry) => {
-      if (!entry.isIntersecting)
-        entry.target.closest(
-          "section"
-        ).previousElementSibling.style.backgroundColor = "rgb(17, 34, 34)";
-      if (entry.isIntersecting)
-        entry.target.closest(
-          "section"
-        ).previousElementSibling.style.backgroundColor = "rgb(17, 34, 34,.0)";
+      if (entry.isIntersecting) this.#nav.classList.remove("stick");
 
-      //entry.target.closest("section").previousElementSibling.style.position = "sticky";
-      //entry.target.closest("section").previousElementSibling.style.top = 0;
+      if (!entry.isIntersecting) this.#nav.classList.add("stick");
     });
   }
 }

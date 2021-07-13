@@ -16,15 +16,63 @@
     <title>Follow!</title>
   </head>
   <body>
+    <!-- navbar -->
     <nav class="nav">
-      <div id="logo">
-        <a href="#"><h1>follow</h1></a>
+      <h1 id="logo">follow</h1>
+      <form class="search-form" action="">
+        <input
+          class="search-input"
+          type="search"
+          name="search"
+          placeholder="search..."
+          id=""
+        />
+      </form>
+
+      <div class="profile-container">
+        <a class="home" href="./index.html">home</a>
+        <a class="logout" href="./logout.html">logout</a>
+        <div class="user-profile">
+          <label for="dropdown"
+            ><img class="user-image" src="./img/IMG_sam_3234353.jpg" alt=""
+          /></label>
+          <input style="display: none" type="checkbox" name="" id="dropdown" />
+
+          <!-- list -->
+
+          <ul class="dropdown">
+            <ul class="list1">
+              <li>
+                <a href="./myprofile.html">profile</a>
+              </li>
+              <li>
+                <a href="./friends.html">friends &amp; groups</a>
+              </li>
+              <li>
+                <a href="./mymessage.html">messages</a>
+              </li>
+              <li>
+                <a class="logout" href="./logout.html">logout</a>
+              </li>
+            </ul>
+            <ul class="list2" style="background-color: #191919">
+              <li>
+                <a href="./administration.html">Admin</a>
+              </li>
+              <li>
+                <a href="./api.html">API Documentation</a>
+              </li>
+              <li>
+                <a href="./feedback.html">feedback &amp; support</a>
+              </li>
+            </ul>
+          </ul>
+
+          <h2 class="username">
+            <a href="./userId">samuel oduwole</a>
+          </h2>
+        </div>
       </div>
-      <ul>
-        <li><a href="./index.html">home</a></li>
-        <li><a href="./about.html">about</a></li>
-        <li><a href="./contact.html">contact</a></li>
-      </ul>
     </nav>
 
     <section>
@@ -54,36 +102,7 @@
               >&nbsp;<span>📌</span>&nbsp;<span>⭐</span>
             </p>
           </div>
-          <p class="status-content">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor,
-            quod ducimus fugit ut voluptate iusto repudiandae, sit quis est
-            repellat exercitationem commodi omnis labore, possimus non officia
-            nostrum officiis quae. Provident corporis ut saepe rerum
-            necessitatibus dicta praesentium! Laborum perferendis maiores nisi
-            debitis nihil cum inventore animi ratione doloremque ab? Deserunt
-            voluptatem earum placeat qui quisquam est vitae quis quas?
-            Cupiditate, exercitationem iste temporibus ratione doloribus facilis
-            ducimus asperiores magnam consequuntur amet inventore consequatur
-            eos unde explicabo quas neque earum sit voluptatem esse maxime
-            quibusdam! Animi sunt voluptatum odio eum. Sit, quaerat molestiae
-            nulla illo deleniti accusantium libero ipsa facere temporibus fugiat
-            suscipit et fuga, nesciunt ex facilis voluptas neque enim,
-            laboriosam earum veritatis eligendi sequi porro vel atque? Natus?
-            Velit fugit soluta magnam eaque! Repudiandae dolorum deserunt minus
-            libero ea expedita, animi quam eaque dicta perferendis eius eligendi
-            amet, quaerat laborum non placeat sint laboriosam odit facere! Eius,
-            architecto. Repellendus hic necessitatibus incidunt vero, obcaecati,
-            dolores quidem culpa molestias ipsum iusto quo aspernatur ipsam
-            quia? Voluptate quis expedita libero illo obcaecati minus quo
-            aliquam eius nemo? Odit, aspernatur alias! Minima, harum.
-            Repudiandae totam numquam, vitae unde quas nisi, ut obcaecati earum
-            repellendus, voluptates suscipit vero quis? Obcaecati alias, error
-            consequuntur sapiente illum eos dolorum molestiae, eligendi tempore
-            similique fuga. Cum, ipsam neque et ab fugiat id temporibus illo,
-            amet doloribus at harum ipsum, repellat distinctio impedit?
-            Exercitationem similique provident unde laboriosam maiores soluta
-            odio, autem!
-          </p>
+          <p class="status-content">aliquam eius nemo? Odit, a odio, autem!</p>
 
           <p class="status-content-dialog">
             <span class="status-like">
@@ -104,7 +123,10 @@
           <div class="comment" data-user-idstatus-id="{{statusId}}">
             <div class="status-info">
               <p>
-                <span class="username">Samuel Oduwole</span>
+                <span class="username"
+                  >Samuel Oduwole
+                  jkffffffffffffffffffffffffffffffbvheruhrgoetttttttttttttttttttghioerhgiergheiot</span
+                >
                 <span class="date">0 min. | edited</span>
               </p>
             </div>
