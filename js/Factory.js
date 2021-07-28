@@ -15,17 +15,23 @@ export default class Factory {
     </div>
     <a href="./panel.html"><p class="status-content">{{post}}<span class="read-more"></span></p></a>
     <p class="status-content-dialog">
-      <span class="status-like">
-        <a href="#">likes</a>
-        <span> 99+</span>
-      </span>
-      <span class="status-comment">
-        <a href="#">comments</a>
-        <span> 9</span>
-      </span>
-      <span class="status-more">
-        <a href="#">more</a>
-      </span>
+      <a class="status-like" href="./friends">
+      <svg>
+        <use xlink:href="./css/sprite.svg#icon-thumbs-up"></use>
+      </svg>
+      &nbsp;<span>99+</span>
+    </a>
+    <a class="status-comment" href="#">
+      <svg>
+        <use  xlink:href="./css/sprite.svg#icon-bubble2"></use>
+      </svg>
+      &nbsp;<span>99454</span>
+    </a>
+    <a class="status-more" href="#">
+      <svg>
+        <use xlink:href="./css/sprite.svg#icon-menu"></use>
+      </svg>
+    </a>
     </p>
   </div>`;
 

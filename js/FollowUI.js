@@ -26,8 +26,8 @@ class FollowUI extends Factory {
           <h3>DELETE</h3>
           <p class="delete-content">you are about to delete this post, do you want to continue?</p>
           <p class="delete-dialog">
-            <span class="delete"><a href="#">delete</a></span>
-            <span class="cancel"><a href="#">cancel</a></span>
+            <a class="delete" href="#">delete</a>
+            <a class="cancel" href="#">cancel</a>
           </p>
         </div>`;
 
@@ -44,6 +44,10 @@ class FollowUI extends Factory {
     ["click", "submit" /*, "mousemove", "mousedown"*/].some((type, i, arr) => {
       this.#root.addEventListener(type, this.rootHandler.bind(this, arr));
     });
+
+    document
+      .querySelectorAll(".sub-nav-section")
+      ?.forEach((s) => !s.classList.contains("overview") && s.remove());
 
     this.focusTextArea();
 
@@ -138,6 +142,70 @@ class FollowUI extends Factory {
   }
 
   clickHandler(e) {
+    console.log(e.target.closest("button"));
+    if (e.target.closest(".sub-nav-label")) {
+      document
+        .querySelector(".active-sub-nav-label")
+        ?.classList.toggle("active-sub-nav-label");
+      document
+        .querySelector(
+          `label[for=${e.target.closest(".sub-nav-label").getAttribute("for")}]`
+        )
+        ?.classList.add("active-sub-nav-label");
+    }
+
+    e.target.closest('input[name = "sub-nav-radio"]') &&
+      document.querySelector(".sub-nav-section")?.remove();
+
+    e.target
+      .closest("input[name = 'sub-nav-radio']#about")
+      ?.insertAdjacentHTML(
+        "afterend",
+        `<section class="sub-nav-section about">about</section>`
+      );
+
+    e.target
+      .closest("input[name = 'sub-nav-radio']#friends")
+      ?.insertAdjacentHTML(
+        "afterend",
+        `<section class="sub-nav-section friends">friends</section>`
+      );
+
+    e.target
+      .closest("input[name = 'sub-nav-radio']#group")
+      ?.insertAdjacentHTML(
+        "afterend",
+        `<section class="sub-nav-section group">group</section>`
+      );
+
+    e.target
+      .closest("input[name = 'sub-nav-radio']#overview")
+      ?.insertAdjacentHTML(
+        "afterend",
+        `<section class="sub-nav-section overview active-sub-nav-label">${"overview"}</section>`
+      );
+
+    e.target
+      .closest("input[name = 'sub-nav-radio']#photos")
+      ?.insertAdjacentHTML(
+        "afterend",
+        `<section class="sub-nav-section photos">photos</section>`
+      );
+
+    e.target
+      .closest("input[name = 'sub-nav-radio']#activities")
+      ?.insertAdjacentHTML(
+        "afterend",
+        `<section class="sub-nav-section photos">activites</section>`
+      );
+
+    e.target
+      .closest("input[name = 'sub-nav-radio']#more")
+      ?.insertAdjacentHTML(
+        "afterend",
+        `<section class="sub-nav-section more">more</section>`
+      );
+
     this._popUp = document.querySelector(".status-popup");
     this.#deleteBox = document.querySelector(".delete-box");
     this.#panel = document.querySelector("#panel");

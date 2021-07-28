@@ -10,14 +10,14 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="./css/style.css" />
     <!-- <script type="module" defer src="script.js"></script> -->
-    <script type="module" defer src="script2.js"></script>
-    <title>Follow!</title>
+    <script type="module" defer src="./script2.js"></script>
+    <title>Follow! |comment</title>
   </head>
-  <body>
+  <body id="comment-page">
     <!-- navbar -->
-    <nav class="nav">
+    <nav class="nav" style="background-color: #191919">
       <h1 id="logo">follow</h1>
       <form class="search-form" action="">
         <input
@@ -30,8 +30,10 @@
       </form>
 
       <div class="profile-container">
-        <a class="home" href="./index.html">home</a>
+        <a class="home" href="./messages.html">messages</a>
+        <a class="home" href="./notifications.html">noti...</a>
         <a class="logout" href="./logout.html">logout</a>
+
         <div class="user-profile">
           <label for="dropdown"
             ><img class="user-image" src="./img/IMG_sam_3234353.jpg" alt=""
@@ -69,13 +71,13 @@
           </ul>
 
           <h2 class="username">
-            <a href="./userId">samuel oduwole</a>
+            <a href="./profile.html">samuel oduwole</a>
           </h2>
         </div>
       </div>
     </nav>
 
-    <section>
+    <section class="section">
       <div id="panel">
         <!-- <h2>post</h2> -->
         <div class="status-box scaleAnimation">
@@ -92,6 +94,7 @@
             ></textarea>
             <input type="submit" value="comment" />
           </form>
+
           <div class="status-info" data-user-idstatus-id="{{statusId}}">
             <div class="user-image-box">
               <img src="./img/IMG_sam_3234353.jpg" alt="" class="user-image" />
@@ -105,17 +108,23 @@
           <p class="status-content">aliquam eius nemo? Odit, a odio, autem!</p>
 
           <p class="status-content-dialog">
-            <span class="status-like">
-              <a href="#">likes</a>
-              <span> 99+</span>
-            </span>
-            <span class="status-comment">
-              <a href="#">comments</a>
-              <span> 9</span>
-            </span>
-            <span class="status-more">
-              <a href="#">more</a>
-            </span>
+            <a class="status-like" href="./friends">
+              <svg width="1.8rem" height="1.8rem" class="icon-people">
+                <use xlink:href="./css/sprite.svg#icon-thumbs-up"></use>
+              </svg>
+              &nbsp;99+
+            </a>
+            <a class="status-comment" href="#">
+              <svg>
+                <use id="id1" xlink:href="./css/sprite.svg#icon-bubbles3"></use>
+              </svg>
+              &nbsp;<span>99454</span>
+            </a>
+            <a class="status-more" href="#">
+              <svg width="1.8rem" height="1.8rem">
+                <use xlink:href="./css/sprite.svg#icon-menu"></use>
+              </svg>
+            </a>
           </p>
         </div>
 
@@ -316,6 +325,54 @@
             <div class="comment-dialog">
               <button class="reply">reply</button>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="section-likes" class="sec" style="width: 20vw">
+        <div class="likes">
+          <h2 class="sub_header-box">
+            <span>likes</span>
+            <a class="after before" href="./friends"
+              ><svg class="icon">
+                <use xlink:href="./css/sprite.svg#icon-thumbs-up"></use>
+              </svg>
+            </a>
+          </h2>
+          <div class="user-info" id="userid" style="padding: 0.5rem 2rem">
+            <div class="user-image-box">
+              <img src="./img/user-10.jpg" alt="" class="user-image" />
+            </div>
+
+            <h2 class="username">
+              <a class="username_name" href="./userid">roger chuks</a>
+            </h2>
+            <svg
+              style="align-self: center"
+              width="3rem"
+              height="3rem"
+              fill="red"
+            >
+              <use xlink:href="./css/sprite.svg#icon-heart"></use>
+            </svg>
+          </div>
+
+          <div class="user-info" id="userid" style="padding: 0.5rem 2rem">
+            <div class="user-image-box">
+              <img src="./img/user-10.jpg" alt="" class="user-image" />
+            </div>
+
+            <h2 class="username">
+              <a class="username_name" href="./userid">roger chuks</a>
+            </h2>
+            <svg
+              style="align-self: center"
+              width="3rem"
+              height="3rem"
+              fill="red"
+            >
+              <use xlink:href="./css/sprite.svg#icon-broken-heart"></use>
+            </svg>
           </div>
         </div>
       </div>

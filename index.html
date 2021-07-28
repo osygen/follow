@@ -9,13 +9,12 @@
       href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap"
       rel="stylesheet"
     />
-
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="./css/style.css" />
     <!-- <script type="module" defer src="script.js"></script> -->
-    <script type="module" defer src="script2.js"></script>
+    <script type="module" defer src="./script2.js"></script>
     <title>Follow!</title>
   </head>
-  <body>
+  <body id="home">
     <!-- navbar -->
     <nav class="nav">
       <h1 id="logo">follow</h1>
@@ -30,7 +29,8 @@
       </form>
 
       <div class="profile-container">
-        <a class="home" href="./index.html">home</a>
+        <a class="home" href="./messages.html">messages</a>
+        <a class="home" href="./notifications.html">noti...</a>
         <a class="logout" href="./logout.html">logout</a>
         <div class="user-profile">
           <label for="dropdown"
@@ -55,7 +55,8 @@
                 <a class="logout" href="./logout.html">logout</a>
               </li>
             </ul>
-            <ul class="list2" style="background-color: #191919">
+
+            <ul class="list2">
               <li>
                 <a href="./administration.html">Admin</a>
               </li>
@@ -69,18 +70,25 @@
           </ul>
 
           <h2 class="username">
-            <a href="./userId">samuel oduwole</a>
+            <a href="./profile.html">samuel oduwole </a>
           </h2>
         </div>
       </div>
     </nav>
 
     <!-- section -->
-    <section>
+    <section class="section">
       <!-- section-1 -->
       <div id="section-1" class="sec">
         <div class="pYMK_box">
-          <h2 class="sub_header-box">people you may know</h2>
+          <h2 class="sub_header-box">
+            <span>people you may know</span>
+            <a class="after before" href="./friends"
+              ><svg class="icon">
+                <use xlink:href="./css/sprite.svg#icon-user-plus"></use>
+              </svg>
+            </a>
+          </h2>
 
           <div class="user-info" id="userid">
             <div class="user-image-box">
@@ -88,7 +96,8 @@
             </div>
 
             <h2 class="username">
-              <a href="./userid">jane ororo</a><span>5 friends</span>
+              <a class="username_name" href="./userid">jane ororo</a>
+              <span class="total-friends">5 friends</span>
             </h2>
             <button>follow</button>
           </div>
@@ -99,7 +108,10 @@
             </div>
 
             <h2 class="username">
-              <a href="./userid">ahmed geijah </a><span>5 friends</span>
+              <a class="username_name" href="./userid"
+                >ahmed geijah gjvhvhjbjjbkjbkbkjjkbjbkjbkbkjbkjbkjbkjbkj</a
+              >
+              <span class="total-friends">5 friends</span>
             </h2>
             <button>follow</button>
           </div>
@@ -110,7 +122,8 @@
             </div>
 
             <h2 class="username">
-              <a href="./userid">roger chuks</a><span>5 friends</span>
+              <a class="username_name" href="./userid">roger chuks</a
+              ><span class="total-friends">5 friends</span>
             </h2>
             <button>follow</button>
           </div>
@@ -121,18 +134,33 @@
             </div>
 
             <h2 class="username">
-              <a href="./userid">daniella ang lee</a><span>59 friends</span>
+              <a class="username_name" href="./userid">daniella ang lee</a
+              ><span class="total-friends">59 friends</span>
             </h2>
             <button>follow</button>
           </div>
         </div>
 
         <div class="groups_box">
-          <h2 class="sub_header-box">groups</h2>
+          <h2 class="sub_header-box">
+            <span>groups</span
+            ><a class="after before" href="./friends"
+              ><svg class="icon">
+                <use xlink:href="./css/sprite.svg#icon-users"></use>
+              </svg>
+            </a>
+          </h2>
         </div>
 
         <div class="friend_box">
-          <h2 class="sub_header-box">friends</h2>
+          <h2 class="sub_header-box">
+            <span>friends</span
+            ><a class="after before" href="./friends"
+              ><svg class="icon">
+                <use xlink:href="./css/sprite.svg#icon-user-group"></use>
+              </svg>
+            </a>
+          </h2>
 
           <div class="user-info" id="userid">
             <div class="user-image-box">
@@ -140,10 +168,10 @@
             </div>
 
             <h2 class="username">
-              <a href="./userid">
+              <a class="username_name" href="./userid">
                 Dr Raymond Justin 4444444444444444444444444
               </a>
-              <span>59 friends</span>
+              <span class="total_friends">59 friends</span>
             </h2>
             <button>unfollow</button>
           </div>
@@ -154,7 +182,8 @@
             </div>
 
             <h2 class="username">
-              <a href="./userid">Mary Smith</a><span>59 friends</span>
+              <a class="username_name" href="./userid">Mary Smith</a
+              ><span class="total_friends">59 friends</span>
             </h2>
             <button>unfollow</button>
           </div>
@@ -165,7 +194,8 @@
             </div>
 
             <h2 class="username">
-              <a href="./userid">Ran Doe</a><span>59 friends</span>
+              <a class="username_name" href="./userid">Ran Doe</a
+              ><span class="total_friends">59 friends</span>
             </h2>
             <button>unfollow</button>
           </div>
@@ -176,7 +206,8 @@
             </div>
 
             <h2 class="username">
-              <a href="./userid">Xu Jong Lee</a><span>59 friends</span>
+              <a class="username_name" href="./userid">Xu Jong Lee</a
+              ><span class="total_friends">59 friends</span>
             </h2>
             <button>unfollow</button>
           </div>
@@ -229,13 +260,23 @@
             velit totam. rgergreg
           </p>
           <p class="status-content-dialog">
-            <span class="status-like"
-              ><a href="#">likes</a><span> 99+</span></span
-            >
-            <span class="status-comment"
-              ><a href="#">comments</a><span> 9</span></span
-            >
-            <span class="status-more"><a href="#">more</a></span>
+            <a class="status-like" href="./friends">
+              <svg>
+                <use xlink:href="./css/sprite.svg#icon-thumbs-up"></use>
+              </svg>
+              &nbsp;99+
+            </a>
+            <a class="status-comment" href="#">
+              <svg>
+                <use xlink:href="./css/sprite.svg#icon-bubbles3"></use>
+              </svg>
+              &nbsp;<span></span>
+            </a>
+            <a class="status-more" href="#">
+              <svg>
+                <use xlink:href="./css/sprite.svg#icon-menu"></use>
+              </svg>
+            </a>
           </p>
         </div>
 
@@ -259,13 +300,23 @@
             velit totam. rgergreg
           </p>
           <p class="status-content-dialog">
-            <span class="status-like"
-              ><a href="#">likes</a><span> 99+</span></span
-            >
-            <span class="status-comment"
-              ><a href="#">comments</a><span> 9</span></span
-            >
-            <span class="status-more"><a href="#">more</a></span>
+            <a class="status-like" href="./friends">
+              <svg>
+                <use xlink:href="./css/sprite.svg#icon-thumbs-up"></use>
+              </svg>
+              &nbsp;99+
+            </a>
+            <a class="status-comment" href="#">
+              <svg>
+                <use xlink:href="./css/sprite.svg#icon-bubbles3"></use>
+              </svg>
+              &nbsp;<span>99454</span>
+            </a>
+            <a class="status-more" href="#">
+              <svg>
+                <use xlink:href="./css/sprite.svg#icon-menu"></use>
+              </svg>
+            </a>
           </p>
         </div>
 
@@ -314,13 +365,23 @@
             velit totam. rgergreg
           </p>
           <p class="status-content-dialog">
-            <span class="status-like"
-              ><a href="#">likes</a><span> 99+</span></span
-            >
-            <span class="status-comment"
-              ><a href="#">comments</a><span> 9</span></span
-            >
-            <span class="status-more"><a href="#">more</a></span>
+            <a class="status-like" href="./friends">
+              <svg>
+                <use xlink:href="./css/sprite.svg#icon-thumbs-up"></use>
+              </svg>
+              &nbsp;99+
+            </a>
+            <a class="status-comment" href="#">
+              <svg>
+                <use xlink:href="./css/sprite.svg#icon-bubbles3"></use>
+              </svg>
+              &nbsp;<span>99454</span>
+            </a>
+            <a class="status-more" href="#">
+              <svg>
+                <use xlink:href="./css/sprite.svg#icon-menu"></use>
+              </svg>
+            </a>
           </p>
         </div>
 
@@ -378,12 +439,24 @@
       <!-- section-5 -->
       <div id="section-5" class="sec">
         <div class="notifications_box">
-          <h2 class="sub_header-box">notifications</h2>
-          <p class="status-content"></p>
+          <h2 class="sub_header-box">
+            <span>notifications</span>
+            <a class="after before" href="./notifications">
+              <svg class="icon">
+                <use xlink:href="./css/sprite.svg#icon-bell"></use>
+              </svg>
+            </a>
+          </h2>
         </div>
         <div class="chats_messages_box">
-          <h2 class="sub_header-box">chats &amp; messages</h2>
-          <p class="status-content"></p>
+          <h2 class="sub_header-box">
+            <span>chats &amp; messages</span>
+            <a class="after before" href="#"
+              ><svg class="icon">
+                <use xlink:href="./css/sprite.svg#icon-camera-web"></use>
+              </svg>
+            </a>
+          </h2>
         </div>
       </div>
     </section>

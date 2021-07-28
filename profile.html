@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <!-- <script type="module" defer src="script.js"></script> -->
+    <script type="module" defer src="./script2.js"></script>
+    <title>Follow! |My profile</title>
+  </head>
+  <body id="profile">
+    <!-- navbar -->
+
+    <nav class="nav" style="background-color: #000">
+      <h1 id="logo">follow</h1>
+      <form class="search-form" action="">
+        <input
+          class="search-input"
+          type="search"
+          name="search"
+          placeholder="search..."
+          id=""
+        />
+      </form>
+
+      <div class="profile-container">
+        <a class="home" href="./messages.html">messages</a>
+        <a class="home" href="./notifications.html">noti...</a>
+        <a class="logout" href="./logout.html">logout</a>
+
+        <div class="user-profile">
+          <label for="dropdown"
+            ><img class="user-image" src="./img/IMG_sam_3234353.jpg" alt=""
+          /></label>
+          <input style="display: none" type="checkbox" name="" id="dropdown" />
+
+          <!-- list -->
+
+          <ul class="dropdown">
+            <ul class="list1">
+              <li>
+                <a href="./myprofile.html">profile</a>
+              </li>
+              <li>
+                <a href="./friends.html">friends &amp; groups</a>
+              </li>
+              <li>
+                <a href="./mymessage.html">messages</a>
+              </li>
+              <li>
+                <a class="logout" href="./logout.html">logout</a>
+              </li>
+            </ul>
+            <ul class="list2" style="background-color: #191919">
+              <li>
+                <a href="./administration.html">Admin</a>
+              </li>
+              <li>
+                <a href="./api.html">API Documentation</a>
+              </li>
+              <li>
+                <a href="./feedback.html">feedback &amp; support</a>
+              </li>
+            </ul>
+          </ul>
+
+          <h2 class="username">
+            <a href="./">samuel oduwole</a>
+          </h2>
+        </div>
+      </div>
+    </nav>
+
+    <section class="profile">
+      <div style="position: relative">
+        <div class="profile-image-box">
+          <div class="blend"></div>
+          <img class="img" src="./img/IMG_sam_3234353.jpg" alt="" />
+        </div>
+
+        <form class="picture-form" style="bottom: 0.5rem; right: 0.5rem">
+          <label for="profile-picture">
+            <svg class="icon">
+              <use xlink:href="./css/sprite.svg#icon-profile-img"></use>
+            </svg>
+          </label>
+          <input id="profile-picture" type="file" />
+          <button type="submit">upload</button>
+        </form>
+      </div>
+
+      <h1 class="username">
+        <span>samuel oduwole</span>
+        <a href="">
+          <svg class="icon" id="icon-edit">
+            <use xlink:href="./css/sprite.svg#icon-edit"></use>
+          </svg>
+        </a>
+      </h1>
+
+      <form class="picture-form">
+        <label for="bg-picture">
+          <svg class="icon">
+            <use xlink:href="./css/sprite.svg#icon-bg-img"></use>
+          </svg>
+        </label>
+        <input id="bg-picture" type="file" />
+        <button type="submit">upload</button>
+      </form>
+    </section>
+
+    <!--sub nav bar  -->
+
+    <ul class="sub-nav">
+      <ul class="sub-nav-list">
+        <li>
+          <label class="sub-nav-label" for="about">about</label>
+        </li>
+        <li>
+          <label class="sub-nav-label" for="friends">friends</label>
+        </li>
+        <li>
+          <label class="sub-nav-label" for="group">group</label>
+        </li>
+        <li>
+          <label class="sub-nav-label active-sub-nav-label" for="overview"
+            >overview</label
+          >
+        </li>
+        <li>
+          <label class="sub-nav-label" for="photos">photos</label>
+        </li>
+        <li>
+          <label class="sub-nav-label" for="activities">activities</label>
+        </li>
+        <li>
+          <label class="sub-nav-label" for="more">more</label>
+        </li>
+      </ul>
+
+      <a class="sub-nav-icon" href="./">
+        <svg class="icon">
+          <use xlink:href="./css/sprite.svg#icon-paper-plane"></use>
+        </svg>
+      </a>
+    </ul>
+
+    <!-- section -->
+
+    <!-- section about -->
+
+    <input type="radio" name="sub-nav-radio" id="about" />
+    <section class="sub-nav-section about"></section>
+
+    <!-- section friends -->
+
+    <input type="radio" name="sub-nav-radio" id="friends" />
+    <section class="sub-nav-section friends"></section>
+
+    <!-- section group -->
+
+    <input type="radio" name="sub-nav-radio" id="group" />
+    <section class="sub-nav-section group"></section>
+
+    <!-- section overview -->
+
+    <input type="radio" name="sub-nav-radio" id="overview" checked />
+    <section class="sub-nav-section overview">
+      <section class="left">
+        <div class="left_box">
+          <h1 class="overview_heading">
+            <span>about</span>
+
+            <label for="about" class="sub-nav-label">
+              <svg class="icon">
+                <use xlink:href="./css/sprite.svg#icon-edit-pen"></use>
+              </svg>
+            </label>
+          </h1>
+
+          <ul id="about-overview_content">
+            <li class="list-item">
+              <label class="list-item_left">name</label>
+              <label class="list-item_right">samuel oduwole</label>
+            </li>
+            <li class="list-item">
+              <label class="list-item_left">birthday</label>
+              <label class="list-item_right">31,Dec</label>
+            </li>
+            <li class="list-item">
+              <label class="list-item_left">gender</label>
+              <label class="list-item_right">Male</label>
+            </li>
+            <li class="list-item">
+              <label class="list-item_left">Address</label>
+              <label class="list-item_right"
+                >42 erwgerh gwegg egerge geger grgerg vg34g fgew...</label
+              >
+            </li>
+            <li class="list-item">
+              <label class="list-item_left">email</label>
+              <a
+                href="emailto:g@gmail.com"
+                class="list-item_right"
+                style="text-transform: lowercase"
+              >
+                g@gmail.com
+              </a>
+            </li>
+            <li class="list-item">
+              <label class="list-item_left">phone number</label>
+              <label class="list-item_right">08123456789</label>
+            </li>
+            <li class="list-item">
+              <label class="list-item_left">website</label>
+              <a
+                href="http://www.follow.com"
+                class="list-item_right"
+                style="text-transform: lowercase"
+              >
+                www.follow.com
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="left_box">
+          <h1 class="overview_heading">
+            <span>friends</span>
+
+            <label for="friends" class="sub-nav-label">
+              <svg class="icon">
+                <use xlink:href="./css/sprite.svg#icon-link-arr"></use>
+              </svg>
+            </label>
+          </h1>
+
+          <ul id="friends-overview_content">
+            <li class="user-info" id="userid">
+              <div class="user-image-box">
+                <img src="./img/user-10.jpg" alt="" class="user-image" />
+              </div>
+
+              <h2 class="username">
+                <a class="username_name" href="./userid"> roger chuks </a>
+
+                <a class="total-friends">59 friends</a>
+              </h2>
+              <button class="follow" href="./index.html">
+                <svg class="icon">
+                  <use xlink:href="./css/sprite.svg#icon-follow-add"></use>
+                </svg>
+              </button>
+            </li>
+
+            <li class="user-info" id="userid">
+              <div class="user-image-box">
+                <img src="./img/user-19.jpg" alt="" class="user-image" />
+              </div>
+
+              <h2 class="username">
+                <a class="username_name" href="./userid"> Dr Raymond </a>
+
+                <a class="total-friends">59 friends</a>
+              </h2>
+              <button class="unfollow" href="./index.html">
+                <svg class="icon">
+                  <use xlink:href="./css/sprite.svg#icon-unfollow-minus"></use>
+                </svg>
+              </button>
+            </li>
+
+            <li class="user-info" id="userid">
+              <div class="user-image-box">
+                <img src="./img/user-19.jpg" alt="" class="user-image" />
+              </div>
+
+              <h2 class="username">
+                <a class="username_name" href="./userid"> Dr Raymond </a>
+
+                <a class="total-friends">59 friends</a>
+              </h2>
+              <button class="unfollow" href="./index.html">
+                <svg class="icon">
+                  <use xlink:href="./css/sprite.svg#icon-unfollow-minus"></use>
+                </svg>
+              </button>
+            </li>
+            <li class="user-info" id="userid">
+              <div class="user-image-box">
+                <img src="./img/user-19.jpg" alt="" class="user-image" />
+              </div>
+
+              <h2 class="username">
+                <a class="username_name" href="./userid"> Dr Raymond </a>
+
+                <a class="total-friends">59 friends</a>
+              </h2>
+              <button class="unfollow" href="./index.html">
+                <svg class="icon">
+                  <use xlink:href="./css/sprite.svg#icon-unfollow-minus"></use>
+                </svg>
+              </button>
+            </li>
+            <li class="user-info" id="userid">
+              <div class="user-image-box">
+                <img src="./img/user-19.jpg" alt="" class="user-image" />
+              </div>
+
+              <h2 class="username">
+                <a class="username_name" href="./userid">
+                  Dr Raymond erhthrthrthjrjrtjyjhhh</a
+                >
+
+                <a class="total-friends">59 friends</a>
+              </h2>
+              <button class="unfollow" href="./index.html">
+                <svg class="icon">
+                  <use xlink:href="./css/sprite.svg#icon-unfollow-minus"></use>
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="left_box">
+          <h1 class="overview_heading">
+            <span>group</span>
+
+            <label for="group" class="sub-nav-label">
+              <svg class="icon">
+                <use xlink:href="./css/sprite.svg#icon-link-arr"></use>
+              </svg>
+            </label>
+          </h1>
+        </div>
+
+        <div class="left_box">
+          <h1 class="overview_heading">
+            <span>photos</span>
+
+            <label for="photos" class="sub-nav-label">
+              <svg class="icon">
+                <use xlink:href="./css/sprite.svg#icon-link-arr"></use>
+              </svg>
+            </label>
+          </h1>
+
+          <ul
+            id="photo-overview_content"
+            style="display: flex; flex-direction: column; gap: 1.5rem"
+          >
+            <ul
+              class="photo-overview_content"
+              style="
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+
+                gap: 1rem;
+                overflow: scroll;
+              "
+            >
+              <li
+                style="
+                  list-style: none;
+                  min-width: calc((100% / 3) - 1rem);
+                  height: 9rem;
+
+                  background: url(./img/1594542349549_collage.jpg) 50% 50%;
+                  background-size: cover;
+                  border-radius: 1rem;
+                "
+              ></li>
+
+              <li
+                style="
+                  list-style: none;
+                  min-width: calc((100% / 3) - 1rem);
+                  height: 9rem;
+
+                  background: url(./img/1594542349549_collage.jpg) 50% 50%;
+                  background-size: cover;
+                  border-radius: 1rem;
+                "
+              ></li>
+
+              <li
+                style="
+                  list-style: none;
+                  min-width: calc((100% / 3) - 1rem);
+                  height: 9rem;
+
+                  background: url(./img/default.jpg) 50% 50%;
+                  background-size: cover;
+                  border-radius: 1rem;
+                "
+              ></li>
+            </ul>
+
+            <ul
+              class="photo-overview_content"
+              style="
+                height: 9rem;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                gap: 1rem;
+                overflow: scroll;
+              "
+            >
+              <li
+                style="
+                  list-style: none;
+                  min-width: calc((100% / 3) - 1rem);
+                  height: 9rem;
+
+                  background: url(./img/1594542349549_collage.jpg) 50% 50%;
+                  background-size: cover;
+                  border-radius: 1rem;
+                "
+              ></li>
+
+              <li
+                style="
+                  list-style: none;
+                  min-width: calc((100% / 3) - 1rem);
+                  height: 9rem;
+
+                  background: url(./img/1594542349549_collage.jpg) 50% 50%;
+                  background-size: cover;
+                  border-radius: 1rem;
+                "
+              ></li>
+
+              <li
+                style="
+                  list-style: none;
+                  min-width: calc((100% / 3) - 1rem);
+                  height: 9rem;
+
+                  background: url(./img/default.jpg) 50% 50%;
+                  background-size: cover;
+                  border-radius: 1rem;
+                "
+              ></li>
+            </ul>
+
+            <ul
+              class="photo-overview_content"
+              style="
+                height: 9rem;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                gap: 1rem;
+                overflow: scroll;
+              "
+            >
+              <li
+                style="
+                  list-style: none;
+                  min-width: calc((100% / 3) - 1rem);
+                  height: 9rem;
+
+                  background: url(./img/1594542349549_collage.jpg) 50% 50%;
+                  background-size: cover;
+                  border-radius: 1rem;
+                "
+              ></li>
+
+              <li
+                style="
+                  list-style: none;
+                  min-width: calc((100% / 3) - 1rem);
+                  height: 9rem;
+
+                  background: url(./img/1594542349549_collage.jpg) 50% 50%;
+                  background-size: cover;
+                  border-radius: 1rem;
+                "
+              ></li>
+
+              <li
+                style="
+                  list-style: none;
+                  min-width: calc((100% / 3) - 1rem);
+                  height: 9rem;
+
+                  background: url(./img/default.jpg) 50% 50%;
+                  background-size: cover;
+                  border-radius: 1rem;
+                "
+              ></li>
+            </ul>
+          </ul>
+        </div>
+      </section>
+
+      <section
+        style="
+          width: 60%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+        "
+      >
+        <div
+          style="
+            background-color: #191919;
+            backdrop-filter: blur(3px);
+            width: 100%;
+            border-radius: 2rem;
+            color: #fff;
+            padding: 2rem 4rem 1rem 4rem;
+          "
+          class="status-box <!--topMarginAnimation scaleAnimation-->"
+        >
+          <div class="status-info" data-user-idstatus-id="userid-statusid2">
+            <div class="user-image-box">
+              <img src="./img/IMG_sam_3234353.jpg" alt="" class="user-image" />
+            </div>
+
+            <p>
+              <span class="username">oduwole samuel</span
+              ><span class="date">⏲ 22 min.</span>&nbsp;<span>📌</span>
+            </p>
+            <span>🤩</span>
+          </div>
+
+          <p
+            style="
+              color: #fff;
+              font-weight: 400;
+              line-height: 1.7;
+              font-size: 1.3rem;
+            "
+            class="status-content"
+          >
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora,
+            nam aliquid ullam fuga possimus sint inventore, laborum harum sunt
+            quia nesciunt. Dicta cumque quos magnam modi exercitationem itaque
+            velit totam. rgergreg
+          </p>
+          <p class="status-content-dialog">
+            <a class="status-like" href="./friends">
+              <svg>
+                <use xlink:href="./css/sprite.svg#icon-thumbs-up"></use>
+              </svg>
+              &nbsp;99+
+            </a>
+            <a class="status-comment" href="#">
+              <svg>
+                <use xlink:href="./css/sprite.svg#icon-bubbles3"></use>
+              </svg>
+              &nbsp;<span>99454</span>
+            </a>
+            <a class="status-more" href="#">
+              <svg>
+                <use xlink:href="./css/sprite.svg#icon-menu"></use>
+              </svg>
+            </a>
+          </p>
+        </div>
+
+        <div
+          style="
+            background-color: #191919;
+            backdrop-filter: blur(3px);
+            width: 100%;
+            border-radius: 2rem;
+            color: #fff;
+            padding: 2rem 4rem 1rem 4rem;
+          "
+          class="status-box <!--topMarginAnimation scaleAnimation-->"
+        >
+          <div class="status-info" data-user-idstatus-id="userid-statusid2">
+            <div class="user-image-box">
+              <img src="./img/IMG_sam_3234353.jpg" alt="" class="user-image" />
+            </div>
+
+            <p>
+              <span class="username">oduwole samuel</span
+              ><span class="date">⏲ 22 min.</span>&nbsp;<span>📌</span>
+            </p>
+            <span>🤩</span>
+          </div>
+
+          <p
+            style="
+              color: #fff;
+              font-weight: 400;
+              line-height: 1.7;
+              font-size: 1.3rem;
+            "
+            class="status-content"
+          >
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora,
+            nam aliquid ullam fuga possimus sint inventore, laborum harum sunt
+            quia nesciunt. Dicta cumque quos magnam modi exercitationem itaque
+            velit totam. rgergreg
+          </p>
+          <p class="status-content-dialog">
+            <a class="status-like" href="./friends">
+              <svg>
+                <use xlink:href="./css/sprite.svg#icon-thumbs-up"></use>
+              </svg>
+              &nbsp;99+
+            </a>
+            <a class="status-comment" href="#">
+              <svg>
+                <use xlink:href="./css/sprite.svg#icon-bubbles3"></use>
+              </svg>
+              &nbsp;<span>99454</span>
+            </a>
+            <a class="status-more" href="#">
+              <svg>
+                <use xlink:href="./css/sprite.svg#icon-menu"></use>
+              </svg>
+            </a>
+          </p>
+        </div>
+      </section>
+    </section>
+
+    <!-- section photo -->
+
+    <input type="radio" name="sub-nav-radio" id="photos" />
+    <section class="sub-nav-section photos"></section>
+
+    <!-- section activities -->
+
+    <input type="radio" name="sub-nav-radio" id="activities" />
+    <section class="sub-nav-section activities"></section>
+
+    <!-- section more -->
+
+    <input type="radio" class="sub-nav-radio" name="sub-nav-radio" id="more" />
+    <section class="sub-nav-section more"></section>
+
+    <footer style="background-color: #000">
+      <h2>&copy; samuel oduwole</h2>
+    </footer>
+  </body>
+</html>
