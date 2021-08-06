@@ -1521,7 +1521,7 @@ body#profile {
 
 .sub-nav {
   display: flex;
-  /* justify-content: center; */
+  justify-content: flex-start;
   position: relative;
   background-color: #111;
   width: 100%;
@@ -1535,14 +1535,14 @@ body#profile {
 
 .sub-nav-list {
   display: flex;
-  width: 100%;
+  width: 50%;
 
   /* border-top: 2rem solid transparent; */
 
   overflow-x: scroll;
 }
 
-.sub-nav-list label {
+.sub-nav label {
   display: block;
   padding: 1.5rem 2.5rem;
   border-radius: 10px;
@@ -1554,13 +1554,16 @@ body#profile {
   transition: all 200ms ease 100ms;
   transform-origin: center center;
 }
+/* .sub-nav label[for="more"] {
+ 
+} */
 
-.sub-nav-list label:hover {
+.sub-nav label:hover {
   background: #191919;
   backdrop-filter: blur(3px);
 }
 
-.sub-nav-list label.active-sub-nav-label {
+.sub-nav label.active-sub-nav-label {
   background: blueviolet;
   backdrop-filter: blur(3px);
   color: #fff;
@@ -1568,6 +1571,12 @@ body#profile {
   transition: all 500ms ease 100ms;
   transform-origin: center center;
 }
+
+/* .sub-nav label[for="more"] {
+   background-color: #fff;
+  position: absolute;
+  right: 0%; 
+} */
 
 .sub-nav-icon {
   position: absolute;
@@ -1615,24 +1624,34 @@ input[name="sub-nav-radio"] {
   outline: none;
   transition: border 200ms linear 100ms; */
 }
-input[name="sub-nav-radio"]:checked {
-  /* border: 5px solid #fbad00; 
-  */
-}
+/* input[name="sub-nav-radio"]:checked {
+   border: 5px solid #fbad00; 
+} */
 
 input[name="sub-nav-radio"] + section {
-  display: none;
+  display: flex;
+  justify-content: center;
+  padding: 1rem 10rem 2rem 10rem;
+  gap: 5rem;
+
   background-color: #111;
   width: 100%;
+}
+
+input[name="sub-nav-radio"] + section:not(.more) {
   min-height: 100vmax;
 }
 
-input[name="sub-nav-radio"]:checked + section {
-  display: flex;
-  justify-content: space-between;
-
-  padding: 1rem 10rem 2rem 10rem;
-  gap: 5rem;
+.sub-nav .sub-nav-section.more {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  /* transform: translateX(-50%); */
+  width: 40%;
+  height: max-content;
+  background-color: #191919;
+  z-index: 1;
+  box-shadow: 2px 2px 10px #191919;
 }
 
 .sub-nav-section.overview .left {
@@ -1745,4 +1764,202 @@ input[name="sub-nav-radio"]:checked + section {
 
 #friends-overview_content .unfollow .icon {
   fill: rgba(255, 99, 71, 0.37);
+}
+
+#photo-overview_content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+#photo-overview_content .photo-overview_content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  gap: 1rem;
+  overflow: scroll;
+}
+
+#photo-overview_content .photo-overview_content li {
+  list-style: none;
+  min-width: calc((100% / 3) - 1rem);
+  height: 9rem;
+
+  border-radius: 1rem;
+}
+
+.sub-nav-section.overview .right {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sub-nav-section.about form {
+  width: 80%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  padding: 2rem 10rem;
+  border-radius: 4rem;
+  border: 1px solid #191919;
+}
+
+.sub-nav-section.about form > fieldset {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+  gap: 2rem;
+
+  border: none;
+
+  width: 100%;
+  height: 100%;
+}
+
+.sub-nav-section.about form #about_list {
+  display: flex;
+  flex-direction: column;
+}
+
+#about_list .about_list_item:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.about_list_item {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 3rem;
+  padding: 1rem 4rem 2rem 4rem;
+  overflow: hidden;
+  background-color: #191919;
+}
+
+.about_list_item .about_heading {
+  display: inline;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #999;
+  margin-bottom: 1rem;
+}
+
+.about_list_item label[for^="about-"] {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  top: 1rem;
+  right: 4rem;
+}
+
+input[type="checkbox"][id^="about-"] {
+  display: none;
+}
+
+input[type="checkbox"][id^="about-"] + label {
+  margin-bottom: 1rem;
+  transition: all 200ms linear;
+}
+
+input[type="checkbox"][id^="about-"]:checked + label {
+  transform: rotate(180deg);
+}
+
+input[type="checkbox"][id^="about-"]:not(:checked) + label {
+  transform: rotate(360deg);
+}
+
+input[type="checkbox"][id^="about-"] ~ .about-content {
+  transition: all 200ms ease;
+  transform-origin: center top;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+input[type="checkbox"][id^="about-"]:checked ~ .about-content {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+input[type="checkbox"][id^="about-"]:not(:checked) ~ .about-content {
+  height: 0rem;
+  opacity: 0;
+
+  transform: scaleY(0);
+}
+
+input[id^="edit-about-content"] {
+  display: none;
+}
+label[for^="edit-about-content"] {
+  margin-left: auto;
+}
+
+input[id^="edit-about-content"]:checked
+  + label[for^="edit-about-content"]::after {
+  content: "disable";
+  display: inline-block;
+  color: #999;
+}
+
+input[id^="edit-about-content"] + label[for^="edit-about-content"]::after {
+  content: "edit";
+  display: inline-block;
+  color: #999;
+}
+
+.about-content fieldset {
+  border: none;
+}
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.info-list li {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  align-items: center;
+  padding: 0 4rem;
+}
+
+.info-list li label,
+.info-list li select {
+  width: 30%;
+  align-self: stretch;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #999;
+}
+
+.info-list li select {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.info-list li select option {
+  background-color: #191919;
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+}
+.info-list li input {
+  background-color: transparent;
+  color: #ddd;
+  width: 60%;
+  font-size: 1.5rem;
+  font-weight: 400;
+  align-self: stretch;
+  border: none;
+  border-bottom: 1px solid limegreen;
+  outline: none;
 }

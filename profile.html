@@ -139,10 +139,19 @@
         <li>
           <label class="sub-nav-label" for="activities">activities</label>
         </li>
-        <li>
+        <!-- <li>
           <label class="sub-nav-label" for="more">more</label>
-        </li>
+        </li> -->
       </ul>
+      <li>
+        <label class="sub-nav-label" for="more">more</label>
+      </li>
+      <input
+        type="radio"
+        class="sub-nav-radio"
+        name="sub-nav-radio"
+        id="more"
+      />
 
       <a class="sub-nav-icon" href="./">
         <svg class="icon">
@@ -156,7 +165,190 @@
     <!-- section about -->
 
     <input type="radio" name="sub-nav-radio" id="about" />
-    <section class="sub-nav-section about"></section>
+    <section class="sub-nav-section about">
+      <form action="" id="about-form">
+        <fieldset>
+          <div id="about_list">
+            <!-- user info -->
+
+            <div class="about_list_item">
+              <h1 class="about_heading">user info</h1>
+              <input type="checkbox" id="about-user-info" checked />
+              <label for="about-user-info">
+                <svg class="icon icon-caret" style="fill: #444">
+                  <use xlink:href="./css/sprite.svg#icon-caret"></use>
+                </svg>
+              </label>
+
+              <div class="about-content">
+                <input type="checkbox" id="edit-about-content" />
+                <label for="edit-about-content"></label>
+
+                <fieldset disabled>
+                  <ul class="info-list">
+                    <li>
+                      <label for="username"> username</label>&nbsp;
+                      <input
+                        type="text"
+                        name="first-name"
+                        value="osygen"
+                        id="username"
+                        required
+                      />
+                    </li>
+
+                    <li>
+                      <label for="first-name"> first name</label>&nbsp;
+                      <input
+                        type="text"
+                        name="first-name"
+                        value="samuel"
+                        id="first-name"
+                        required
+                      />
+                    </li>
+                  </ul>
+                </fieldset>
+              </div>
+            </div>
+
+            <!-- basic info -->
+
+            <div class="about_list_item">
+              <h1 class="about_heading">basic info</h1>
+              <input type="checkbox" id="about-basic-info" checked />
+              <label for="about-basic-info">
+                <svg class="icon icon-caret" style="fill: #444">
+                  <use xlink:href="./css/sprite.svg#icon-caret"></use>
+                </svg>
+              </label>
+
+              <div class="about-content">
+                <input type="checkbox" id="edit-about-content-1" />
+                <label for="edit-about-content-1"></label>
+                <fieldset disabled>
+                  <ul class="info-list">
+                    <li>
+                      <label for="dob"> birthday</label>&nbsp;
+                      <input
+                        type="date"
+                        name="dob"
+                        value="2021-07-09"
+                        id="dob"
+                      />
+                    </li>
+                  </ul>
+                </fieldset>
+              </div>
+            </div>
+
+            <!-- links -->
+
+            <div class="about_list_item">
+              <h1 class="about_heading">links</h1>
+              <input type="checkbox" id="about-links" checked />
+              <label for="about-links">
+                <svg class="icon icon-caret" style="fill: #444">
+                  <use xlink:href="./css/sprite.svg#icon-caret"></use>
+                </svg>
+              </label>
+
+              <div class="about-content">
+                <input type="checkbox" id="edit-about-content-2" />
+                <label for="edit-about-content-2"></label>
+                <fieldset disabled>
+                  <ul class="info-list">
+                    <li>
+                      <select>
+                        <option value="skype">skype</option>
+                        <option value="facebook">facebook</option>
+                        <option value="twitter">twitter</option>
+                        <option value="instagram">instagram</option>
+                        <option value="linkedIn">linkedIn</option>
+                      </select>
+                      <input type="text" name="skype" value="osygen" />
+                      <svg style="width: 1.5rem; height: 1.5rem; fill: tomato">
+                        <use
+                          xlink:href="./css/sprite.svg#icon-unfollow-minus"
+                        ></use>
+                      </svg>
+
+                      <svg
+                        style="width: 1.5rem; height: 1.5rem; fill: limegreen"
+                      >
+                        <use
+                          xlink:href="./css/sprite.svg#icon-follow-add"
+                        ></use>
+                      </svg>
+                    </li>
+                  </ul>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="about_list_item">
+              <h1 class="about_heading">skills</h1>
+              <input type="checkbox" id="about-skills" checked />
+              <label for="about-skills">
+                <svg class="icon icon-caret" style="fill: #444">
+                  <use xlink:href="./css/sprite.svg#icon-caret"></use>
+                </svg>
+              </label>
+
+              <div class="about-content">
+                <input type="checkbox" id="edit-about-content-3" />
+                <label for="edit-about-content-3"></label>
+                <fieldset disabled>
+                  <ul class="info-list"></ul>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+
+          <fieldset
+            style="
+              border: none;
+
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+              gap: 2rem;
+            "
+          >
+            <div
+              style="
+                position: relative;
+
+                width: 3rem;
+                height: 3rem;
+                border-radius: 50%;
+                border: 1px solid #555;
+                background-color: transparent;
+              "
+            >
+              <svg class="icon" style="fill: #999">
+                <use xlink:href="./css/sprite.svg#icon-unlock"></use>
+              </svg>
+            </div>
+
+            <button
+              type="submit"
+              style="
+                align-self: flex-end;
+                margin-top: auto;
+                padding: 1rem 2.5rem;
+                width: 20%;
+                border-radius: 2rem;
+                border: none;
+                outline: none;
+              "
+            >
+              submit
+            </button>
+          </fieldset>
+        </fieldset>
+      </form>
+    </section>
 
     <!-- section friends -->
 
@@ -352,150 +544,72 @@
             </label>
           </h1>
 
-          <ul
-            id="photo-overview_content"
-            style="display: flex; flex-direction: column; gap: 1.5rem"
-          >
-            <ul
-              class="photo-overview_content"
-              style="
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-
-                gap: 1rem;
-                overflow: scroll;
-              "
-            >
+          <ul id="photo-overview_content">
+            <ul class="photo-overview_content">
               <li
                 style="
-                  list-style: none;
-                  min-width: calc((100% / 3) - 1rem);
-                  height: 9rem;
-
                   background: url(./img/1594542349549_collage.jpg) 50% 50%;
                   background-size: cover;
-                  border-radius: 1rem;
                 "
               ></li>
 
               <li
                 style="
-                  list-style: none;
-                  min-width: calc((100% / 3) - 1rem);
-                  height: 9rem;
-
                   background: url(./img/1594542349549_collage.jpg) 50% 50%;
                   background-size: cover;
-                  border-radius: 1rem;
                 "
               ></li>
 
               <li
                 style="
-                  list-style: none;
-                  min-width: calc((100% / 3) - 1rem);
-                  height: 9rem;
-
                   background: url(./img/default.jpg) 50% 50%;
                   background-size: cover;
-                  border-radius: 1rem;
                 "
               ></li>
             </ul>
 
-            <ul
-              class="photo-overview_content"
-              style="
-                height: 9rem;
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                gap: 1rem;
-                overflow: scroll;
-              "
-            >
+            <ul class="photo-overview_content">
               <li
                 style="
-                  list-style: none;
-                  min-width: calc((100% / 3) - 1rem);
-                  height: 9rem;
-
                   background: url(./img/1594542349549_collage.jpg) 50% 50%;
-                  background-size: cover;
-                  border-radius: 1rem;
+                  background-size: cover; ;
                 "
               ></li>
 
               <li
                 style="
-                  list-style: none;
-                  min-width: calc((100% / 3) - 1rem);
-                  height: 9rem;
-
                   background: url(./img/1594542349549_collage.jpg) 50% 50%;
                   background-size: cover;
-                  border-radius: 1rem;
                 "
               ></li>
 
               <li
                 style="
-                  list-style: none;
-                  min-width: calc((100% / 3) - 1rem);
-                  height: 9rem;
-
                   background: url(./img/default.jpg) 50% 50%;
                   background-size: cover;
-                  border-radius: 1rem;
                 "
               ></li>
             </ul>
 
-            <ul
-              class="photo-overview_content"
-              style="
-                height: 9rem;
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                gap: 1rem;
-                overflow: scroll;
-              "
-            >
+            <ul class="photo-overview_content">
               <li
                 style="
-                  list-style: none;
-                  min-width: calc((100% / 3) - 1rem);
-                  height: 9rem;
-
                   background: url(./img/1594542349549_collage.jpg) 50% 50%;
                   background-size: cover;
-                  border-radius: 1rem;
                 "
               ></li>
 
               <li
                 style="
-                  list-style: none;
-                  min-width: calc((100% / 3) - 1rem);
-                  height: 9rem;
-
                   background: url(./img/1594542349549_collage.jpg) 50% 50%;
                   background-size: cover;
-                  border-radius: 1rem;
                 "
               ></li>
 
               <li
                 style="
-                  list-style: none;
-                  min-width: calc((100% / 3) - 1rem);
-                  height: 9rem;
-
                   background: url(./img/default.jpg) 50% 50%;
                   background-size: cover;
-                  border-radius: 1rem;
                 "
               ></li>
             </ul>
@@ -503,26 +617,8 @@
         </div>
       </section>
 
-      <section
-        style="
-          width: 60%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 1rem;
-        "
-      >
-        <div
-          style="
-            background-color: #191919;
-            backdrop-filter: blur(3px);
-            width: 100%;
-            border-radius: 2rem;
-            color: #fff;
-            padding: 2rem 4rem 1rem 4rem;
-          "
-          class="status-box <!--topMarginAnimation scaleAnimation-->"
-        >
+      <section class="right">
+        <div class="status-box <!--topMarginAnimation scaleAnimation-->">
           <div class="status-info" data-user-idstatus-id="userid-statusid2">
             <div class="user-image-box">
               <img src="./img/IMG_sam_3234353.jpg" alt="" class="user-image" />
@@ -535,15 +631,7 @@
             <span>🤩</span>
           </div>
 
-          <p
-            style="
-              color: #fff;
-              font-weight: 400;
-              line-height: 1.7;
-              font-size: 1.3rem;
-            "
-            class="status-content"
-          >
+          <p class="status-content">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora,
             nam aliquid ullam fuga possimus sint inventore, laborum harum sunt
             quia nesciunt. Dicta cumque quos magnam modi exercitationem itaque
@@ -570,17 +658,7 @@
           </p>
         </div>
 
-        <div
-          style="
-            background-color: #191919;
-            backdrop-filter: blur(3px);
-            width: 100%;
-            border-radius: 2rem;
-            color: #fff;
-            padding: 2rem 4rem 1rem 4rem;
-          "
-          class="status-box <!--topMarginAnimation scaleAnimation-->"
-        >
+        <div class="status-box <!--topMarginAnimation scaleAnimation-->">
           <div class="status-info" data-user-idstatus-id="userid-statusid2">
             <div class="user-image-box">
               <img src="./img/IMG_sam_3234353.jpg" alt="" class="user-image" />
@@ -593,15 +671,7 @@
             <span>🤩</span>
           </div>
 
-          <p
-            style="
-              color: #fff;
-              font-weight: 400;
-              line-height: 1.7;
-              font-size: 1.3rem;
-            "
-            class="status-content"
-          >
+          <p class="status-content">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora,
             nam aliquid ullam fuga possimus sint inventore, laborum harum sunt
             quia nesciunt. Dicta cumque quos magnam modi exercitationem itaque
@@ -642,8 +712,8 @@
 
     <!-- section more -->
 
-    <input type="radio" class="sub-nav-radio" name="sub-nav-radio" id="more" />
-    <section class="sub-nav-section more"></section>
+    <!-- <input type="radio" class="sub-nav-radio" name="sub-nav-radio" id="more" />
+    <section class="sub-nav-section more"></section> -->
 
     <footer style="background-color: #000">
       <h2>&copy; samuel oduwole</h2>

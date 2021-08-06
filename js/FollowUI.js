@@ -41,13 +41,13 @@ class FollowUI extends Factory {
   constructor() {
     super();
 
-    ["click", "submit" /*, "mousemove", "mousedown"*/].some((type, i, arr) => {
+    ["click", "submit"].some((type, i, arr) => {
       this.#root.addEventListener(type, this.rootHandler.bind(this, arr));
     });
 
     document
       .querySelectorAll(".sub-nav-section")
-      ?.forEach((s) => !s.classList.contains("overview") && s.remove());
+      ?.forEach((s) => !s.classList.contains("about") && s.remove());
 
     this.focusTextArea();
 
@@ -72,44 +72,23 @@ class FollowUI extends Factory {
   }
   x;
 
-  down(e) {
-    document.querySelector(".unshift") &&
-      setTimeout(
-        () => document.querySelector(".unshift")?.classList.remove("unshift"),
-        401
-      );
-
-    if (!e.target.closest(".status-box ")) return;
-
-    if (document.querySelector(".shift")) {
-      document.querySelector(".shift").classList.add("unshift");
-      document.querySelector(".shift").classList.remove("shift");
-    }
-
-    this.x = e.clientX;
-  }
-
-  shift(e) {
-    if (
-      !e.target.closest(".status-box ") ||
-      !e.target.closest("#section-3") ||
-      this.x === undefined
-    )
-      return;
-
-    if (e.clientX - this.x < -200) {
-      e.target.closest(".status-box ").classList.add("shift");
-      this.x = undefined;
-    }
-  }
-
   submitForm(e) {
-    if (!e.target.closest("#post-form") && !e.target.closest("#com-ply"))
+    if (
+      !e.target.closest("#post-form") &&
+      !e.target.closest("#com-ply") &&
+      !e.target.closest("#about-form")
+    )
       return;
     e.preventDefault();
 
     // const [[, post]] = Array.from(new FormData(e.target));
     const post = Object.fromEntries(this._formData(e.target));
+
+    if (document.querySelector(".sub-nav-section.about")) {
+      console.log(post);
+
+      return;
+    }
 
     if (!["post", "comment", "reply"].some((key) => post[key]?.trim()))
       return this.alert(...Object.keys(post), "error");
@@ -142,7 +121,19 @@ class FollowUI extends Factory {
   }
 
   clickHandler(e) {
-    console.log(e.target.closest("button"));
+    if (
+      e.target.closest("[for^='about-']") ||
+      e.target.closest('[for^="edit-about-content"]')
+    )
+      return;
+
+    const cb = e.target.closest('input[id^="edit-about-content"]');
+    if (cb) {
+      cb.nextElementSibling.nextElementSibling[
+        cb.checked ? "removeAttribute" : "setAttribute"
+      ](...(cb.checked ? ["disabled"] : ["disabled", "disabled"]));
+    }
+
     if (e.target.closest(".sub-nav-label")) {
       document
         .querySelector(".active-sub-nav-label")
@@ -152,10 +143,28 @@ class FollowUI extends Factory {
           `label[for=${e.target.closest(".sub-nav-label").getAttribute("for")}]`
         )
         ?.classList.add("active-sub-nav-label");
+
+      return;
     }
 
+    if (
+      document.querySelector(".sub-nav-section.more") &&
+      !e.target.closest("input[name = 'sub-nav-radio']#more")
+    )
+      document.querySelector(".sub-nav-section.more").remove();
+
+    if (
+      document.querySelector(
+        `.sub-nav-section.${e.target
+          .closest(`input[name = 'sub-nav-radio']`)
+          ?.getAttribute("id")}`
+      )
+    )
+      return;
+
     e.target.closest('input[name = "sub-nav-radio"]') &&
-      document.querySelector(".sub-nav-section")?.remove();
+      !e.target.closest("#more") &&
+      document.querySelector("#profile>.sub-nav-section")?.remove();
 
     e.target
       .closest("input[name = 'sub-nav-radio']#about")
@@ -196,15 +205,18 @@ class FollowUI extends Factory {
       .closest("input[name = 'sub-nav-radio']#activities")
       ?.insertAdjacentHTML(
         "afterend",
-        `<section class="sub-nav-section photos">activites</section>`
+        `<section class="sub-nav-section activities">activites</section>`
       );
 
-    e.target
-      .closest("input[name = 'sub-nav-radio']#more")
-      ?.insertAdjacentHTML(
-        "afterend",
-        `<section class="sub-nav-section more">more</section>`
-      );
+    !document.querySelector(".sub-nav-section.more") &&
+      e.target
+        .closest("input[name = 'sub-nav-radio']#more")
+        ?.insertAdjacentHTML(
+          "afterend",
+          `<section class="sub-nav-section more">       
+        <label class="sub-nav-label" for="activities">activities</label>
+      </section>`
+        );
 
     this._popUp = document.querySelector(".status-popup");
     this.#deleteBox = document.querySelector(".delete-box");
@@ -292,7 +304,7 @@ class FollowUI extends Factory {
     this.clearEmptyTextArea(e);
 
     if (e.target.closest(".status-comment") && e.target.closest("#section-3"))
-      return setTimeout(() => location.assign("/panel.html"), 200);
+      return setTimeout(() => location.assign("./panel.html"), 200);
 
     !document.querySelector("#comment") &&
       this.#statusBox?.insertAdjacentHTML("afterbegin", this._comPlyForm());
