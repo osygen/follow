@@ -41,13 +41,19 @@ class FollowUI extends Factory {
   constructor() {
     super();
 
-    ["click", "submit"].some((type, i, arr) => {
-      this.#root.addEventListener(type, this.rootHandler.bind(this, arr));
+    ["click", "submit", "hashchange", "load"].some((type, i, arr) => {
+      // this.#root.addEventListener(type, this.rootHandler.bind(this, arr));
+      window.addEventListener(type, this.rootHandler.bind(this, arr));
     });
 
     document
       .querySelectorAll(".sub-nav-section")
-      ?.forEach((s) => !s.classList.contains("about") && s.remove());
+      ?.forEach((s) => !s.classList.contains("overview") && s.remove());
+
+    // location.hash =
+    //   document.querySelector("#profile") && !location.hash
+    //     ? "#overview"
+    //     : location.hash;
 
     this.focusTextArea();
 
@@ -65,14 +71,38 @@ class FollowUI extends Factory {
       : e.type === arr[1]
       ? this.submitForm(e)
       : e.type === arr[2]
-      ? this.shift(e)
+      ? this.hashchange(e)
       : e.type === arr[3]
-      ? this.down(e)
-      : alert("event not handled!");
+      ? this.hashchange(e)
+      : alert(`${e.type} event not handled!`);
   }
-  x;
+
+  hashchange(e) {
+    if (!location.hash) return;
+    document
+      .querySelector(".active-sub-nav-label")
+      ?.classList.toggle("active-sub-nav-label");
+
+    document
+      .querySelector(`a[id=${location.hash.slice(1)}]`)
+      ?.classList.add("active-sub-nav-label");
+
+    document.querySelector("#profile>.sub-nav-section")?.remove();
+
+    document
+      .querySelector(".sub-nav")
+      .insertAdjacentHTML(
+        "afterend",
+        `<section class="sub-nav-section ${location.hash.slice(
+          1
+        )}">${this.domString(location.hash)}</section>`
+      );
+
+    return;
+  }
 
   submitForm(e) {
+    if (e.target.closest("#photo-overview_content")) return;
     if (
       !e.target.closest("#post-form") &&
       !e.target.closest("#com-ply") &&
@@ -134,89 +164,91 @@ class FollowUI extends Factory {
       ](...(cb.checked ? ["disabled"] : ["disabled", "disabled"]));
     }
 
-    if (e.target.closest(".sub-nav-label")) {
-      document
-        .querySelector(".active-sub-nav-label")
-        ?.classList.toggle("active-sub-nav-label");
-      document
-        .querySelector(
-          `label[for=${e.target.closest(".sub-nav-label").getAttribute("for")}]`
-        )
-        ?.classList.add("active-sub-nav-label");
+    // if (e.target.closest(".sub-nav-label[for='more']")) {
+    //   document
+    //     .querySelector(".active-sub-nav-label")
+    //     ?.classList.toggle("active-sub-nav-label");
 
-      return;
-    }
+    //   document
+    //     .querySelector(
+    //       `label[for=${e.target.closest(".sub-nav-label").getAttribute("for")}]`
+    //     )
+    //     ?.classList.add("active-sub-nav-label");
 
-    if (
-      document.querySelector(".sub-nav-section.more") &&
-      !e.target.closest("input[name = 'sub-nav-radio']#more")
-    )
-      document.querySelector(".sub-nav-section.more").remove();
+    //   return;
+    // }
 
-    if (
-      document.querySelector(
-        `.sub-nav-section.${e.target
-          .closest(`input[name = 'sub-nav-radio']`)
-          ?.getAttribute("id")}`
-      )
-    )
-      return;
+    // if (
+    //   document.querySelector(".sub-nav-section.more") &&
+    //   !e.target.closest("input[name = 'sub-nav-radio']#more")
+    // )
+    //   document.querySelector(".sub-nav-section.more").remove();
 
-    e.target.closest('input[name = "sub-nav-radio"]') &&
-      !e.target.closest("#more") &&
-      document.querySelector("#profile>.sub-nav-section")?.remove();
+    // if (
+    //   document.querySelector(
+    //     `.sub-nav-section.${e.target
+    //       .closest(`input[name = 'sub-nav-radio']`)
+    //       ?.getAttribute("id")}`
+    //   )
+    // )
+    //   return;
 
-    e.target
-      .closest("input[name = 'sub-nav-radio']#about")
-      ?.insertAdjacentHTML(
-        "afterend",
-        `<section class="sub-nav-section about">about</section>`
-      );
+    // e.target.closest('input[name = "sub-nav-radio"]:not(#more)') &&
+    // !e.target.closest("#more")
+    // &&
+    // document.querySelector("#profile>.sub-nav-section")?.remove();
 
-    e.target
-      .closest("input[name = 'sub-nav-radio']#friends")
-      ?.insertAdjacentHTML(
-        "afterend",
-        `<section class="sub-nav-section friends">friends</section>`
-      );
+    // e.target
+    //   .closest("input[name = 'sub-nav-radio']#about")
+    //   ?.insertAdjacentHTML(
+    //     "afterend",
+    //     `<section class="sub-nav-section about">about</section>`
+    //   );
 
-    e.target
-      .closest("input[name = 'sub-nav-radio']#group")
-      ?.insertAdjacentHTML(
-        "afterend",
-        `<section class="sub-nav-section group">group</section>`
-      );
+    // e.target
+    //   .closest("input[name = 'sub-nav-radio']#friends")
+    //   ?.insertAdjacentHTML(
+    //     "afterend",
+    //     `<section class="sub-nav-section friends">friends</section>`
+    //   );
 
-    e.target
-      .closest("input[name = 'sub-nav-radio']#overview")
-      ?.insertAdjacentHTML(
-        "afterend",
-        `<section class="sub-nav-section overview active-sub-nav-label">${"overview"}</section>`
-      );
+    // e.target
+    //   .closest("input[name = 'sub-nav-radio']#group")
+    //   ?.insertAdjacentHTML(
+    //     "afterend",
+    //     `<section class="sub-nav-section group">group</section>`
+    //   );
 
-    e.target
-      .closest("input[name = 'sub-nav-radio']#photos")
-      ?.insertAdjacentHTML(
-        "afterend",
-        `<section class="sub-nav-section photos">photos</section>`
-      );
+    // e.target
+    //   .closest("input[name = 'sub-nav-radio']#overview")
+    //   ?.insertAdjacentHTML(
+    //     "afterend",
+    //     `<section class="sub-nav-section overview active-sub-nav-label">${"overview"}</section>`
+    //   );
 
-    e.target
-      .closest("input[name = 'sub-nav-radio']#activities")
-      ?.insertAdjacentHTML(
-        "afterend",
-        `<section class="sub-nav-section activities">activites</section>`
-      );
+    // e.target
+    //   .closest("input[name = 'sub-nav-radio']#photos")
+    //   ?.insertAdjacentHTML(
+    //     "afterend",
+    //     `<section class="sub-nav-section photos">photos</section>`
+    //   );
 
-    !document.querySelector(".sub-nav-section.more") &&
-      e.target
-        .closest("input[name = 'sub-nav-radio']#more")
-        ?.insertAdjacentHTML(
-          "afterend",
-          `<section class="sub-nav-section more">       
-        <label class="sub-nav-label" for="activities">activities</label>
-      </section>`
-        );
+    // e.target
+    //   .closest("input[name = 'sub-nav-radio']#activities")
+    //   ?.insertAdjacentHTML(
+    //     "afterend",
+    //     `<section class="sub-nav-section activities">activites</section>`
+    //   );
+
+    // !document.querySelector(".sub-nav-section.more") &&
+    //   e.target
+    //     .closest("input[name = 'sub-nav-radio']#more")
+    //     ?.insertAdjacentHTML(
+    //       "afterend",
+    //       `<section class="sub-nav-section more">
+    //     <label class="sub-nav-label" for="activities">activities</label>
+    //   </section>`
+    //     );
 
     this._popUp = document.querySelector(".status-popup");
     this.#deleteBox = document.querySelector(".delete-box");

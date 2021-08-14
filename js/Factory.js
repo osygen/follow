@@ -132,4 +132,192 @@ export default class Factory {
       animationName
     );
   }
+
+  domString(p) {
+    // alert(p);
+    return p === "#about"
+      ? `<form action="" id="about-form">
+    <fieldset>
+      <div id="about_list">
+        <!-- user info -->
+
+        <div class="about_list_item">
+          <h1 class="about_heading">user info</h1>
+          <input type="checkbox" id="about-user-info" checked />
+          <label for="about-user-info">
+            <svg class="icon icon-caret" style="fill: #444">
+              <use xlink:href="./css/sprite.svg#icon-caret"></use>
+            </svg>
+          </label>
+
+          <div class="about-content">
+            <input type="checkbox" id="edit-about-content" />
+            <label for="edit-about-content"></label>
+
+            <fieldset disabled>
+              <ul class="info-list">
+                <li>
+                  <label for="username"> username</label>&nbsp;
+                  <input
+                    type="text"
+                    name="first-name"
+                    value="osygen"
+                    id="username"
+                    required
+                  />
+                </li>
+
+                <li>
+                  <label for="first-name"> first name</label>&nbsp;
+                  <input
+                    type="text"
+                    name="first-name"
+                    value="samuel"
+                    id="first-name"
+                    required
+                  />
+                </li>
+              </ul>
+            </fieldset>
+          </div>
+        </div>
+
+        <!-- basic info -->
+
+        <div class="about_list_item">
+          <h1 class="about_heading">basic info</h1>
+          <input type="checkbox" id="about-basic-info" checked />
+          <label for="about-basic-info">
+            <svg class="icon icon-caret" style="fill: #444">
+              <use xlink:href="./css/sprite.svg#icon-caret"></use>
+            </svg>
+          </label>
+
+          <div class="about-content">
+            <input type="checkbox" id="edit-about-content-1" />
+            <label for="edit-about-content-1"></label>
+            <fieldset disabled>
+              <ul class="info-list">
+                <li>
+                  <label for="dob"> birthday</label>&nbsp;
+                  <input
+                    type="date"
+                    name="dob"
+                    value="2021-07-09"
+                    id="dob"
+                  />
+                </li>
+              </ul>
+            </fieldset>
+          </div>
+        </div>
+
+        <!-- links -->
+
+        <div class="about_list_item">
+          <h1 class="about_heading">links</h1>
+          <input type="checkbox" id="about-links" checked />
+          <label for="about-links">
+            <svg class="icon icon-caret" style="fill: #444">
+              <use xlink:href="./css/sprite.svg#icon-caret"></use>
+            </svg>
+          </label>
+
+          <div class="about-content">
+            <input type="checkbox" id="edit-about-content-2" />
+            <label for="edit-about-content-2"></label>
+            <fieldset disabled>
+              <ul class="info-list">
+                <li>
+                  <select>
+                    <option value="skype">skype</option>
+                    <option value="facebook">facebook</option>
+                    <option value="twitter">twitter</option>
+                    <option value="instagram">instagram</option>
+                    <option value="linkedIn">linkedIn</option>
+                  </select>
+                  <input type="text" name="skype" value="osygen" />
+                  <svg style="width: 1.5rem; height: 1.5rem; fill: tomato">
+                    <use
+                      xlink:href="./css/sprite.svg#icon-unfollow-minus"
+                    ></use>
+                  </svg>
+
+                  <svg
+                    style="width: 1.5rem; height: 1.5rem; fill: limegreen"
+                  >
+                    <use
+                      xlink:href="./css/sprite.svg#icon-follow-add"
+                    ></use>
+                  </svg>
+                </li>
+              </ul>
+            </fieldset>
+          </div>
+        </div>
+
+        <div class="about_list_item">
+          <h1 class="about_heading">skills</h1>
+          <input type="checkbox" id="about-skills" checked />
+          <label for="about-skills">
+            <svg class="icon icon-caret" style="fill: #444">
+              <use xlink:href="./css/sprite.svg#icon-caret"></use>
+            </svg>
+          </label>
+
+          <div class="about-content">
+            <input type="checkbox" id="edit-about-content-3" />
+            <label for="edit-about-content-3"></label>
+            <fieldset disabled>
+              <ul class="info-list"></ul>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+
+      <fieldset
+        style="
+          border: none;
+
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          gap: 2rem;
+        "
+      >
+        <div
+          style="
+            position: relative;
+
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            border: 1px solid #555;
+            background-color: transparent;
+          "
+        >
+          <svg class="icon" style="fill: #999">
+            <use xlink:href="./css/sprite.svg#icon-unlock"></use>
+          </svg>
+        </div>
+
+        <button
+          type="submit"
+          style="
+            align-self: flex-end;
+            margin-top: auto;
+            padding: 1rem 2.5rem;
+            width: 20%;
+            border-radius: 2rem;
+            border: none;
+            outline: none;
+          "
+        >
+          submit
+        </button>
+      </fieldset>
+    </fieldset>
+  </form>`
+      : p;
+  }
 }

@@ -120,24 +120,29 @@
     <ul class="sub-nav">
       <ul class="sub-nav-list">
         <li>
-          <label class="sub-nav-label" for="about">about</label>
+          <a class="sub-nav-label" id="about" href="#about">about</a>
         </li>
         <li>
-          <label class="sub-nav-label" for="friends">friends</label>
+          <a class="sub-nav-label" id="friends" href="#friends">friends</a>
         </li>
         <li>
-          <label class="sub-nav-label" for="group">group</label>
+          <a class="sub-nav-label" id="group" href="#group">group</a>
         </li>
         <li>
-          <label class="sub-nav-label active-sub-nav-label" for="overview"
-            >overview</label
+          <a
+            class="sub-nav-label active-sub-nav-label"
+            id="overview"
+            href="#overview"
+            >overview</a
           >
         </li>
         <li>
-          <label class="sub-nav-label" for="photos">photos</label>
+          <a class="sub-nav-label" id="photos" href="#photos">photos</a>
         </li>
         <li>
-          <label class="sub-nav-label" for="activities">activities</label>
+          <a class="sub-nav-label" id="activities" href="#activities"
+            >activities</a
+          >
         </li>
         <!-- <li>
           <label class="sub-nav-label" for="more">more</label>
@@ -147,7 +152,7 @@
         <label class="sub-nav-label" for="more">more</label>
       </li>
       <input
-        type="radio"
+        type="checkbox"
         class="sub-nav-radio"
         name="sub-nav-radio"
         id="more"
@@ -164,7 +169,7 @@
 
     <!-- section about -->
 
-    <input type="radio" name="sub-nav-radio" id="about" />
+    <!-- <input type="radio" name="sub-nav-radio" id="about" /> -->
     <section class="sub-nav-section about">
       <form action="" id="about-form">
         <fieldset>
@@ -352,13 +357,13 @@
 
     <!-- section friends -->
 
-    <input type="radio" name="sub-nav-radio" id="friends" />
-    <section class="sub-nav-section friends"></section>
+    <!-- <input type="radio" name="sub-nav-radio" id="friends" /> -->
+    <!-- <section class="sub-nav-section friends"></section> -->
 
     <!-- section group -->
 
-    <input type="radio" name="sub-nav-radio" id="group" />
-    <section class="sub-nav-section group"></section>
+    <!-- <input type="radio" name="sub-nav-radio" id="group" /> -->
+    <!-- <section class="sub-nav-section group"></section> -->
 
     <!-- section overview -->
 
@@ -369,11 +374,11 @@
           <h1 class="overview_heading">
             <span>about</span>
 
-            <label for="about" class="sub-nav-label">
+            <a href="#about" class="sub-nav-label">
               <svg class="icon">
                 <use xlink:href="./css/sprite.svg#icon-edit-pen"></use>
               </svg>
-            </label>
+            </a>
           </h1>
 
           <ul id="about-overview_content">
@@ -426,11 +431,11 @@
           <h1 class="overview_heading">
             <span>friends</span>
 
-            <label for="friends" class="sub-nav-label">
+            <a href="#friends" class="sub-nav-label">
               <svg class="icon">
                 <use xlink:href="./css/sprite.svg#icon-link-arr"></use>
               </svg>
-            </label>
+            </a>
           </h1>
 
           <ul id="friends-overview_content">
@@ -525,11 +530,11 @@
           <h1 class="overview_heading">
             <span>group</span>
 
-            <label for="group" class="sub-nav-label">
+            <a href="#group" class="sub-nav-label">
               <svg class="icon">
                 <use xlink:href="./css/sprite.svg#icon-link-arr"></use>
               </svg>
-            </label>
+            </a>
           </h1>
         </div>
 
@@ -537,83 +542,84 @@
           <h1 class="overview_heading">
             <span>photos</span>
 
-            <label for="photos" class="sub-nav-label">
+            <a href="#photos" class="sub-nav-label">
               <svg class="icon">
                 <use xlink:href="./css/sprite.svg#icon-link-arr"></use>
               </svg>
-            </label>
+            </a>
           </h1>
 
-          <ul id="photo-overview_content">
-            <ul class="photo-overview_content">
-              <li
+          <div id="photo-overview_content">
+            <div class="photo-overview_content">
+              <a
+                href="#photos"
                 style="
                   background: url(./img/1594542349549_collage.jpg) 50% 50%;
                   background-size: cover;
                 "
-              ></li>
+              ></a>
 
-              <li
+              <a
                 style="
                   background: url(./img/1594542349549_collage.jpg) 50% 50%;
                   background-size: cover;
                 "
-              ></li>
+              ></a>
 
-              <li
+              <a
                 style="
                   background: url(./img/default.jpg) 50% 50%;
                   background-size: cover;
                 "
-              ></li>
-            </ul>
+              ></a>
+            </div>
 
-            <ul class="photo-overview_content">
-              <li
+            <div class="photo-overview_content">
+              <a
                 style="
                   background: url(./img/1594542349549_collage.jpg) 50% 50%;
                   background-size: cover; ;
                 "
-              ></li>
+              ></a>
 
-              <li
+              <a
                 style="
                   background: url(./img/1594542349549_collage.jpg) 50% 50%;
                   background-size: cover;
                 "
-              ></li>
+              ></a>
 
-              <li
+              <a
                 style="
                   background: url(./img/default.jpg) 50% 50%;
                   background-size: cover;
                 "
-              ></li>
-            </ul>
+              ></a>
+            </div>
 
-            <ul class="photo-overview_content">
-              <li
+            <div class="photo-overview_content">
+              <a
                 style="
                   background: url(./img/1594542349549_collage.jpg) 50% 50%;
                   background-size: cover;
                 "
-              ></li>
+              ></a>
 
-              <li
+              <a
                 style="
                   background: url(./img/1594542349549_collage.jpg) 50% 50%;
                   background-size: cover;
                 "
-              ></li>
+              ></a>
 
-              <li
+              <a
                 style="
                   background: url(./img/default.jpg) 50% 50%;
                   background-size: cover;
                 "
-              ></li>
-            </ul>
-          </ul>
+              ></a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -702,13 +708,13 @@
 
     <!-- section photo -->
 
-    <input type="radio" name="sub-nav-radio" id="photos" />
-    <section class="sub-nav-section photos"></section>
+    <!-- <input type="radio" name="sub-nav-radio" id="photos" /> -->
+    <!-- <section class="sub-nav-section photos"></section> -->
 
     <!-- section activities -->
 
-    <input type="radio" name="sub-nav-radio" id="activities" />
-    <section class="sub-nav-section activities"></section>
+    <!-- <input type="radio" name="sub-nav-radio" id="activities" /> -->
+    <!-- <section class="sub-nav-section activities"></section> -->
 
     <!-- section more -->
 
