@@ -1,4 +1,4 @@
-import Factory from "./Factory.js";
+import Factory from './Factory.js';
 
 class FollowUI extends Factory {
   #deleteBox;
@@ -10,9 +10,9 @@ class FollowUI extends Factory {
   #deleteStatus;
   #deleteBoxE;
   #root = document.documentElement;
-  #form = document.querySelector("form");
-  #nav = document.querySelector(".nav");
-  #secs = document.querySelectorAll(".sec");
+  #form = document.querySelector('form');
+  #nav = document.querySelector('.nav');
+  #secs = document.querySelectorAll('.sec');
   #btnMore = `
         <div class="status-popup hidden scaleAnimation">
           <span class="share"><a href="#">share</a></span>
@@ -41,14 +41,14 @@ class FollowUI extends Factory {
   constructor() {
     super();
 
-    ["click", "submit", "hashchange", "load"].some((type, i, arr) => {
+    ['click', 'submit', 'hashchange', 'load'].some((type, i, arr) => {
       // this.#root.addEventListener(type, this.rootHandler.bind(this, arr));
       window.addEventListener(type, this.rootHandler.bind(this, arr));
     });
 
     document
-      .querySelectorAll(".sub-nav-section")
-      ?.forEach((s) => !s.classList.contains("overview") && s.remove());
+      .querySelectorAll('.sub-nav-section')
+      ?.forEach((s) => !s.classList.contains('overview') && s.remove());
 
     // location.hash =
     //   document.querySelector("#profile") && !location.hash
@@ -59,10 +59,10 @@ class FollowUI extends Factory {
 
     this.#secs?.forEach((s) => this.secObserver().observe(s));
 
-    document.querySelector("#post-form") &&
-      this.navObserver().observe(document.querySelector("#post-form"));
-    document.querySelector("#panel") &&
-      this.navObserver().observe(document.querySelector(".status-box"));
+    document.querySelector('#post-form') &&
+      this.navObserver().observe(document.querySelector('#post-form'));
+    document.querySelector('#panel') &&
+      this.navObserver().observe(document.querySelector('.status-box'));
   }
 
   rootHandler(arr, e) {
@@ -80,19 +80,19 @@ class FollowUI extends Factory {
   hashchange(e) {
     if (!location.hash) return;
     document
-      .querySelector(".active-sub-nav-label")
-      ?.classList.toggle("active-sub-nav-label");
+      .querySelector('.active-sub-nav-label')
+      ?.classList.toggle('active-sub-nav-label');
 
     document
       .querySelector(`a[id=${location.hash.slice(1)}]`)
-      ?.classList.add("active-sub-nav-label");
+      ?.classList.add('active-sub-nav-label');
 
-    document.querySelector("#profile>.sub-nav-section")?.remove();
+    document.querySelector('#profile>.sub-nav-section')?.remove();
 
     document
-      .querySelector(".sub-nav")
+      .querySelector('.sub-nav')
       .insertAdjacentHTML(
-        "afterend",
+        'afterend',
         `<section class="sub-nav-section ${location.hash.slice(
           1
         )}">${this.domString(location.hash)}</section>`
@@ -102,11 +102,11 @@ class FollowUI extends Factory {
   }
 
   submitForm(e) {
-    if (e.target.closest("#photo-overview_content")) return;
+    if (e.target.closest('#photo-overview_content')) return;
     if (
-      !e.target.closest("#post-form") &&
-      !e.target.closest("#com-ply") &&
-      !e.target.closest("#about-form")
+      !e.target.closest('#post-form') &&
+      !e.target.closest('#com-ply') &&
+      !e.target.closest('#about-form')
     )
       return;
     e.preventDefault();
@@ -114,40 +114,40 @@ class FollowUI extends Factory {
     // const [[, post]] = Array.from(new FormData(e.target));
     const post = Object.fromEntries(this._formData(e.target));
 
-    if (document.querySelector(".sub-nav-section.about")) {
+    if (document.querySelector('.sub-nav-section.about')) {
       console.log(post);
 
       return;
     }
 
-    if (!["post", "comment", "reply"].some((key) => post[key]?.trim()))
-      return this.alert(...Object.keys(post), "error");
+    if (!['post', 'comment', 'reply'].some((key) => post[key]?.trim()))
+      return this.alert(...Object.keys(post), 'error');
 
     const status = this._statusHandler(post);
 
     if (post.post) {
-      e.target.insertAdjacentElement("afterend", status);
+      e.target.insertAdjacentElement('afterend', status);
 
       Array.from(e.target.children).forEach((domEl) => {
-        if (["post", "comment"].includes(domEl.name)) domEl.value = "";
+        if (['post', 'comment'].includes(domEl.name)) domEl.value = '';
       });
     }
 
     if (post.comment) {
       e.target.parentNode.nextElementSibling.insertAdjacentElement(
-        "afterbegin",
+        'afterbegin',
         status
       );
-      e.target.closest("#com-ply").remove();
+      e.target.closest('#com-ply').remove();
     }
 
     if (post.reply) {
-      e.target.closest("#com-ply").remove();
+      e.target.closest('#com-ply').remove();
       this.logger(status.reply);
       return;
     }
 
-    this._removeAnimation(".topMarginAnimation", 500);
+    this._removeAnimation('.topMarginAnimation', 500);
   }
 
   clickHandler(e) {
@@ -160,8 +160,8 @@ class FollowUI extends Factory {
     const cb = e.target.closest('input[id^="edit-about-content"]');
     if (cb) {
       cb.nextElementSibling.nextElementSibling[
-        cb.checked ? "removeAttribute" : "setAttribute"
-      ](...(cb.checked ? ["disabled"] : ["disabled", "disabled"]));
+        cb.checked ? 'removeAttribute' : 'setAttribute'
+      ](...(cb.checked ? ['disabled'] : ['disabled', 'disabled']));
     }
 
     // if (e.target.closest(".sub-nav-label[for='more']")) {
@@ -250,19 +250,19 @@ class FollowUI extends Factory {
     //   </section>`
     //     );
 
-    this._popUp = document.querySelector(".status-popup");
-    this.#deleteBox = document.querySelector(".delete-box");
-    this.#panel = document.querySelector("#panel");
+    this._popUp = document.querySelector('.status-popup');
+    this.#deleteBox = document.querySelector('.delete-box');
+    this.#panel = document.querySelector('#panel');
 
-    this.#deleteBoxE = e.target.closest(".delete-box");
-    this.#popUpEvent = e.target.closest(".status-popup");
-    this.#more = e.target.closest(".status-more");
-    this.#statusBox = e.target.closest(".status-box");
-    this.#cancel = e.target.closest(".cancel");
-    this.#deleteStatus = e.target.closest(".delete");
+    this.#deleteBoxE = e.target.closest('.delete-box');
+    this.#popUpEvent = e.target.closest('.status-popup');
+    this.#more = e.target.closest('.status-more');
+    this.#statusBox = e.target.closest('.status-box');
+    this.#cancel = e.target.closest('.cancel');
+    this.#deleteStatus = e.target.closest('.delete');
 
-    this.#statusContent = e.target.closest(".status-content");
-    this.#panelE = e.target.closest("#panel");
+    this.#statusContent = e.target.closest('.status-content');
+    this.#panelE = e.target.closest('#panel');
 
     if (
       !(
@@ -271,14 +271,14 @@ class FollowUI extends Factory {
         this.#cancel ||
         this.#deleteStatus ||
         this.#deleteBox ||
-        e.target.closest(".status-comment") ||
-        e.target.closest(".reply") ||
-        (document.querySelector("#com-ply") && !e.target.closest("#com-ply"))
+        e.target.closest('.status-comment') ||
+        e.target.closest('.reply') ||
+        (document.querySelector('#com-ply') && !e.target.closest('#com-ply'))
       )
     )
       return;
 
-    if (e.target.closest(".nav")) return;
+    if (e.target.closest('.nav')) return;
 
     e.preventDefault();
 
@@ -295,55 +295,56 @@ class FollowUI extends Factory {
 
     this.deleteOpt(e, deleteOption);
 
-    e.target.closest("." + share) && this._popUp.remove();
+    e.target.closest('.' + share) && this._popUp.remove();
   }
 
   clearEmptyTextArea(e) {
-    ["#reply", "#comment"].some((id, i, arr) =>
+    ['#reply', '#comment'].some((id, i, arr) =>
       document.querySelectorAll(id)?.forEach((el) => {
-        if (el.value.trim() === "" && arr[i] === "#reply")
+        if (el.value.trim() === '' && arr[i] === '#reply')
           el.parentNode.remove();
-        if (el.value.trim() === "" && arr[i] === "#comment" && !this.#statusBox)
+        if (el.value.trim() === '' && arr[i] === '#comment' && !this.#statusBox)
           el.parentNode.remove();
       })
     );
-    this.logger("clearEmptyTextArea ran");
+    this.logger('clearEmptyTextArea ran');
   }
 
   focusTextArea(e) {
-    document.querySelector("#comment")?.focus();
+    document.querySelector('#comment')?.focus();
 
     document
-      .querySelectorAll("#reply")
+      .querySelectorAll('#reply')
       ?.forEach(
         (el) =>
-          el.closest(".comment") ===
-            e.target.closest(".reply").parentNode.parentNode && el?.focus()
+          el.closest('.comment') ===
+            e.target.closest('.reply').parentNode.parentNode && el?.focus()
       );
   }
 
   comPly(e) {
     if (
       !(
-        e.target.closest(".status-comment") ||
-        e.target.closest(".reply") ||
-        document.querySelectorAll("#reply").length ||
-        document.querySelectorAll("#comment").length
+        e.target.closest('.status-comment') ||
+        e.target.closest('.reply') ||
+        document.querySelectorAll('#reply').length ||
+        document.querySelectorAll('#comment').length
       )
     )
       return;
 
     this.clearEmptyTextArea(e);
 
-    if (e.target.closest(".status-comment") && e.target.closest("#section-3"))
-      return setTimeout(() => location.assign("./panel.html"), 200);
+    if (e.target.closest('.status-comment') && e.target.closest('#section-3'))
+      return setTimeout(() => location.assign('./panel.html'), 200);
 
-    !document.querySelector("#comment") &&
-      this.#statusBox?.insertAdjacentHTML("afterbegin", this._comPlyForm());
+    !document.querySelector('#comment') &&
+      e.target.closest('.status-comment') &&
+      this.#statusBox?.insertAdjacentHTML('afterbegin', this._comPlyForm());
 
     e.target
-      .closest(".reply")
-      ?.parentNode.insertAdjacentHTML("beforebegin", this._comPlyForm("reply"));
+      .closest('.reply')
+      ?.parentNode.insertAdjacentHTML('beforebegin', this._comPlyForm('reply'));
 
     this.focusTextArea(e);
   }
@@ -351,10 +352,17 @@ class FollowUI extends Factory {
   moreOption() {
     if (!this.#more) return;
 
+    if (
+      this.#more
+        .closest('.status-box')
+        .nextElementSibling?.classList.contains('status-popup')
+    )
+      return this._popUp.remove();
+
     this.#statusBox?.insertAdjacentHTML(
-      "afterend",
+      'afterend',
       this.#panelE
-        ? this.#btnMore.replace("scaleAnimation", "scaleyAnimation")
+        ? this.#btnMore.replace('scaleAnimation', 'scaleyAnimation')
         : this.#btnMore
     );
   }
@@ -370,9 +378,9 @@ class FollowUI extends Factory {
   }
 
   deleteOpt(e, deleteOption) {
-    if (!e.target.closest("." + deleteOption)) return;
+    if (!e.target.closest('.' + deleteOption)) return;
 
-    this._popUp.insertAdjacentHTML("afterend", this.#deleteBoxTemplate);
+    this._popUp.insertAdjacentHTML('afterend', this.#deleteBoxTemplate);
 
     this.#temp[0] = this._popUp.previousElementSibling;
 
@@ -383,26 +391,26 @@ class FollowUI extends Factory {
   deleteBoxCancel() {
     if (!(this.#cancel || (this.#deleteBox && !this.#deleteBoxE))) return;
 
-    this.#temp[0]?.classList.add("scaleAnimation");
+    this.#temp[0]?.classList.add('scaleAnimation');
 
-    this.#deleteBox?.insertAdjacentElement("beforebegin", this.#temp[0]);
+    this.#deleteBox?.insertAdjacentElement('beforebegin', this.#temp[0]);
     this.#deleteBox?.remove();
 
-    this._removeAnimation(".scaleAnimation", 210);
+    this._removeAnimation('.scaleAnimation', 210);
     this.#temp[0] = undefined;
   }
 
   deleteBoxDelete(e) {
     if (!this.#deleteStatus) return;
 
-    if (e.target.closest(".comment")) {
-      e.target.closest(".comment").remove();
+    if (e.target.closest('.comment')) {
+      e.target.closest('.comment').remove();
       return;
     }
 
     if (this.#panelE) {
       this.#panelE.remove();
-      setTimeout(() => location.assign("/index.html"), 500);
+      setTimeout(() => location.assign('/index.html'), 500);
       return;
     }
 
@@ -412,24 +420,24 @@ class FollowUI extends Factory {
 
   alert(key, c) {
     this.#root.insertAdjacentHTML(
-      "afterbegin",
+      'afterbegin',
       `<div class="alert"><p class="${c}"><span>Failed:</span><span>${key} cannot be empty, please try again.</span></p></div>`
     );
-    setTimeout(() => document.querySelector(".alert")?.remove(), 800);
+    setTimeout(() => document.querySelector('.alert')?.remove(), 800);
   }
 
-  logger(key = "running") {
+  logger(key = 'running') {
     this.#root.insertAdjacentHTML(
-      "afterbegin",
+      'afterbegin',
       `<div class="alert"><p class="success"><span style="text-decoration:underline wavy">Success:</span><span>${key}</span></p></div>`
     );
-    setTimeout(() => document.querySelector(".alert")?.remove(), 1000);
+    setTimeout(() => document.querySelector('.alert')?.remove(), 1000);
   }
 
   secObserver() {
     return new IntersectionObserver(this.secCb, {
       root: null,
-      rootMargin: -this.#nav.getBoundingClientRect().height + "px",
+      rootMargin: -this.#nav.getBoundingClientRect().height + 'px',
       //
       threshold: 0
     });
@@ -440,22 +448,22 @@ class FollowUI extends Factory {
       if (!entry.isIntersecting) return;
 
       const section = entry.target.parentNode;
-      const navHeight = section.previousElementSibling.getBoundingClientRect()
-        .height;
+      const navHeight =
+        section.previousElementSibling.getBoundingClientRect().height;
       const sectionPad = Number.parseFloat(
         getComputedStyle(section).marginTop,
         10
       );
 
-      entry.target.style.position = "sticky";
-      entry.target.style.top = sectionPad + navHeight + "px";
+      entry.target.style.position = 'sticky';
+      entry.target.style.top = sectionPad + navHeight + 'px';
     });
   }
 
   navObserver() {
     return new IntersectionObserver(this.navCb.bind(this), {
       root: null,
-      rootMargin: -this.#nav.getBoundingClientRect().height + "px",
+      rootMargin: -this.#nav.getBoundingClientRect().height + 'px',
       //
       threshold: 1
     });
@@ -463,9 +471,9 @@ class FollowUI extends Factory {
 
   navCb(entries, observer) {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) this.#nav.classList.remove("stick");
+      if (entry.isIntersecting) this.#nav.classList.remove('stick');
 
-      if (!entry.isIntersecting) this.#nav.classList.add("stick");
+      if (!entry.isIntersecting) this.#nav.classList.add('stick');
     });
   }
 }

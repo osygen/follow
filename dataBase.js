@@ -1,4 +1,4 @@
-const { connect } = require("mongoose");
+const { connect } = require('mongoose');
 // const chalk = require("chalk");
 
 exports.dataBase = async (dbURI) => {

@@ -1,1 +1,3 @@
-module.exports = { ...require("./statusController") };
+module.exports = {
+  statusController: require('./statusController')
+};

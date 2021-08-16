@@ -1,31 +1,17 @@
-exports.getAllStatus = (req, res, next) => {
-  res.status(200).json({ success: true, data: "get all status" });
+const { model } = require('mongoose');
 
-  next();
-};
+const { Status } = require('../models');
+const {
+  getAll,
+  getOne,
+  createOne,
+  updateOne,
+  deleteOne
+} = require('./factory');
 
-exports.getOneStatus = (req, res, next) => {
-  res
-    .status(200)
-    .json({ success: true, data: `get one status ${req.params.id}` });
-};
-
-exports.createStatus = (req, res, next) => {
-  //   if (!req.body.username) return res.status(400).send("pls provide username");
-  res.status(200).json({ success: true, data: req.body });
-
-  next();
-};
-
-exports.editStatus = (req, res, next) => {
-  res
-    .status(200)
-    .json({ success: true, data: `edit one status ${req.params.id}` });
-};
-
-exports.deleteStatus = (req, res, next) => {
-  res
-    .status(200)
-    .json({ success: true, data: `delete one status ${req.params.id}` });
-};
+exports.getAllStatus = getAll(Status);
+exports.getOneStatus = getOne(Status);
+exports.createStatus = createOne(Status);
+exports.updateStatus = updateOne(Status);
+exports.deleteStatus = deleteOne(Status);
 // console.log(exports);

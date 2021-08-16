@@ -1,1 +1,1 @@
-module.exports = { statusRoutes: require("./statusRoutes") };
+module.exports = { statusRoutes: require('./statusRoutes') };
