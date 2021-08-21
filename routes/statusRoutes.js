@@ -8,11 +8,22 @@ const {
     createStatus,
     updateStatus,
     deleteStatus
-  }
+  },
+  authController: { protect, restrictTo },
+  factory: { setReqBodyUser }
 } = require('../controllers');
 
-router.route('/').get(getAllStatus).post(createStatus);
+router
+  .use(protect, restrictTo())
+  .route('/')
+  .get(getAllStatus)
+  .post(setReqBodyUser, createStatus);
 
-router.route('/:id').get(getOneStatus).patch(updateStatus).delete(deleteStatus);
+router
+  .use(protect)
+  .route('/:id')
+  .get(getOneStatus)
+  .patch(updateStatus)
+  .delete(deleteStatus);
 
 module.exports = router;
