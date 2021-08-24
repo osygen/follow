@@ -15,9 +15,10 @@ exports.unHandled = (msg) => (req, res, next) => {
   });
 };
 
-exports.getAll = (Model) =>
+exports.getAll = (Model, ...[populate, select, func]) =>
   catchAsync(async (req, res, next) => {
-    const doc = await Model.find();
+    let doc = await Model.find().populate(populate).select(select);
+    doc = func && doc.length ? doc.filter(func) : doc;
 
     res.status(200).json({
       success: true,

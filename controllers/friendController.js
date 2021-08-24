@@ -20,7 +20,28 @@ exports.createFriend = unHandled('Please use post/api/v1/friend/<:id>/req');
 exports.updateFriend = unHandled('Please use post/api/v1/friend/<:id>/req');
 exports.deleteFriend = unHandled('Please use post/api/v1/friend/<:id>/req');
 
-exports.getAllFriend = unHandled();
+exports.getAllFriend = catchAsync(async (req, res, next) => {
+  const doc = await Friend.find(/*{ user: req.user._id }*/)
+    .populate(
+      {
+        path: 'addUser user',
+        select: 'name email photo vbb'
+      }
+      // {
+      //   path: 'user',
+      //   select: 'name email photo'
+      // }
+    )
+    .select('-__v');
+
+  res.status(200).json({
+    success: true,
+    requestedAt: req.requestTime,
+    results: doc.length,
+    data: { data: doc }
+  });
+});
+// = unHandled();
 exports.getOneFriend = unHandled();
 
 exports.friendRequest = catchAsync(async (req, res, next) => {
@@ -37,7 +58,7 @@ exports.friendRequest = catchAsync(async (req, res, next) => {
   }
 
   if (doc) {
-    doc = await Friend.updateFollow(doc, req.body.addUser);
+    doc = await Friend.updateFollow(doc);
     await doc?.save();
 
     res.status(!doc ? 204 : 200).json({

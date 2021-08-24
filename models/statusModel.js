@@ -35,25 +35,26 @@ statusSchema.virtual('comments', {
 //   next();
 // });
 
-statusSchema.pre(/^(find|findOne)$/i, async function (next) {
-  this.populate({
-    path: 'comments',
-    options: {
-      limit: this.op === 'find' ? 3 : undefined
-      // skip: this.op === 'find' ? 2 : undefined
-    },
-    populate: { path: 'user', select: '-__v -passwordConfirm -email -role' }
-  }).populate({
-    path: 'user',
-    // match: { role: /^admin$/i },
-    select: '-__v -passwordConfirm -email -role'
-  });
+// statusSchema.pre(/^(find|findOne)$/i, async function () {
+//   this.populate({
+//     path: 'user',
+//     select: '-__v -passwordConfirm -email -role -stats'
+//   }).populate({
+//     path: 'comments',
+//     options: {
+//       // limit: this.op === 'find' ? 3 : undefined
+//     },
+//     populate: {
+//       path: 'user',
+//       select: '-__v -passwordConfirm -email -role -stats'
+//     }
+//   });
 
-  next();
-});
+//   // next();
+// });
 
-statusSchema.post('find', function (doc, next) {
-  next();
-});
+// statusSchema.post('find', function (doc, next) {
+//   next();
+// });
 
 module.exports = model('Status', statusSchema);

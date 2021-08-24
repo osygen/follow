@@ -84,6 +84,18 @@ const userSchema = new Schema(
   { toObject: { virtuals: true }, toJSON: { virtuals: true } }
 );
 
+userSchema.virtual('friends', {
+  ref: 'Friend',
+  localField: '_id',
+  foreignField: 'user'
+});
+
+userSchema.virtual('status', {
+  ref: 'Status',
+  localField: '_id',
+  foreignField: 'user'
+});
+
 userSchema.methods.comparePassWord = function (loggedPwd, UserPwd) {
   return bcrypt.compare(loggedPwd, UserPwd);
 };
@@ -120,11 +132,10 @@ userSchema.post('remove', async function () {
     _id: friends.map((f) => f._id.toHexString())
   });
 
-  console.log(friends);
-
   friends
     .filter((f) => f.addUser !== null && `${f.addUser._id}` !== `${this._id}`)
     .forEach((f) => f.constructor.calStats(f.addUser._id));
 });
 
-module.exports = model('User', userSchema);
+const User = model('User', userSchema);
+module.exports = User;

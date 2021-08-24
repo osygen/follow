@@ -1,8 +1,4 @@
-const {
-  model,
-  Schema,
-  Types: { ObjectId }
-} = require('mongoose');
+const { model, Schema } = require('mongoose');
 
 const friendSchema = new Schema(
   {
@@ -90,21 +86,22 @@ friendSchema.statics.updateFollow = async function (userA, addUserID) {
 };
 
 friendSchema.statics.calStats = async function (id) {
-  const stats = await this.aggregate([
+  const aggStats = await this.aggregate([
     {
       $match: { user: id }
     }
   ]).facet({
-    following: [{ $match: { following: true } }],
-    follower: [{ $match: { followed: true } }],
-    friends: [{ $match: { friends: 'friends' } }]
+    following: [{ $match: { following: true } }, { $count: 'following' }],
+    follower: [{ $match: { followed: true } }, { $count: 'follower' }],
+    friends: [{ $match: { friends: 'friends' } }, { $count: 'friends' }]
   });
 
-  const user = await model('User').findById(id);
-  Object.keys(stats[0]).forEach(
-    (key) => (user.stats[key] = stats[0][key].length)
-  );
-  user.save({ validateModifiedOnly: true });
+  let stats = {};
+  Object.keys(aggStats[0]).forEach((key) => {
+    stats[key] = aggStats[0][key][0]?.[key] ?? 0;
+  });
+
+  await model('User').findByIdAndUpdate(id, { stats });
 };
 
 friendSchema.post(['save', 'remove'], async function (doc, next) {
@@ -112,14 +109,14 @@ friendSchema.post(['save', 'remove'], async function (doc, next) {
   next();
 });
 
-friendSchema.pre([/^find/], function (next) {
-  this.populate({
-    path: 'addUser',
-    select: 'name email photo'
-  });
+// friendSchema.pre([/^find/], async function (next) {
+//   this.populate({
+//     path: 'addUser',
+//     select: 'name email photo'
+//   });
 
-  next();
-});
+//   next();
+// });
 
 const Friend = model('Friend', friendSchema);
 module.exports = Friend;

@@ -14,7 +14,7 @@ const {
 } = require('../controllers');
 
 router
-  .use(protect, restrictTo())
+  .use(protect)
   .route('/')
   .get(getAllStatus)
   .post(setReqBodyUser, createStatus);
