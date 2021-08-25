@@ -21,7 +21,7 @@ exports.updateFriend = unHandled('Please use post/api/v1/friend/<:id>/req');
 exports.deleteFriend = unHandled('Please use post/api/v1/friend/<:id>/req');
 
 exports.getAllFriend = catchAsync(async (req, res, next) => {
-  const doc = await Friend.find(/*{ user: req.user._id }*/)
+  const doc = await Friend.find({ user: req.user._id })
     .populate(
       {
         path: 'addUser user',

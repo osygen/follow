@@ -11,7 +11,7 @@ const {
 } = require('./factory');
 
 exports.getAllStatus = catchAsync(async (req, res, next) => {
-  const doc = await model('Friend')
+  let doc = await model('Friend')
     .aggregate()
     .match({ $or: [{ addUser: req.user._id }, { user: req.user._id }] })
     .group({ _id: '$user' })
@@ -32,7 +32,30 @@ exports.getAllStatus = catchAsync(async (req, res, next) => {
     .replaceRoot({
       $mergeObjects: ['$user', '$all_status']
     })
-    .project('-stats -role -email -password -__v');
+    .lookup({
+      from: model('Comment').collection.name,
+
+      let: { idd: '$_id' },
+      pipeline: [
+        { $match: { $expr: { $eq: ['$$idd', '$statusId'] } } },
+        { $group: { _id: null, total: { $sum: 1 } } }
+        // {
+        //   $lookup: {
+        //     from: model('User').collection.name,
+        //     let: { userId: '$userId' },
+        //     pipeline: [{ $match: { $expr: { $eq: ['$_id', '$$userId'] } } }],
+        //     as: 'userId'
+        //   }
+        // }
+      ],
+
+      // localField: '_id',
+      // foreignField: 'statusId',
+      as: 'comment'
+    })
+    .project('-stats -role -email -password -__v -comment._id');
+
+  // doc = await model('Comment').populate(doc, 'comment._id');
 
   res.status(200).json({
     success: true,
