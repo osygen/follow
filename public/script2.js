@@ -1,2 +1,2 @@
-import FollowUI from "./js/FollowUI.js";
+import FollowUI from './js/FollowUI.js';
 console.log(FollowUI);

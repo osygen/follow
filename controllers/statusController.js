@@ -11,9 +11,13 @@ const {
 } = require('./factory');
 
 exports.getAllStatus = catchAsync(async (req, res, next) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+
   let doc = await model('Friend')
     .aggregate()
-    .match({ $or: [{ addUser: req.user._id }, { user: req.user._id }] })
+    .match({ $or: [{ user: req.user._id }, { addUser: req.user._id }] })
     .group({ _id: '$user' })
     .lookup({
       from: model('Status').collection.name,
@@ -28,34 +32,31 @@ exports.getAllStatus = catchAsync(async (req, res, next) => {
       as: 'user'
     })
     .unwind('$all_status', '$user')
-    .sort('-all_status.createdAt')
+    .sort('-all_status.createdAt -_id')
+    .skip(skip)
+    .limit(limit)
     .replaceRoot({
       $mergeObjects: ['$user', '$all_status']
     })
     .lookup({
       from: model('Comment').collection.name,
-
       let: { idd: '$_id' },
       pipeline: [
         { $match: { $expr: { $eq: ['$$idd', '$statusId'] } } },
-        { $group: { _id: null, total: { $sum: 1 } } }
-        // {
-        //   $lookup: {
-        //     from: model('User').collection.name,
-        //     let: { userId: '$userId' },
-        //     pipeline: [{ $match: { $expr: { $eq: ['$_id', '$$userId'] } } }],
-        //     as: 'userId'
-        //   }
-        // }
+        { $group: { _id: null, comments: { $sum: 1 } } }
       ],
-
-      // localField: '_id',
-      // foreignField: 'statusId',
       as: 'comment'
     })
-    .project('-stats -role -email -password -__v -comment._id');
-
-  // doc = await model('Comment').populate(doc, 'comment._id');
+    .replaceRoot({
+      $mergeObjects: [
+        { comments: 0 },
+        {
+          $arrayElemAt: ['$comment', 0]
+        },
+        '$$ROOT'
+      ]
+    })
+    .project('-stats -role -email -password -__v -comment');
 
   res.status(200).json({
     success: true,
