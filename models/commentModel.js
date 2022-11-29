@@ -10,11 +10,6 @@ const commentSchema = new Schema(
       trim: true
     },
 
-    createdAt: {
-      type: Date,
-      default: Date.now()
-    },
-
     userId: {
       type: Schema.ObjectId,
       ref: 'User',

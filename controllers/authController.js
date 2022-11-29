@@ -29,7 +29,7 @@ exports.signupUser = catchAsync(async (req, res, next) => {
 
 exports.checkLogin = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
-  if (!(email.trim() && password.trim()))
+  if (!(email?.trim() && password?.trim()))
     return next(new ErrorHandler('please provide email and password', 401));
 
   next();
@@ -40,7 +40,7 @@ exports.loginUser = catchAsync(async (req, res, next) => {
     .findOne({ email: req.body.email })
     .select('password');
 
-  if (!req.user?.comparePassWord(req.body.password, req.user.password))
+  if (!(await req.user?.comparePassWord(req.body.password, req.user.password)))
     return next(
       new ErrorHandler('invalid email or password, please try again', 401)
     );
